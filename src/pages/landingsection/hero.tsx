@@ -2,17 +2,17 @@
 
 import { Session } from "next-auth";
 import { Button } from "@heroui/button";
-import { signIn, signOut } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react"; //don't delete this
 import { Chip } from "@heroui/react";
-import { TextAnimate } from "@/components/ui/text-animate";
-// import { WarpBackground } from "@/components/ui/warp-background";
+import { Image } from "@heroui/react";
+import NextImage from "next/image";
 
 import dynamic from 'next/dynamic';
-import { WarpBackgroundProps } from '@/components/ui/warp-background'; // Make sure the path is correct
-
+import { WarpBackgroundProps } from '@/components/ui/warp-background';
+//dynamic import cuz wtf is hydration error
 const WarpBackground = dynamic<WarpBackgroundProps>(() =>
     import('@/components/ui/warp-background')
-        .then((mod) => mod.WarpBackground) // Access named export
+        .then((mod) => mod.WarpBackground)
 );
 
 const HeroSection = ({ session }: { session: Session | null }) => {
@@ -36,9 +36,10 @@ const HeroSection = ({ session }: { session: Session | null }) => {
                     )}
                 </div>
                 <div>
-                    <div>
-                        <img src="/images/heroimage.png" alt="logo" className="rounded-xl" width={700} />
-                    </div>
+
+                    {/* <img src="/images/heroimage.png" alt="logo" className="rounded-xl" width={700} /> */}
+                    <Image src="/images/heroimage.png" isBlurred as={NextImage} alt="logo" width={700} height={700} />
+
                 </div>
             </div>
         </WarpBackground>
