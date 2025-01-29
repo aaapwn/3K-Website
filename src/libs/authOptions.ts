@@ -8,4 +8,10 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
+  callbacks: {
+    async signIn({ account, profile }) {
+      console.log(account, profile);
+      return true;
+    },
+  }
 };
