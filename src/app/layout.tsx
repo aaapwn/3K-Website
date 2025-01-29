@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from 'next/font/local'
+
+import Nav from "@/components/nav/nav";
 import "./globals.css";
 
 import AuthProviders from "../components/providers/AuthProviders";
@@ -14,6 +18,8 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const KMITL2020 = localFont({ src: '../../public/fonts/KMITL 2020 Regular.woff2' })
 
 export const metadata: Metadata = {
   title: "3 Kings",
@@ -33,9 +39,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="shortcut icon" href="../images/logo.webp" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${KMITL2020.className} antialiased`}
       >
+        <Nav session={null} />
         <AuthProviders>
           <UIProviders>
             {children}
