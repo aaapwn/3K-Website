@@ -39,6 +39,14 @@ const rows = [
         bronze: 0,
         sum: 3,
     },
+    {
+        key: "4",
+        name: "รวม",
+        gold: 6,
+        silver: 3,
+        bronze: 0,
+        sum: 9,
+    }
 ];
 
 const columns = [
@@ -77,13 +85,13 @@ const FeatureSection = () => {
                     </TableHeader>
                     <TableBody items={rows}>
                         {(item) => (
-                            <TableRow key={item.key}>
+                            <TableRow key={item.key} className="border-t-2">
                                 {(columnKey) => <TableCell className=" text-secondb font-thin text-lg">{getKeyValue(item, columnKey)}</TableCell>}
                             </TableRow>
                         )}
-
                     </TableBody>
                 </Table>
+
             </div>
             <div className="w-full flex flex-col gap-5">
                 <h1 className="font-bold text-4xl leading-[64px]">สรุปเหรียญรางวัล</h1>
@@ -101,7 +109,7 @@ const FeatureSection = () => {
                     </TableBody>
                 </Table>
             </div>
-        </div>
+        </div >
     );
 }
 
