@@ -6,6 +6,7 @@ import { Button } from "@heroui/button";
 import HeroSection from "@/pages/landingsection/hero";
 import FeatureSection from "./landingsection/feature";
 import SportSection from "./landingsection/sportlist";
+import { Banner } from "./landingsection/banner";
 
 
 type LandingProps = Readonly<{
@@ -19,6 +20,7 @@ const Landing = ({ session }: LandingProps) => {
     <div className="bg-secondw">
       <HeroSection session={session} />
       {/* <FeatureSection /> */}
+      <Banner />
       <SportSection />
     </div>
   )

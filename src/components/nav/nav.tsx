@@ -13,7 +13,7 @@ type NavProps = Readonly<{ session: Session | null; }>
 
 const Nav = ({ session }: NavProps) => {
     return (
-        <nav className="flex justify-between items-center py-2 px-32 bg-secondw text-xl drop-shadow-md">
+        <nav className="flex justify-between items-center py-2 px-32 bg-secondw text-xl drop-shadow-md sticky top-0 z-50">
             <div>
                 <Link href="/">
                     <img src="/images/logo.webp" alt="logo" width={50} />

@@ -3,6 +3,7 @@
 import { Session } from "next-auth";
 import { Button } from "@heroui/button";
 import { Chip } from "@heroui/react";
+import SportBadge from "@/components/sport/sportbadge";
 
 
 const SportSection = () => {
@@ -14,17 +15,17 @@ const SportSection = () => {
                 <Button onPress={() => null} className='bg-firsto text-secondw rounded-md text-medium px-16'>ลงทะเบียน</Button>
                 <Button onPress={() => null} className='bg-secondw text-tertbg rounded-md text-medium border-tertbg border-1 px-16'>กำหนดการ</Button>
             </div>
-            <div className="flex justify-center items-center gap-[100px] align-middle self-stretch flex-wrap">
-                <img src="/images/logo.webp" alt="logo" width={150} />
-                <img src="/images/logo.webp" alt="logo" width={150} />
-                <img src="/images/logo.webp" alt="logo" width={150} />
-                <img src="/images/logo.webp" alt="logo" width={150} />
-                <img src="/images/logo.webp" alt="logo" width={150} />
-                <img src="/images/logo.webp" alt="logo" width={150} />
-                <img src="/images/logo.webp" alt="logo" width={150} />
-                <img src="/images/logo.webp" alt="logo" width={150} />
-                <img src="/images/logo.webp" alt="logo" width={150} />
-                <img src="/images/logo.webp" alt="logo" width={150} />
+            <div className="flex justify-center items-center gap-x-[80px] gap-y-10 align-middle self-stretch flex-wrap px-60">
+                <SportBadge sport="football" >ฟุตบอล</SportBadge>
+                <SportBadge sport="football" >ฟุตซอล</SportBadge>
+                <SportBadge sport="basketball">บาสเกตบอล</SportBadge>
+                <SportBadge sport="volleyball">วอลเลย์บอล</SportBadge>
+                <SportBadge sport="badminton">แบดมินตัน</SportBadge>
+                <SportBadge sport="tableTennis">เทเบิลเทนนิส</SportBadge>
+                <SportBadge sport="running">กรีฑา</SportBadge>
+                <SportBadge sport="bowling">เปตอง</SportBadge>
+                <SportBadge sport="chess">หมากกระดาน</SportBadge>
+                <SportBadge sport="gaming">เกมส์</SportBadge>
             </div>
         </div >
     );

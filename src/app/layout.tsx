@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import localFont from 'next/font/local'
 
 import Nav from "@/components/nav/nav";
+import Footer from "@/components/footer/footer";
 import "./globals.css";
 
 import AuthProviders from "../components/providers/AuthProviders";
@@ -52,6 +53,7 @@ export default function RootLayout({
             {children}
           </UIProviders>
         </AuthProviders>
+        <Footer />
       </body>
     </html>
   );
