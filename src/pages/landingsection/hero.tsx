@@ -9,7 +9,7 @@ import NextImage from "next/image";
 
 import dynamic from 'next/dynamic';
 import { WarpBackgroundProps } from '@/components/ui/warp-background';
-//dynamic import cuz wtf is hydration error
+//dynamic import cuz i've makes a little change in the warpbg eiei
 const WarpBackground = dynamic<WarpBackgroundProps>(() =>
     import('@/components/ui/warp-background')
         .then((mod) => mod.WarpBackground)
@@ -22,7 +22,7 @@ const HeroSection = ({ session }: { session: Session | null }) => {
                 <div className="w-[679px] flex flex-col gap-5">
                     <Chip className="bg-secondy px-5">รู้จักกับ3K Games</Chip>
                     <h1 className="font-bold text-8xl leading-[90px]">กีฬาประเพณี<br /><strong className="text-firsto">3พระจอม ครั้งที่ 16</strong></h1>
-                    <h2>เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 </h2>
+                    <h2 className="text-xl">เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 </h2>
                     {session ? (
                         <div className="flex gap-5 flex-row">
                             <Button onPress={() => null} className='bg-firsto text-secondw rounded-md text-medium px-10'>ลงทะเบียน</Button>
