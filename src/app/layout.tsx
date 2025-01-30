@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { Geist, Geist_Mono } from "next/font/google";
 import localFont from 'next/font/local'
 
 import Nav from "@/components/nav/nav";
@@ -10,15 +9,7 @@ import "./globals.css";
 import AuthProviders from "../components/providers/AuthProviders";
 import UIProviders from "@/components/providers/UIProviders";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import auth from "@/libs/auth";
 
 const KMITL2020 = localFont({ src: '../../public/fonts/KMITL 2020 Regular.woff2' })
 
@@ -33,11 +24,12 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
     <html lang="en">
       <head>
@@ -47,7 +39,7 @@ export default function RootLayout({
       <body
         className={`${KMITL2020.className} antialiased`}
       >
-        <Nav session={null} />
+        <Nav session={session} />
         <AuthProviders>
           <UIProviders>
             {children}

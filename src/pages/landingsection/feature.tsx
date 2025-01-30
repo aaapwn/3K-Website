@@ -1,8 +1,6 @@
 "use client";
 
-import { Session } from "next-auth";
 import { Button } from "@heroui/button";
-import { Chip } from "@heroui/react";
 
 import {
     Table,

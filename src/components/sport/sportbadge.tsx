@@ -1,7 +1,5 @@
 "use client";
 
-import { Button } from "@heroui/button";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { BadmintonShuttleIcon, Chess02Icon, GameController03Icon, WorkoutRunIcon, BowlingBallIcon, TableTennisBatIcon, BasketballIcon, FootballIcon, VolleyballIcon } from "./sporticon";
 
 interface SportBadgeProps {

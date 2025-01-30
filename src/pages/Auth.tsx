@@ -1,6 +1,7 @@
 "use client";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 
 import { Button } from "@heroui/button";
 
@@ -12,7 +13,7 @@ const Landing = ({ session }: LandingProps) => {
     if (session) {
         return (
             <div>
-                <img src={session.user?.image as string} alt="profile img" width={100} />
+                <Image src={session.user?.image as string} alt="profile img" width={100} />
                 <p>email: {session.user?.email}</p>
                 <Button onPress={() => signOut()} color="danger">Sign out</Button>
             </div>

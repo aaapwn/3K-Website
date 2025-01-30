@@ -2,10 +2,10 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { useSession } from 'next-auth/react';
-
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
+import Image from 'next/image';
+import logo from "@public/images/logo.webp"
 
 import { MenuIcon, ChevronRight } from 'lucide-react';
 
@@ -14,7 +14,6 @@ import {
     DrawerContent,
     DrawerHeader,
     DrawerBody,
-    DrawerFooter,
     Button,
     useDisclosure,
 } from "@heroui/react";
@@ -27,7 +26,7 @@ const Nav = ({ session }: NavProps) => {
         <nav className="flex justify-between items-center py-2 md:px-32 px-5 bg-secondw text-xl drop-shadow-md sticky top-0 z-50">
             <div>
                 <Link href="/">
-                    <img src="/images/logo.webp" alt="logo" width={50} />
+                    <Image src={logo}  alt="logo" width={50} />
                 </Link>
             </div>
             <div className='md:flex hidden justify-center items-center gap-10 '>
@@ -51,7 +50,7 @@ const Nav = ({ session }: NavProps) => {
                     </div>
                 ) : (
                     <div>
-                        <Button onPress={() => signIn()} className='bg-firsto text-secondw rounded-sm text-medium'>เข้าสู่ระบบ</Button>
+                        <Button onPress={() => signIn('google')} className='bg-firsto text-secondw rounded-sm text-medium'>เข้าสู่ระบบ</Button>
                     </div>
                 )}
                 <button onClick={onOpen} className='md:hidden'>
@@ -66,7 +65,7 @@ const Nav = ({ session }: NavProps) => {
                                         Close<ChevronRight />
                                     </Button>
                                 </DrawerHeader>
-                                <DrawerBody>
+                                <DrawerBody className='flex flex-col justify-center mb-16'>
                                     <Link href="/" className='w-full rounded-none p-4 text-xl text-center'>
                                         นักกีฬา
                                     </Link>
