@@ -10,11 +10,17 @@
     "db:migrate": "prisma migrate dev"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@heroui/react": "^2.6.13",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^11.18.1",
     "lucide-react": "^0.474.0",
+    "motion": "^12.0.6",
     "next": "15.1.5",
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
