@@ -30,9 +30,20 @@ const Footer = () => {
                     <div className='flex-col flex gap-5'>
                         <p className='font-medium text-2xl text-center py-5 px-5 border-b-1 border-secondy w-fit self-center'>ช่องทางการติดต่่อ</p>
                         <div className='flex flex-row gap-5 justify-center'>
-                            <Instagram />
-                            <Facebook />
-                            <Mail />
+                            <Link rel="noopener noreferrer" target="_blank" href={'https://www.instagram.com/sor.kmitlofficial/'}>
+                                <Instagram />
+                            </Link>
+
+                            <Link rel="noopener noreferrer" target="_blank" href={'https://www.facebook.com/sorkmitl/'}>
+                                <Facebook />
+                            </Link>
+
+                            <Link rel="noopener noreferrer" target="_blank" href={'#'} onClick={(e) => {
+                                e.preventDefault()
+                                openGmailCompose()
+                            }}>
+                                <Mail stroke='white' />
+                            </Link>
                         </div>
                     </div>
                     <p className='font-medium md:text-lg text-medium text-center self-stretch'>
@@ -57,7 +68,10 @@ const Footer = () => {
                             <Facebook />
                         </Link>
 
-                        <Link rel="noopener noreferrer" target="_blank" href={'#'} onClick={openGmailCompose}>
+                        <Link rel="noopener noreferrer" target="_blank" href={'#'} onClick={(e) => {
+                            e.preventDefault()
+                            openGmailCompose()
+                        }}>
                             <Mail stroke='white' />
                         </Link>
 
@@ -65,7 +79,7 @@ const Footer = () => {
                 </div>
                 <p className='font-medium text-lg text-end self-stretch'>
                     สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง<br />
-                    เลขที่ 1 ซอยฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพฯ 10520<br />
+                    เลขที่ 1 ซอยฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพฯ 10520 <br />
                 </p>
             </div>
         </footer>
