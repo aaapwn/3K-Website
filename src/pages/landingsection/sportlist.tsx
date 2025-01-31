@@ -31,7 +31,7 @@ const SportSection = () => {
                 <Button onPress={() => null} className='bg-secondw text-tertbg rounded-md text-medium border-tertbg border-1 px-16'>กำหนดการ</Button>
             </div>
             <div className="grid grid-cols-2 gap-10 md:grid-cols-3 xl:grid-cols-5">
-            {/* <div className="flex justify-center items-center md:gap-x-[80px] md:gap-y-10 align-middle flex-wrap md:px-20 gap-x-10"> */}
+                {/* <div className="flex justify-center items-center md:gap-x-[80px] md:gap-y-10 align-middle flex-wrap md:px-20 gap-x-10"> */}
                 {
                     sports.map((sport, index) => (
                         <SportBadge key={index} sport={sport.en}>{sport.th}</SportBadge>
