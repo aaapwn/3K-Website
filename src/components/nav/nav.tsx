@@ -46,7 +46,7 @@ const Nav = ({ session }: NavProps) => {
             <div className='flex-row flex gap-2 justify-self-end border-l-2 border-tertbg/20 pl-3'>
                 {session ? (
                     <div className='flex-row flex gap-2 items-center'>
-                        <Link href="/test" className='border-1 px-3 py-1 rounded-sm'>
+                        <Link href="/players/1" className='border-1 px-3 py-1 rounded-sm'>
                             {session.user?.name?.split(' ')[0]}
                         </Link>
                         <Button onPress={() => signOut()} className='bg-firsto text-secondw rounded-sm text-medium'>ออกจากระบบ</Button>
