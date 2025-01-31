@@ -23,13 +23,13 @@ type NavProps = Readonly<{ session: Session | null; }>
 const Nav = ({ session }: NavProps) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     return (
-        <nav className="flex justify-between items-center py-2 md:px-32 px-5 bg-secondw text-xl drop-shadow-md sticky top-0 z-50">
-            <div>
+        <nav className="grid auto-cols-min md:grid-cols-4 grid-cols-2 items-center justify-items-center py-2 px-5 bg-secondw text-xl drop-shadow-md sticky top-0 z-50 gap-1">
+            <div className='justify-self-start'>
                 <Link href="/">
-                    <Image src={logo}  alt="logo" width={50} />
+                    <Image src={logo} alt="logo" width={50} />
                 </Link>
             </div>
-            <div className='md:flex hidden justify-center items-center gap-10 '>
+            <div className='md:flex hidden justify-center items-center gap-5 w-fit col-span-2 md:text-base lg:text-lg md:justify-self-start lg:justify-self-center'>
                 <Link href="/">
                     นักกีฬา
                 </Link>
@@ -43,9 +43,12 @@ const Nav = ({ session }: NavProps) => {
                     กฏระเบียบ/PDPA
                 </Link>
             </div>
-            <div className='flex-row flex gap-2 items-center'>
+            <div className='flex-row flex gap-2 justify-self-end border-l-2 border-tertbg/20 pl-3'>
                 {session ? (
-                    <div>
+                    <div className='flex-row flex gap-2 items-center'>
+                        <Link href="/test" className='border-1 px-3 py-1 rounded-sm'>
+                            {session.user?.name?.split(' ')[0]}
+                        </Link>
                         <Button onPress={() => signOut()} className='bg-firsto text-secondw rounded-sm text-medium'>ออกจากระบบ</Button>
                     </div>
                 ) : (

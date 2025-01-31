@@ -24,7 +24,7 @@ const HeroSection = ({ session }: { session: Session | null }) => {
                     <Chip className="bg-secondy p-5 text-base md:text-lg">รู้จักกับ 3K Games</Chip>
                     <div className="flex-col gap-1">
                         <h1 className="font-bold xl:text-8xl md:text-6xl text-5xl text-firsto">ฟุตบอลประเพณี<br /><strong className="text-secondb">ชิงถ้วยพระราชทาน</strong></h1>
-                        <h1 className="font-bold xl:text-3xl md:text-6xl text-xl text-firsto">สมเด็จพระกนิษฐาธิราชเจ้า กรมสมเด็จพระเทพรัตนราชสุดาฯ สยามบรมราชกุมารี และกีฬา 3 พระจอมเกล้า ครั้งที่ 16</h1>
+                        <h1 className="font-bold xl:text-3xl md:text-2xl text-xl text-firsto">สมเด็จพระกนิษฐาธิราชเจ้า กรมสมเด็จพระเทพรัตนราชสุดาฯ สยามบรมราชกุมารี และกีฬา 3 พระจอมเกล้า ครั้งที่ 16</h1>
                     </div>
                     <h2 className="text-lg md:text-xl text-tertbg">ร่วมเป็นส่วนหนึ่งของประเพณีอันทรงเกียรติและการแข่งขันฟุตบอลที่ยิ่งใหญ่ที่สุดของ 3 สถาบัน</h2>
                     {session ? (
