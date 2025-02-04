@@ -7,14 +7,15 @@ import { ChevronLeft, UserRoundCheck } from 'lucide-react';
 import PlayerCard from './playersection/playercard';
 import PlayerTable from './playersection/playertable';
 
-import { Player } from '@/app/players/[id]/page';
+import { Player, Matches } from '@/app/players/[id]/page';
 
 type PlayerProfileProps = Readonly<{
   playerID: string;
   playerData: Player;
+  matchesData: Matches[];
 }>;
 
-const PlayerPage = ({ playerID, playerData }: PlayerProfileProps) => {
+const PlayerPage = ({ playerID, playerData, matchesData }: PlayerProfileProps) => {
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-white to-[#FFC72C]/10 px-5 py-5 flex flex-col gap-10">
       <div className="w-full flex flex-row justify-between items-center">
@@ -38,7 +39,7 @@ const PlayerPage = ({ playerID, playerData }: PlayerProfileProps) => {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
         <div className="flex xl:flex-row flex-col justify-center gap-5 items-center lg:items-start content-start ">
           <PlayerCard playerData={playerData} />
-          <PlayerTable playerID={playerID} />
+          <PlayerTable matchesData={matchesData} />
         </div>
       </motion.div>
     </div>
