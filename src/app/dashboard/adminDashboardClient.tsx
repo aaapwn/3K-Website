@@ -2,21 +2,15 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Button } from '@heroui/react';
+import { Button, ModalFooter } from '@heroui/react';
 import { Chip } from '@heroui/react';
 import { Card, CardBody, CardHeader } from '@heroui/react';
+// import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@heroui/react';
 // import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@heroui/react"
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@heroui/react';
 import { ArrowLeft, CalendarIcon } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from '@heroui/react';
 
 export default function AdminDashboardClient({
   data,
@@ -36,7 +30,7 @@ export default function AdminDashboardClient({
   };
 }) {
   const [selectedDate, setSelectedDate] = useState<string>('2024-06-15');
-
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const handleDateChange = (date: string) => {
     console.log('Selected date changed to:', date);
     setSelectedDate(date);
@@ -47,6 +41,14 @@ export default function AdminDashboardClient({
   }, []);
 
   const matches = data.matches[selectedDate] || [];
+
+  if (window.innerWidth <= 768) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <p className="text-xl">This dashboard is not available on mobile devices.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white flex">
@@ -99,10 +101,7 @@ export default function AdminDashboardClient({
                   <TableCell className="text-2xl">{match.time}</TableCell>
                   <TableCell className="text-2xl space-x-2">
                     <Chip variant="bordered" className="bg-firsto/10 text-firsto border-firsto text-xl">
-                      {match.sport}
-                    </Chip>
-                    <Chip variant="bordered" className="bg-firsto/10 text-firsto border-firsto text-xl">
-                      {match.type}
+                      {match.sport} {match.type}
                     </Chip>
                   </TableCell>
                   <TableCell className="text-2xl">{match.homeTeam}</TableCell>
@@ -110,78 +109,79 @@ export default function AdminDashboardClient({
                   <TableCell className="text-2xl">{match.venue}</TableCell>
                   <TableCell className="text-2xl">-</TableCell>
                   <TableCell className="text-2xl text-end">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button variant="bordered" size="lg" className="text-xl">
-                          ดูรายละเอียด
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-6xl">
-                        <DialogHeader>
-                          <DialogTitle className="text-5xl">Match Details</DialogTitle>
-                          <DialogDescription className="text-3xl">
+                    <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
+                      <ModalContent className="max-w-6xl">
+                        <ModalHeader className="flex flex-col gap-2">
+                          <h1 className="text-5xl">Match Details</h1>
+                          <h2 className="text-3xl font-normal">
                             {match.homeTeam} vs {match.awayTeam} - {format(parseISO(selectedDate), 'PPP')} at{' '}
                             {match.time}
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="grid grid-cols-2 gap-4 text-2xl">
-                          <Card>
-                            <CardHeader>{match.homeTeam}</CardHeader>
-                            <CardBody>
-                              <Table>
-                                <TableHeader>
-                                  <TableColumn className="text-2xl">Player</TableColumn>
-                                  <TableColumn className="text-2xl">Status</TableColumn>
-                                </TableHeader>
-                                <TableBody>
-                                  {data.players[match.id]?.homeTeam.map((player) => (
-                                    <TableRow key={player.id}>
-                                      <TableCell className="text-2xl">{player.name}</TableCell>
-                                      <TableCell className="text-2xl">
-                                        {player.registered ? (
-                                          <Chip className="bg-green-500 text-xl text-secondw">ลงทะเบียนแล้ว</Chip>
-                                        ) : (
-                                          <Chip variant="bordered" className="text-red-500 text-xl">
-                                            ยังไม่ลงทะเบียน
-                                          </Chip>
-                                        )}
-                                      </TableCell>
-                                    </TableRow>
-                                  ))}
-                                </TableBody>
-                              </Table>
-                            </CardBody>
-                          </Card>
-                          <Card>
-                            <CardHeader>{match.awayTeam}</CardHeader>
-                            <CardBody>
-                              <Table>
-                                <TableHeader>
-                                  <TableColumn className="text-2xl">Player</TableColumn>
-                                  <TableColumn className="text-2xl">Status</TableColumn>
-                                </TableHeader>
-                                <TableBody>
-                                  {data.players[match.id]?.awayTeam.map((player) => (
-                                    <TableRow key={player.id}>
-                                      <TableCell className="text-2xl">{player.name}</TableCell>
-                                      <TableCell className="text-2xl">
-                                        {player.registered ? (
-                                          <Chip className="bg-green-500 text-xl text-secondw">ลงทะเบียนแล้ว</Chip>
-                                        ) : (
-                                          <Chip variant="bordered" className="text-red-500 text-xl">
-                                            ยังไม่ลงทะเบียน
-                                          </Chip>
-                                        )}
-                                      </TableCell>
-                                    </TableRow>
-                                  ))}
-                                </TableBody>
-                              </Table>
-                            </CardBody>
-                          </Card>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
+                          </h2>
+                        </ModalHeader>
+                        <ModalBody>
+                          <div className="grid grid-cols-2 gap-4 text-2xl">
+                            <Card>
+                              <CardHeader>{match.homeTeam}</CardHeader>
+                              <CardBody>
+                                <Table>
+                                  <TableHeader>
+                                    <TableColumn className="text-2xl">Player</TableColumn>
+                                    <TableColumn className="text-2xl">Status</TableColumn>
+                                  </TableHeader>
+                                  <TableBody>
+                                    {data.players[match.id]?.homeTeam.map((player) => (
+                                      <TableRow key={player.id}>
+                                        <TableCell className="text-2xl">{player.name}</TableCell>
+                                        <TableCell className="text-2xl">
+                                          {player.registered ? (
+                                            <Chip className="bg-green-500 text-xl text-secondw">ลงทะเบียนแล้ว</Chip>
+                                          ) : (
+                                            <Chip variant="bordered" className="text-red-500 text-xl">
+                                              ยังไม่ลงทะเบียน
+                                            </Chip>
+                                          )}
+                                        </TableCell>
+                                      </TableRow>
+                                    ))}
+                                  </TableBody>
+                                </Table>
+                              </CardBody>
+                            </Card>
+                            <Card>
+                              <CardHeader>{match.awayTeam}</CardHeader>
+                              <CardBody>
+                                <Table>
+                                  <TableHeader>
+                                    <TableColumn className="text-2xl">Player</TableColumn>
+                                    <TableColumn className="text-2xl">Status</TableColumn>
+                                  </TableHeader>
+                                  <TableBody>
+                                    {data.players[match.id]?.awayTeam.map((player) => (
+                                      <TableRow key={player.id}>
+                                        <TableCell className="text-2xl">{player.name}</TableCell>
+                                        <TableCell className="text-2xl">
+                                          {player.registered ? (
+                                            <Chip className="bg-green-500 text-xl text-secondw">ลงทะเบียนแล้ว</Chip>
+                                          ) : (
+                                            <Chip variant="bordered" className="text-red-500 text-xl">
+                                              ยังไม่ลงทะเบียน
+                                            </Chip>
+                                          )}
+                                        </TableCell>
+                                      </TableRow>
+                                    ))}
+                                  </TableBody>
+                                </Table>
+                              </CardBody>
+                            </Card>
+                          </div>
+                        </ModalBody>
+                        <ModalFooter></ModalFooter>
+                      </ModalContent>
+                    </Modal>
+                    <Button onPress={onOpen} variant="bordered" size="lg" className="text-xl">
+                      ดูรายละเอียด
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
