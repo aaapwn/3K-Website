@@ -23,7 +23,7 @@ const Nav = ({ session }: NavProps) => {
         </Link>
       </div>
       <div className="md:flex hidden justify-center w-fit col-span-2 md:text-base lg:text-xl md:justify-self-start lg:justify-self-center h-full items-stretch py-1">
-        <Link className=" hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md" href="/">
+        {/* <Link className=" hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md" href="/">
           นักกีฬา
         </Link>
         <Link className=" hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md" href="/">
@@ -31,8 +31,11 @@ const Nav = ({ session }: NavProps) => {
         </Link>
         <Link className=" hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md" href="/">
           กีฬาทั้งหมด
-        </Link>
-        <Link className=" hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md" href="/">
+        </Link> */}
+        <Link
+          className=" hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md"
+          href="/pdpa"
+        >
           กฏระเบียบ/PDPA
         </Link>
       </div>
@@ -67,7 +70,7 @@ const Nav = ({ session }: NavProps) => {
                   </Button>
                 </DrawerHeader>
                 <DrawerBody className="flex flex-col justify-center mb-16">
-                  <Link href="/" className="w-full rounded-none p-4 text-xl text-center">
+                  {/* <Link href="/" className="w-full rounded-none p-4 text-xl text-center">
                     นักกีฬา
                   </Link>
                   <Link href="/" className="w-full rounded-none p-4 text-xl text-center">
@@ -75,8 +78,8 @@ const Nav = ({ session }: NavProps) => {
                   </Link>
                   <Link href="/" className="w-full rounded-none p-4 text-xl text-center">
                     กีฬาทั้งหมด
-                  </Link>
-                  <Link href="/" className="w-full rounded-none p-4 text-xl text-center">
+                  </Link> */}
+                  <Link onClick={onOpenChange} href="/pdpa" className="w-full rounded-none p-4 text-xl text-center">
                     กฏระเบียบ/PDPA
                   </Link>
                 </DrawerBody>
