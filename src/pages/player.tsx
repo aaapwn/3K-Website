@@ -18,13 +18,12 @@ type PlayerProfileProps = Readonly<{
   matchesData: Matches[];
 }>;
 
-const isRegistered = false;
+const isRegistered = true;
 
 const PlayerPage = ({ playerID, playerData, matchesData }: PlayerProfileProps) => {
   const { data: session } = useSession();
 
   return (
-
     <div className="min-h-screen w-full bg-gradient-to-b from-white to-[#FFC72C]/10 px-5 py-5 flex flex-col gap-10">
       <div className="w-full flex flex-row justify-between items-center">
         <Link
@@ -46,7 +45,6 @@ const PlayerPage = ({ playerID, playerData, matchesData }: PlayerProfileProps) =
         ) : (
           <></>
         )}
-
       </div>
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
@@ -71,8 +69,8 @@ const PlayerPage = ({ playerID, playerData, matchesData }: PlayerProfileProps) =
             </>
           )}
         </div>
-      </motion.div >
-    </div >
+      </motion.div>
+    </div>
   );
 };
 
