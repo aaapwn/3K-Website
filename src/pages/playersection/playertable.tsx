@@ -3,7 +3,7 @@
 import React from 'react';
 
 import { Matches } from '@/app/players/[id]/page';
-import MatchesTable from '@/components/matchesTable';
+import MatchesTable from '@/components/matchesTableold';
 
 const PlayerTable = ({ matchesData }: { matchesData: Matches[] }) => {
   return (

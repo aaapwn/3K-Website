@@ -3,6 +3,7 @@
     "2024-06-15": [
       {
         "id": 1,
+        "date": "2024-06-15",
         "time": "14:00",
         "sport": "ฟุตบอล",
         "type": "ทีมชาย",
@@ -12,6 +13,7 @@
       },
       {
         "id": 2,
+        "date": "2024-06-15",
         "time": "16:30",
         "sport": "บาสเกตบอล",
         "type": "ทีมชาย",
@@ -23,6 +25,7 @@
     "2024-06-16": [
       {
         "id": 3,
+        "date": "2024-06-16",
         "time": "15:00",
         "sport": "ฟุตบอล",
         "type": "ทีมชาย",
@@ -34,6 +37,7 @@
     "2024-06-17": [
       {
         "id": 4,
+        "date": "2024-06-17",
         "time": "18:00",
         "sport": "ฟุตบอล",
         "type": "ทีมชาย",
@@ -119,72 +123,72 @@
     "3": {
       "homeTeam": [
         {
-          "id": 13,
-          "name": "Liam Anderson",
+          "id": 10,
+          "name": "Emma Wilson",
           "registered": true
         },
         {
-          "id": 14,
-          "name": "Ava Thompson",
+          "id": 11,
+          "name": "Ryan Taylor",
           "registered": false
         },
         {
-          "id": 15,
-          "name": "Noah Garcia",
+          "id": 12,
+          "name": "Sophia Martinez",
           "registered": true
         }
       ],
       "awayTeam": [
         {
-          "id": 16,
-          "name": "Isabella Rodriguez",
+          "id": 1,
+          "name": "John Doe",
           "registered": true
         },
         {
-          "id": 17,
-          "name": "Ethan Wright",
-          "registered": true
-        },
-        {
-          "id": 18,
-          "name": "Mia Lewis",
+          "id": 2,
+          "name": "Jane Smith",
           "registered": false
+        },
+        {
+          "id": 3,
+          "name": "Mike Johnson",
+          "registered": true
         }
       ]
     },
     "4": {
       "homeTeam": [
         {
-          "id": 19,
-          "name": "James Clark",
+          "id": 1,
+          "name": "John Doe",
           "registered": true
         },
         {
-          "id": 20,
-          "name": "Charlotte Hill",
-          "registered": true
-        },
-        {
-          "id": 21,
-          "name": "Benjamin King",
+          "id": 2,
+          "name": "Jane Smith",
           "registered": false
+        },
+        {
+          "id": 3,
+          "name": "Mike Johnson",
+          "registered": true
         }
       ],
       "awayTeam": [
         {
-          "id": 22,
-          "name": "Amelia Scott",
+          "id": 7,
+          "name": "Alex Turner",
+          "registered": true
+        },
+        {
+          "id": 8,
+          "name": "Olivia Parker",
+          "registered": true
+        },
+        {
+          "id": 9,
+          "name": "Daniel Lee",
           "registered": false
-        },
-        {
-          "id": 23,
-          "name": "William Green",
-          "registered": true
-        },
-        {
-          "id": 24,
-          "name": "Harper Adams",
-          "registered": true
         }
       ]
     }

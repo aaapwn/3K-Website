@@ -1,117 +1,72 @@
 'use client';
-
 import React from 'react';
-
-import { Session } from 'next-auth';
-import { Button } from '@heroui/button';
+import { format, parseISO } from 'date-fns';
 import { Chip } from '@heroui/react';
-
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@heroui/react';
+import MatchesDetail from '@/components/matchesDetail';
 
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@heroui/react';
-import { Matches } from '@/app/players/[id]/page';
-import MatchesDetailButton from '@/components/matchesDetailButton';
+interface match {
+  id: number;
+  date: string;
+  time: string;
+  sport: string;
+  type: string;
+  homeTeam: string;
+  awayTeam: string;
+  venue: string;
+}
 
-const matchColumn = [
-  {
-    key: 'date',
-    label: 'วันที่',
-  },
-  {
-    key: 'time',
-    label: 'เวลา',
-  },
-  {
-    key: 'type',
-    label: 'ประเภท',
-  },
-  {
-    key: 'teamA',
-    label: 'ทีม A',
-  },
-  {
-    key: 'vs',
-    label: 'VS',
-  },
-  {
-    key: 'teamB',
-    label: 'ทีม B',
-  },
-  {
-    key: 'venue',
-    label: 'สนาม',
-  },
-  {
-    key: 'winner',
-    label: 'ผลการแข่งขัน',
-  },
-  {
-    key: 'detail',
-    label: 'รายละเอียด',
-  },
-];
-
-type MatchesTableProps = {
-  matchesData: Matches[];
-};
-
-const MatchesTable = ({ matchesData }: MatchesTableProps) => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  const renderCell = React.useCallback((match: Matches, column: React.Key) => {
-    const cellValue = match[column as keyof Matches];
-
-    switch (column) {
-      case 'date':
-        return <TableCell className=" text-secondb font-thin text-2xl">{cellValue}</TableCell>;
-      case 'time':
-        return <TableCell className=" text-secondb font-thin text-2xl">{cellValue}</TableCell>;
-      case 'type':
-        return (
-          <TableCell className=" text-secondb font-thin text-2xl">
-            <Chip className="bg-firsto/10 text-firsto border-1 border-firsto rounded-full text-medium px-5 py-2">
-              {cellValue}
-            </Chip>
-          </TableCell>
-        );
-      case 'teamA':
-        return <TableCell className=" text-secondb font-thin text-2xl">{cellValue}</TableCell>;
-      case 'vs':
-        return <TableCell className=" text-secondb font-thin text-2xl">{cellValue}</TableCell>;
-      case 'teamB':
-        return <TableCell className=" text-secondb font-thin text-2xl">{cellValue}</TableCell>;
-      case 'venue':
-        return <TableCell className=" text-secondb font-thin text-2xl">{cellValue}</TableCell>;
-      case 'winner':
-        return <TableCell className=" text-secondb font-thin text-2xl">{cellValue}</TableCell>;
-      case 'detail':
-        return (
-          <TableCell className=" text-secondb font-thin">
-            <MatchesDetailButton matchesData={matchesData} />
-          </TableCell>
-        );
-      default:
-        return null;
+interface data {
+  players: Record<
+    number,
+    {
+      homeTeam: { id: number; name: string; registered: boolean }[];
+      awayTeam: { id: number; name: string; registered: boolean }[];
     }
-  }, []);
-  return (
-    <Table isStriped aria-label="table with dynamic content" className="h-full">
-      <TableHeader columns={matchColumn} className="bg-firsto">
-        {(match) => (
-          <TableColumn className="bg-firsto text-secondw font-thin text-2xl" key={match.key}>
-            {match.label}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody items={matchesData}>
-        {(match) => (
-          <TableRow key={match.date} className="border-t-2">
-            {(column) => <>{renderCell(match, column)}</>}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
-  );
-};
+  >;
+}
 
-export default MatchesTable;
+interface MatchesTableProps {
+  matches: match[];
+  data: data;
+}
+
+export default function MatchesTable({ matches, data }: MatchesTableProps) {
+  return (
+    <>
+      <Table>
+        <TableHeader>
+          <TableColumn className="text-2xl">วันที่</TableColumn>
+          <TableColumn className="text-2xl">เวลา</TableColumn>
+          <TableColumn className="text-2xl">ประเภทกีฬา</TableColumn>
+          <TableColumn className="text-2xl">ทีมA</TableColumn>
+          <TableColumn className="text-2xl">ทีมB</TableColumn>
+          <TableColumn className="text-2xl">สนาม</TableColumn>
+          <TableColumn className="text-2xl">ผลการแข่งขัน</TableColumn>
+          <TableColumn className="text-2xl text-end">รายละเอียด</TableColumn>
+        </TableHeader>
+        <TableBody>
+          {matches.map((match) => (
+            <TableRow key={match.id}>
+              <TableCell className="text-2xl">{format(parseISO(match.date), 'dd MMM y')}</TableCell>
+              <TableCell className="text-2xl">{match.time}</TableCell>
+              <TableCell className="text-2xl space-x-2">
+                <Chip variant="bordered" className="bg-firsto/10 text-firsto border-firsto text-xl">
+                  {match.sport} {match.type}
+                </Chip>
+              </TableCell>
+              <TableCell className="text-2xl">{match.homeTeam}</TableCell>
+              <TableCell className="text-2xl">{match.awayTeam}</TableCell>
+              <TableCell className="text-2xl">{match.venue}</TableCell>
+              <TableCell className="text-2xl">-</TableCell>
+              <TableCell className="text-2xl text-end">
+                <MatchesDetail match={match} data={data} />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      ;
+    </>
+  );
+}

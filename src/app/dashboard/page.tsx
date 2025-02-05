@@ -1,7 +1,7 @@
 'use server';
 
 // Mock data for matches and players
-import matchesData from './mock.json';
+import matchesData from '@public/mock.json';
 import AdminDashboardClient from './adminDashboardClient';
 async function getMatchesData() {
   await new Promise((resolve) => setTimeout(resolve, 1000));
