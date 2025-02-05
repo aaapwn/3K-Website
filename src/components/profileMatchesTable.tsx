@@ -10,7 +10,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@heroui/react';
 import { Matches } from '@/app/players/[id]/page';
-import MatchesDetailButton from '@/components/matchesDetailButton';
+import MatchesDetailButton from '@/components/profileMatchesDetailButton';
 
 const matchColumn = [
   {

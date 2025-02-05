@@ -2,7 +2,7 @@
 
 // Mock data for matches and players
 import matchesData from '@public/mock.json';
-import AdminDashboardClient from './adminDashboardClient';
+import AdminDashboardClient from '../../pages/adminDashboardClient';
 async function getMatchesData() {
   await new Promise((resolve) => setTimeout(resolve, 1000));
   return matchesData;
