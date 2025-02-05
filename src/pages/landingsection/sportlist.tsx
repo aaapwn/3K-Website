@@ -18,7 +18,7 @@ const sports: Sport[] = [
     { en: 'running', th: 'กรีฑา' },
     { en: 'bowling', th: 'เปตอง' },
     { en: 'chess', th: 'หมากกระดาน' },
-    { en: 'gaming', th: 'เกมส์' },
+    { en: 'gaming', th: 'อีสปอร์ต' },
 ]
 
 const SportSection = () => {
