@@ -192,5 +192,17 @@
         }
       ]
     }
-  }
+  },
+  "sports": [
+    { "en": "football", "th": "ฟุตบอล", "type": ["ทีมชาย", "ทีมหญิง"] },
+    { "en": "petong", "th": "ฟุตซอล" },
+    { "en": "basketball", "th": "บาสเกตบอล" },
+    { "en": "volleyball", "th": "วอลเลย์บอล" },
+    { "en": "badminton", "th": "แบดมินตัน" },
+    { "en": "tableTennis", "th": "เทเบิลเทนนิส" },
+    { "en": "running", "th": "กรีฑา" },
+    { "en": "bowling", "th": "เปตอง" },
+    { "en": "chess", "th": "หมากกระดาน" },
+    { "en": "gaming", "th": "อีสปอร์ต" }
+  ]
 }

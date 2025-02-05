@@ -2,13 +2,10 @@
 
 import React from 'react';
 
-import { Session } from 'next-auth';
-import { Button } from '@heroui/button';
 import { Chip } from '@heroui/react';
 
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@heroui/react';
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, useDisclosure } from '@heroui/react';
 
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@heroui/react';
 import { Matches } from '@/app/players/[id]/page';
 import MatchesDetailButton from '@/components/profileMatchesDetailButton';
 
