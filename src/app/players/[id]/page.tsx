@@ -20,48 +20,48 @@ const playerData: Player = {
   jerseyNumber: '1',
 };
 
-const matchesData: Matches[] = [
-  {
-    date: '15/03/68',
-    time: '10:00',
-    type: 'ทีมชาย',
-    teamA: 'KMITL',
-    vs: 'VS',
-    teamB: 'KMUTT',
-    venue: 'สนามกีฬาในร่ม',
-    winner: 'KMUTT',
-  },
-  {
-    date: '16/03/68',
-    time: '12:00',
-    type: 'ทีมชาย',
-    teamA: 'KMITL',
-    vs: 'VS',
-    teamB: 'KMUTT',
-    venue: 'สนามกีฬากลางแจ้ง',
-    winner: 'KMITL',
-  },
-  {
-    date: '17/03/68',
-    time: '14:00',
-    type: 'ทีมชาย',
-    teamA: 'KMITL',
-    vs: 'VS',
-    teamB: 'KMUTT',
-    venue: 'สนามแบดมินตัน',
-    winner: 'KMUTT',
-  },
-  {
-    date: '18/03/68',
-    time: '16:00',
-    type: 'ทีมชาย',
-    teamA: 'KMITL',
-    vs: 'VS',
-    teamB: 'KMUTT',
-    venue: 'สนามปิงปอง',
-    winner: 'KMITL',
-  },
-];
+// const matchesData: Matches[] = [
+//   {
+//     date: '15/03/68',
+//     time: '10:00',
+//     type: 'ทีมชาย',
+//     teamA: 'KMITL',
+//     vs: 'VS',
+//     teamB: 'KMUTT',
+//     venue: 'สนามกีฬาในร่ม',
+//     winner: 'KMUTT',
+//   },
+//   {
+//     date: '16/03/68',
+//     time: '12:00',
+//     type: 'ทีมชาย',
+//     teamA: 'KMITL',
+//     vs: 'VS',
+//     teamB: 'KMUTT',
+//     venue: 'สนามกีฬากลางแจ้ง',
+//     winner: 'KMITL',
+//   },
+//   {
+//     date: '17/03/68',
+//     time: '14:00',
+//     type: 'ทีมชาย',
+//     teamA: 'KMITL',
+//     vs: 'VS',
+//     teamB: 'KMUTT',
+//     venue: 'สนามแบดมินตัน',
+//     winner: 'KMUTT',
+//   },
+//   {
+//     date: '18/03/68',
+//     time: '16:00',
+//     type: 'ทีมชาย',
+//     teamA: 'KMITL',
+//     vs: 'VS',
+//     teamB: 'KMUTT',
+//     venue: 'สนามปิงปอง',
+//     winner: 'KMITL',
+//   },
+// ];
 
 export type Player = {
   id: string;
@@ -90,8 +90,9 @@ export type Matches = {
 
 const PlayerProfile = ({ params }: { params: Promise<{ id: string }> }) => {
   const resolvedParams = use(params);
+  console.log(resolvedParams);
 
-  return <PlayerPage playerID={resolvedParams.id} playerData={playerData} matchesData={matchesData} />;
+  return <PlayerPage playerData={playerData} />;
 };
 
 export default PlayerProfile;

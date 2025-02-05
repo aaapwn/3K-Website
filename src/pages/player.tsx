@@ -8,20 +8,19 @@ import { useSession } from 'next-auth/react';
 
 import PlayerCard from './playersection/playercard';
 import PlayerTable from './playersection/playertable';
+// import { useMemo } from 'react';
 import PlayerNotConnect from './playersection/playetNotConnect';
 
-import { Player, Matches } from '@/app/players/[id]/page';
+import { Player } from '@/app/players/[id]/page';
 
 type PlayerProfileProps = Readonly<{
-  playerID: string;
   playerData: Player;
-  matchesData: Matches[];
 }>;
 
 const isRegistered = true;
 
-const PlayerPage = ({ playerID, playerData, matchesData }: PlayerProfileProps) => {
-  const { data: session } = useSession();
+const PlayerPage = ({ playerData }: PlayerProfileProps) => {
+  const { data: session } = useSession() || {};
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-white to-[#FFC72C]/10 px-5 py-5 flex flex-col gap-10">
@@ -54,7 +53,7 @@ const PlayerPage = ({ playerID, playerData, matchesData }: PlayerProfileProps) =
               {session?.user?.email?.split('@')[0] === playerData?.studentID && isRegistered ? (
                 <>
                   <PlayerCard playerData={playerData} />
-                  <PlayerTable matchesData={matchesData} />
+                  <PlayerTable />
                 </>
               ) : (
                 <>
@@ -65,7 +64,7 @@ const PlayerPage = ({ playerID, playerData, matchesData }: PlayerProfileProps) =
           ) : (
             <>
               <PlayerCard playerData={playerData} />
-              <PlayerTable matchesData={matchesData} />
+              <PlayerTable />
             </>
           )}
         </div>

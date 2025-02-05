@@ -38,6 +38,12 @@ const Nav = ({ session }: NavProps) => {
         >
           กฏระเบียบ/PDPA
         </Link>
+        <Link
+          className=" hover:bg-tertbg/20 flex justify-center text-firsto items-center px-4 duration-200 rounded-md"
+          href="/dashboard"
+        >
+          ADMIN
+        </Link>
       </div>
       <div className="flex-row flex gap-2 justify-self-end border-l-2 border-tertbg/20 pl-3">
         {session ? (

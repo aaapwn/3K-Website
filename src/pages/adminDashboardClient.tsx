@@ -44,12 +44,12 @@ export default function AdminDashboardClient({
   };
 
   const availableDates = useMemo(() => {
-    return Object.keys(data.matches).sort();
-  }, []);
+    return data && data.matches ? Object.keys(data.matches).sort() : [];
+  }, [data]);
 
-  const matches = data.matches[selectedDate] || [];
+  const matches = data && data.matches ? data.matches[selectedDate] || [] : [];
 
-  if (window.innerWidth <= 768) {
+  if (typeof window !== 'undefined' && window.innerWidth <= 768) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <p className="text-xl">This dashboard is not available on mobile devices.</p>

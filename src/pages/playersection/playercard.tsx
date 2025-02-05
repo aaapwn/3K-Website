@@ -7,7 +7,14 @@ import Image from 'next/image';
 import qr from '@public/images/qrpreview.webp';
 import logo from '@public/images/logo.webp';
 
-import { Player } from '@/app/players/[id]/page';
+type Player = {
+  studentID: string;
+  university: string;
+  titleThai: string;
+  nameThai: string;
+  sport: string;
+  sportType: string;
+};
 
 // for future
 // type PlayerCardProps = {
@@ -20,7 +27,7 @@ type PlayerCardProps = {
 };
 
 const PlayerCard = ({ playerData }: PlayerCardProps) => {
-  const { data: session } = useSession();
+  const { data: session } = useSession() || {};
 
   return (
     <div className="flex flex-col gap-5 px-5 pb-10 rounded-xl bg-secondw drop-shadow-md align-top">

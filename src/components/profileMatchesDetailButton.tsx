@@ -16,12 +16,13 @@ type MatchesDetailButtonProps = {
 };
 
 const MatchesDetailButton = ({ matchesData }: MatchesDetailButtonProps) => {
+  console.log(matchesData);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
               <ModalHeader className="flex flex-col gap-1">
                 <p className="text-3xl font-normal">รายละเอียดการแข่งขัน</p>
