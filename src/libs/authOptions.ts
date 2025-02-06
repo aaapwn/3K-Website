@@ -12,7 +12,7 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async signIn({ account }) {
       try {
-        const res = await axios.post(`${process.env.BACKEND_URL}/api/auth/google-login`, {
+        await axios.post(`${process.env.BACKEND_URL}/api/auth/google-login`, {
           token: account?.id_token,
         });
         return true;

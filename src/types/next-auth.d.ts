@@ -29,9 +29,6 @@ declare module "next-auth" {
         },
         accessToken: string,
     }
-
-    interface Account { }
-    interface Profile { }
 }
 
 declare module "next-auth/jwt" {
