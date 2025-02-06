@@ -160,7 +160,7 @@ const PlayerTable = () => {
       default:
         return null;
     }
-  }, []);
+  }, [onOpen]);
   return (
     <div className="flex flex-col gap-5 pb-10 pt-5 px-5 rounded-xl bg-secondw w-full h-full">
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
