@@ -11,7 +11,7 @@ import PlayerTable from './playersection/playertable';
 // import { useMemo } from 'react';
 import PlayerNotConnect from './playersection/playetNotConnect';
 
-import { Player } from '@/app/players/[id]/page';
+import { Player } from '@/app/players/page';
 
 type PlayerProfileProps = Readonly<{
   playerData: Player;
@@ -47,7 +47,7 @@ const PlayerPage = ({ playerData }: PlayerProfileProps) => {
       </div>
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-        <div className="flex xl:flex-row flex-col justify-center gap-5 items-center lg:items-start content-start ">
+        <div className="flex xl:flex-row flex-col justify-center gap-5 items-center lg:items-start content-start">
           {session ? (
             <>
               {session?.user?.email?.split('@')[0] === playerData?.studentID && isRegistered ? (

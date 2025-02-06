@@ -9,7 +9,7 @@ import { Button } from '@heroui/button';
 // import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@heroui/react';
 
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@heroui/react';
-import { Matches } from '@/app/players/[id]/page';
+import { Matches } from '@/app/players/page';
 
 type MatchesDetailButtonProps = {
   matchesData: Matches[];
