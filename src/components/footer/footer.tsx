@@ -1,19 +1,21 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { Image } from "@heroui/react";
-import NextImage from "next/image";
+import Image from 'next/image';
+
+import sor from "@public/images/sor.webp";
+import logo from "@public/images/logo_light.webp";
 
 import { Instagram, Facebook, Mail } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <footer className="flex md:flex-row flex-col md:justify-between justify-center md:text-start text-center py-6 px-5 md:px-32 bg-secondb text-secondw md:text-xl text-medium">
+        <footer className="flex md:flex-row flex-col md:justify-between justify-center md:text-start text-center py-6 px-5 bg-secondb text-secondw md:text-xl text-medium">
             <div className="px-2.5 justify-between">
                 <p className='font-medium text-2xl hidden md:block'>สนับสนุนโดย</p>
                 <div className='flex flex-row gap-5 justify-center md:justify-start align-middle items-center'>
-                    <Image src="/images/KMITL.webp" as={NextImage} alt="logo" width={50} height={50} className="object-contain" />
-                    <Image src="/images/logo_light.webp" as={NextImage}  alt="logo" width={50} height={50} className="object-contain" />
+                    <Image src={sor} alt="logo" className="object-contain w-12" />
+                    <Image src={logo} alt="logo" className="object-contain w-12" />
                 </div>
                 <div className="flex-col md:px-2.5 justify-between flex md:hidden gap-5">
                     <div className='flex-col flex gap-5'>
