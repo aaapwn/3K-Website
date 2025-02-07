@@ -18,8 +18,8 @@ export default function SportPage({ sportData }: sportPageProps) {
         {sportData.map((sport, index) => (
           <Card className="" key={sport.en}>
             <CardHeader className="flex gap-1 bg-secondy/10 p-5 items-center">
-              <SportBadge sport={sport.en} className="scale-50" key={sport.en}></SportBadge>
-              <p className="text-3xl font-bold">{sport.th}</p>
+              <SportBadge sport={sport.en} className="scale-50" key={sport.en} padding="p-2"></SportBadge>
+              <p className="text-4xl font-bold">{sport.th}</p>
             </CardHeader>
             <Divider />
             <CardBody>
@@ -31,7 +31,9 @@ export default function SportPage({ sportData }: sportPageProps) {
             <Divider />
             <CardFooter className="flex gap-2 w-full flex-wrap">
               {sport.type.map((type, index) => (
-                <Chip key={sport.en + index}>{type}</Chip>
+                <Chip key={sport.en + index} className="text-xl py-2">
+                  {type}
+                </Chip>
               ))}
             </CardFooter>
           </Card>

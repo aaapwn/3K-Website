@@ -16,7 +16,7 @@ const sports: Sport[] = [
   { en: 'badminton', th: 'แบดมินตัน' },
   { en: 'tableTennis', th: 'เทเบิลเทนนิส' },
   { en: 'running', th: 'กรีฑา' },
-  { en: 'bowling', th: 'เปตอง' },
+  { en: 'petong', th: 'เปตอง' },
   { en: 'chess', th: 'หมากกระดาน' },
   { en: 'gaming', th: 'อีสปอร์ต' },
 ];
@@ -43,7 +43,7 @@ const SportSection = () => {
       <div className="grid grid-cols-2 gap-10 md:grid-cols-3 xl:grid-cols-5">
         {/* <div className="flex justify-center items-center md:gap-x-[80px] md:gap-y-10 align-middle flex-wrap md:px-20 gap-x-10"> */}
         {sports.map((sport, index) => (
-          <SportBadge key={index} sport={sport.en} className="md:scale-100 scale-85">
+          <SportBadge key={index} sport={sport.en} className="md:scale-100 scale-85" padding="p-10">
             {sport.th}
           </SportBadge>
         ))}
