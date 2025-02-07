@@ -26,13 +26,19 @@ const Nav = ({ session }: NavProps) => {
       <div className="md:flex hidden justify-center w-fit col-span-2 md:text-base lg:text-xl md:justify-self-start lg:justify-self-center h-full items-stretch py-1">
         {/* <Link className=" hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md" href="/">
           นักกีฬา
-        </Link>
-        <Link className=" hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md" href="/">
+        </Link> */}
+        <Link
+          className=" hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md"
+          href="/schedule"
+        >
           กำหนดการ
         </Link>
-        <Link className=" hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md" href="/">
+        <Link
+          className=" hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md"
+          href="/sport"
+        >
           กีฬาทั้งหมด
-        </Link> */}
+        </Link>
         <Link
           className=" hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md"
           href="/pdpa"

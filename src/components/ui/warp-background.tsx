@@ -1,6 +1,7 @@
-import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
-import React, { HTMLAttributes, useCallback, useMemo } from "react";
+'use client';
+import { cn } from '@/lib/utils';
+import { motion } from 'motion/react';
+import React, { HTMLAttributes, useCallback, useMemo } from 'react';
 
 export interface WarpBackgroundProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -31,20 +32,20 @@ const Beam = ({
     <motion.div
       style={
         {
-          "--x": `${x}`,
-          "--width": `${width}`,
-          "--aspect-ratio": `${ar}`,
-          "--background": `linear-gradient(hsl(${hue} 90% 58% / 25%), transparent)`,
+          '--x': `${x}`,
+          '--width': `${width}`,
+          '--aspect-ratio': `${ar}`,
+          '--background': `linear-gradient(hsl(${hue} 90% 58% / 25%), transparent)`,
         } as React.CSSProperties
       }
       className={`absolute left-[var(--x)] top-0 [aspect-ratio:1/var(--aspect-ratio)] [background:var(--background)] [width:var(--width)]`}
-      initial={{ y: "100cqmax", x: "-50%" }}
-      animate={{ y: "-100%", x: "-50%" }}
+      initial={{ y: '100cqmax', x: '-50%' }}
+      animate={{ y: '-100%', x: '-50%' }}
       transition={{
         duration,
         delay,
         repeat: Infinity,
-        ease: "linear",
+        ease: 'linear',
       }}
     />
   );
@@ -59,7 +60,7 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
   beamDelayMax = 3,
   beamDelayMin = 0,
   beamDuration = 3,
-  gridColor = "hsl(var(--border))",
+  gridColor = 'hsl(var(--border))',
   ...props
 }) => {
   const generateBeams = useCallback(() => {
@@ -69,8 +70,7 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
 
     for (let i = 0; i < beamsPerSide; i++) {
       const x = Math.floor(i * step);
-      const delay =
-        Math.random() * (beamDelayMax - beamDelayMin) + beamDelayMin;
+      const delay = Math.random() * (beamDelayMax - beamDelayMin) + beamDelayMin;
       beams.push({ x, delay });
     }
     return beams;
@@ -82,17 +82,17 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
   const leftBeams = useMemo(() => generateBeams(), [generateBeams]);
 
   return (
-    <div className={cn("relative rounded border p-20", className)} {...props}>
+    <div className={cn('relative rounded border p-20', className)} {...props}>
       <div
         style={
           {
-            "--perspective": `${perspective}px`,
-            "--grid-color": gridColor,
-            "--beam-size": `${beamSize}%`,
+            '--perspective': `${perspective}px`,
+            '--grid-color': gridColor,
+            '--beam-size': `${beamSize}%`,
           } as React.CSSProperties
         }
         className={
-          "pointer-events-none absolute left-0 top-0 size-full overflow-hidden [clip-path:inset(0)] [container-type:size] [perspective:var(--perspective)] [transform-style:preserve-3d]"
+          'pointer-events-none absolute left-0 top-0 size-full overflow-hidden [container-type:size] [perspective:var(--perspective)] [transform-style:preserve-3d]'
         }
       >
         {/* top side */}
