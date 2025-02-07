@@ -11,6 +11,8 @@ import UIProviders from '@/components/providers/UIProviders';
 
 import auth from '@/libs/auth';
 
+import Transition from '@/app/Transition';
+
 const KMITL2020 = localFont({ src: '../../public/fonts/KMITL 2020 Regular.woff2' });
 
 export const metadata: Metadata = {
@@ -40,7 +42,7 @@ export default async function RootLayout({
         <AuthProviders>
           <UIProviders>
             <Nav session={session} />
-            {children}
+            <Transition>{children}</Transition>
           </UIProviders>
         </AuthProviders>
         <Footer />
