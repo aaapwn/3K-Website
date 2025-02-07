@@ -14,6 +14,7 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerBody, Button, useDisclosure 
 type NavProps = Readonly<{ session: Session | null }>;
 
 const Nav = ({ session }: NavProps) => {
+  console.log(session);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <nav className="grid auto-cols-min md:grid-cols-4 grid-cols-2 items-center justify-items-center px-5 bg-secondw text-xl drop-shadow-md sticky top-0 z-50 gap-1">
@@ -48,7 +49,7 @@ const Nav = ({ session }: NavProps) => {
       <div className="flex-row flex gap-2 justify-self-end border-l-2 border-tertbg/20 pl-3">
         {session ? (
           <div className="flex-row flex gap-2 items-center">
-            <Link href="/players/1" className="border-1 px-3 py-1 rounded-sm">
+            <Link href="/players" className="border-1 px-3 py-1 rounded-sm">
               {session.user?.name?.split(' ')[0]}
             </Link>
             <Button onPress={() => signOut()} className="bg-firsto text-secondw rounded-sm text-medium">
