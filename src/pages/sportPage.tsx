@@ -15,10 +15,10 @@ export default function SportPage({ sportData }: sportPageProps) {
   return (
     <div className="flex flex-col justify-center lg:px-32 md:px-14 px-10 py-10">
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
-        {sportData.map((sport, index) => (
+        {sportData.map((sport) => (
           <Card className="" key={sport.en}>
             <CardHeader className="flex gap-1 bg-secondy/10 p-5 items-center">
-              <SportBadge sport={sport.en} className="scale-50" key={sport.en} padding="p-2"></SportBadge>
+              <SportBadge sport={sport.en} className="scale-50" key={sport.en} padding="p-10"></SportBadge>
               <p className="text-4xl font-bold">{sport.th}</p>
             </CardHeader>
             <Divider />

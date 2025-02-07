@@ -16,7 +16,13 @@ interface match {
   venue: string;
 }
 
-interface data {
+interface players {
+  homeTeam: { id: number; name: string; registered: boolean }[];
+  awayTeam: { id: number; name: string; registered: boolean }[];
+}
+
+interface MatchesTableProps {
+  matches: match[];
   players: Record<
     number,
     {
@@ -26,12 +32,7 @@ interface data {
   >;
 }
 
-interface MatchesTableProps {
-  matches: match[];
-  data: data;
-}
-
-export default function MatchesTable({ matches, data }: MatchesTableProps) {
+export default function MatchesTable({ matches, players }: MatchesTableProps) {
   return (
     <>
       <Table>
@@ -60,7 +61,7 @@ export default function MatchesTable({ matches, data }: MatchesTableProps) {
               <TableCell className="text-2xl">{match.venue}</TableCell>
               <TableCell className="text-2xl">-</TableCell>
               <TableCell className="text-2xl text-end">
-                <MatchesDetail match={match} data={data} />
+                <MatchesDetail match={match} players={players} />
               </TableCell>
             </TableRow>
           ))}

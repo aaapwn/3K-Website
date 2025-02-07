@@ -92,7 +92,7 @@ export default function AdminDashboardClient({
 
         <h2 className="text-2xl font-bold mb-4">รายการแข่งวันที่ : {format(parseISO(selectedDate), 'MMMM d, yyyy')}</h2>
         {matches.length > 0 ? (
-          <MatchesTable matches={matches} data={data} />
+          <MatchesTable matches={matches} players={data.players} />
         ) : (
           <Card>
             <CardBody className="flex items-center justify-center h-32">

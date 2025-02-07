@@ -19,7 +19,13 @@ type match = {
   venue: string;
 };
 
-type data = {
+type players = {
+  homeTeam: { id: number; name: string; registered: boolean }[];
+  awayTeam: { id: number; name: string; registered: boolean }[];
+};
+
+type MatchesDetailProps = {
+  match: match;
   players: Record<
     number,
     {
@@ -27,15 +33,10 @@ type data = {
       awayTeam: { id: number; name: string; registered: boolean }[];
     }
   >;
-};
-
-type MatchesDetailProps = {
-  match: match;
-  data: data;
   // selectedDate: string;
 };
 
-export default function MatchesDetail({ match, data }: MatchesDetailProps) {
+export default function MatchesDetail({ match, players }: MatchesDetailProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
@@ -58,7 +59,7 @@ export default function MatchesDetail({ match, data }: MatchesDetailProps) {
                       <TableColumn className="text-2xl">Status</TableColumn>
                     </TableHeader>
                     <TableBody>
-                      {data.players[match.id]?.homeTeam.map((player) => (
+                      {players[match.id]?.homeTeam.map((player) => (
                         <TableRow key={player.id}>
                           <TableCell className="text-2xl">{player.name}</TableCell>
                           <TableCell className="text-2xl">
@@ -86,7 +87,7 @@ export default function MatchesDetail({ match, data }: MatchesDetailProps) {
                       <TableColumn className="text-2xl">Status</TableColumn>
                     </TableHeader>
                     <TableBody>
-                      {data.players[match.id]?.awayTeam.map((player) => (
+                      {players[match.id]?.awayTeam.map((player) => (
                         <TableRow key={player.id}>
                           <TableCell className="text-2xl">{player.name}</TableCell>
                           <TableCell className="text-2xl">
