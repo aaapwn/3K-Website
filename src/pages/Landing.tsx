@@ -4,6 +4,7 @@ import { Session } from "next-auth";
 import HeroSection from "@/pages/landingsection/hero";
 import SportSection from "./landingsection/sportlist";
 import Banner from "./landingsection/banner";
+import FeatureSection from "./landingsection/feature";
 
 
 type LandingProps = Readonly<{
@@ -16,7 +17,8 @@ const Landing = ({ session }: LandingProps) => {
   return (
     <div className="bg-secondw">
       <HeroSection session={session} />
-      {/* <FeatureSection /> */}
+      <Banner />
+      <FeatureSection />
       <Banner />
       <SportSection />
     </div>

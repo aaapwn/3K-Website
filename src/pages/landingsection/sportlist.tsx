@@ -34,7 +34,7 @@ const SportSection = () => {
                 {/* <div className="flex justify-center items-center md:gap-x-[80px] md:gap-y-10 align-middle flex-wrap md:px-20 gap-x-10"> */}
                 {
                     sports.map((sport, index) => (
-                        <SportBadge key={index} sport={sport.en}>{sport.th}</SportBadge>
+                        <SportBadge key={index} sport={sport.en} className="md:scale-100 scale-85">{sport.th}</SportBadge>
                     ))
                 }
             </div>

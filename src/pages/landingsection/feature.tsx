@@ -71,11 +71,11 @@ const columns = [
 ];
 const FeatureSection = () => {
     return (
-        <div className="py-16 px-32 flex flex-row justify-between items-center bg-secondw gap-10">
+        <div className="py-16 px-5 md:px-20 flex md:flex-row flex-col justify-between items-stretch bg-secondw gap-10">
             <div className="w-full flex flex-col gap-5">
-                <div className="flex flex-row justify-between items-center">
-                    <h1 className="font-bold text-4xl leading-[64px]">สรุปเหรียญรางวัล</h1>
-                    <Button onPress={() => null} className='bg-secondw text-firsto rounded-md text-medium border-firsto border-1 px-10'>กำหนดการ</Button>
+                <div className="flex md:flex-row flex-col justify-between items-center">
+                    <h1 className="font-bold lg:text-5xl text-4xl leading-[64px]">สรุปเหรียญรางวัล</h1>
+                    <Button onPress={() => null} className='bg-secondw text-firsto rounded-md text-medium border-firsto border-1 px-10'>สำหรับฟุตบอล <strong>Click</strong></Button>
                 </div>
                 <Table isStriped aria-label="table with dynamic content">
                     <TableHeader columns={columns} className="bg-firsto">
@@ -92,20 +92,12 @@ const FeatureSection = () => {
 
             </div>
             <div className="w-full flex flex-col gap-5">
-                <h1 className="font-bold text-4xl leading-[64px]">สรุปเหรียญรางวัล</h1>
-                <Table aria-label="table with dynamic content">
-                    <TableHeader columns={columns}>
-                        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
-                    </TableHeader>
-                    <TableBody items={rows}>
-                        {(item) => (
-                            <TableRow key={item.key}>
-                                {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
-
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
+                <h1 className="font-bold lg:text-5xl text-4xl leading-[64px]">สนามแข่งขัน</h1>
+                <iframe
+                    src="https://www.google.com/maps/d/u/2/embed?mid=1-uDyJsdDI2lY8M4Imq8y5iUO1XbSj7Q&ehbc=2E312F&noprof=1"
+                    className="min-h-[400px]"
+                    lang="th">
+                </iframe>
             </div>
         </div >
     );
