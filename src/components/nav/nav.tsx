@@ -14,7 +14,7 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerBody, Button, useDisclosure 
 type NavProps = Readonly<{ session: Session | null }>;
 
 const Nav = ({ session }: NavProps) => {
-  console.log(session);
+  // console.log(session);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <nav className="grid auto-cols-min md:grid-cols-4 grid-cols-2 items-center justify-items-center px-5 bg-secondw text-xl drop-shadow-md sticky top-0 z-50 gap-1">
