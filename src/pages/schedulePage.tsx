@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { Button } from '@heroui/react';
 
 import { Card, CardBody } from '@heroui/react';
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from '@heroui/react';
 
-import { ArrowLeft } from 'lucide-react';
-import { format, parseISO } from 'date-fns';
+import { ArrowLeft, ChevronDown } from 'lucide-react';
 import MatchesTable from '@/components/matchesTable';
 
 import {
@@ -60,9 +60,9 @@ export default function MatchesSchedulePage({ filteredMatches, sports, players }
   console.log('all sports:', sports);
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-white flex w-full lg:flex-row flex-col">
       {/* Sidebar */}
-      <aside className="w-64 bg-firsto text-secondw p-6">
+      <aside className="w-64 bg-firsto text-secondw p-6 lg:block hidden">
         <Link href="/" className="flex items-center mb-6">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Home
@@ -96,9 +96,36 @@ export default function MatchesSchedulePage({ filteredMatches, sports, players }
           ))}
         </ul>
       </aside>
+      {/* Topbar */}
+      <header className="w-full bg-firsto p-6 flex items-center justify-between lg:hidden">
+        <h1 className="text-2xl font-bold text-secondw">Matches Schedule</h1>
+        <Dropdown className="text-2xl">
+          <DropdownTrigger className="bg-secondw text-xl">
+            <Button variant="bordered">
+              {selectedSport}
+              <ChevronDown />
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Static Actions text-xl">
+            {sports.map((sport) => (
+              <DropdownItem
+                key={sport.en}
+                className={
+                  selectedSport === sport.th
+                    ? 'w-full justify-center text-xl bg-firsto text-secondw'
+                    : 'w-full justify-center text-xl bg-secondw'
+                }
+                onPress={() => handleSportChange(sport.th)}
+              >
+                <p className="text-xl">{sport.th}</p>
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
+      </header>
 
       {/* Main content */}
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-6 w-full">
         <h1 className="text-3xl font-bold mb-6">รายการแข่งขัน</h1>
 
         <h2 className="text-2xl font-bold mb-4">กีฬา : {selectedSport}</h2>
