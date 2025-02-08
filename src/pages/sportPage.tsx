@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardHeader, CardBody, CardFooter, Divider, Link, Chip } from '@heroui/react';
+import { Card, CardHeader, CardBody, CardFooter, Divider, Chip } from '@heroui/react';
 import SportBadge from '@/components/sport/sportbadge';
 
 type sportPageProps = {
@@ -15,7 +15,7 @@ export default function SportPage({ sportData }: sportPageProps) {
   return (
     <div className="flex flex-col justify-center lg:px-32 md:px-14 px-10 py-10">
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
-        {sportData.map((sport) => (
+        {sportData?.map((sport) => (
           <Card className="" key={sport.en}>
             <CardHeader className="flex gap-1 bg-secondy/10 p-5 items-center">
               <SportBadge sport={sport.en} className="scale-50" key={sport.en} padding="p-10"></SportBadge>
@@ -30,7 +30,7 @@ export default function SportPage({ sportData }: sportPageProps) {
             </CardBody>
             <Divider />
             <CardFooter className="flex gap-2 w-full flex-wrap">
-              {sport.type.map((type, index) => (
+              {sport?.type?.map((type, index) => (
                 <Chip key={sport.en + index} className="text-xl py-2">
                   {type}
                 </Chip>

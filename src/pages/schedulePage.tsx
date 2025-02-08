@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@heroui/react';
 
@@ -69,7 +69,7 @@ export default function MatchesSchedulePage({ filteredMatches, sports, players }
         </Link>
         <h2 className="text-xl font-bold mb-4">Select Sport</h2>
         <ul className="space-y-2">
-          {sports.map((sport) => (
+          {sports?.map((sport) => (
             <li key={sport.en}>
               <Button
                 variant="solid"
@@ -106,21 +106,23 @@ export default function MatchesSchedulePage({ filteredMatches, sports, players }
               <ChevronDown />
             </Button>
           </DropdownTrigger>
-          <DropdownMenu aria-label="Static Actions text-xl">
-            {sports.map((sport) => (
-              <DropdownItem
-                key={sport.en}
-                className={
-                  selectedSport === sport.th
-                    ? 'w-full justify-center text-xl bg-firsto text-secondw'
-                    : 'w-full justify-center text-xl bg-secondw'
-                }
-                onPress={() => handleSportChange(sport.th)}
-              >
-                <p className="text-xl">{sport.th}</p>
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
+          {sports && sports.length > 0 && (
+            <DropdownMenu aria-label="Static Actions text-xl">
+              {sports?.map((sport) => (
+                <DropdownItem
+                  key={sport.en}
+                  className={
+                    selectedSport === sport.th
+                      ? 'w-full justify-center text-xl bg-firsto text-secondw'
+                      : 'w-full justify-center text-xl bg-secondw'
+                  }
+                  onPress={() => handleSportChange(sport.th)}
+                >
+                  <p className="text-xl">{sport.th}</p>
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          )}
         </Dropdown>
       </header>
 

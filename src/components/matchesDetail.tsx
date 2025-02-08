@@ -19,11 +19,6 @@ type match = {
   venue: string;
 };
 
-type players = {
-  homeTeam: { id: number; name: string; registered: boolean }[];
-  awayTeam: { id: number; name: string; registered: boolean }[];
-};
-
 type MatchesDetailProps = {
   match: match;
   players: Record<

@@ -16,10 +16,6 @@ interface match {
   venue: string;
 }
 
-interface players {
-  homeTeam: { id: number; name: string; registered: boolean }[];
-  awayTeam: { id: number; name: string; registered: boolean }[];
-}
 
 interface MatchesTableProps {
   matches: match[];
