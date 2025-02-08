@@ -85,13 +85,13 @@ const Nav = ({ session }: NavProps) => {
                 <DrawerBody className="flex flex-col justify-center mb-16">
                   {/* <Link href="/" className="w-full rounded-none p-4 text-xl text-center">
                     นักกีฬา
-                  </Link>
-                  <Link href="/" className="w-full rounded-none p-4 text-xl text-center">
+                  </Link> */}
+                  <Link href="/schedule" onClick={onOpenChange} className="w-full rounded-none p-4 text-xl text-center">
                     กำหนดการ
                   </Link>
-                  <Link href="/" className="w-full rounded-none p-4 text-xl text-center">
+                  <Link href="/sport" onClick={onOpenChange} className="w-full rounded-none p-4 text-xl text-center">
                     กีฬาทั้งหมด
-                  </Link> */}
+                  </Link>
                   <Link onClick={onOpenChange} href="/pdpa" className="w-full rounded-none p-4 text-xl text-center">
                     กฏระเบียบ/PDPA
                   </Link>
