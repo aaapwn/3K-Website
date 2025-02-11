@@ -1,6 +1,6 @@
 'use server';
 
-import AdminDashboardClient from '@/pages/adminDashboardClient';
+import AdminDashboardClient from '@/views/adminDashboardClient';
 import auth from '@/libs/auth';
 import { getAllSchedule } from '@/queries/schedule/query';
 

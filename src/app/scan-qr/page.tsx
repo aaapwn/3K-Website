@@ -1,6 +1,6 @@
 "use server";
 import auth from "@/libs/auth";
-import ScanQR from "@/pages/ScanQR";
+import ScanQR from "@/views/ScanQR";
 
 const Page = async () => {
     const session = await auth();

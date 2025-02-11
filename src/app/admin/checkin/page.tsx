@@ -1,6 +1,6 @@
 "use server";
 
-import CheckIn from "@/pages/CheckIn";
+import CheckIn from "@/views/CheckIn";
 import auth from "@/libs/auth";
 
 const page = async () => {

@@ -1,7 +1,7 @@
 "use client";
 import { Session } from "next-auth";
 
-import HeroSection from "@/pages/landingsection/hero";
+import HeroSection from "@/views/landingsection/hero";
 import SportSection from "./landingsection/sportlist";
 import Banner from "./landingsection/banner";
 

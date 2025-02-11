@@ -1,7 +1,7 @@
 'use server';
 
 import auth from '@/libs/auth';
-import PlayerPage from '@/pages/player';
+import PlayerPage from '@/views/player';
 
 export type Player = {
   id: string;
