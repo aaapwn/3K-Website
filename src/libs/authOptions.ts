@@ -22,7 +22,10 @@ export const authOptions: AuthOptions = {
       }
     },
     async redirect({ url, baseUrl }) {
-      return baseUrl
+      if (url.startsWith(baseUrl)) {
+        return url;
+      }
+      return baseUrl;
     },
     async jwt({ token, account }) {
       if (account) {

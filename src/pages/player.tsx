@@ -19,7 +19,7 @@ type PlayerProfileProps = Readonly<{
 }>;
 
 const PlayerPage = ({ session }: PlayerProfileProps) => {
-  const { data, isLoading, isError } = useQuery<UserProfile>({
+  const { data } = useQuery<UserProfile>({
     queryKey: ["getProfile"],
     queryFn: () => getProfile(session?.accessToken as string),
   });

@@ -12,31 +12,16 @@ import {
   useDisclosure,
 } from "@heroui/react";
 import { Button } from "@heroui/react";
-import { extendVariants } from "@heroui/react";
 import toast from "react-hot-toast";
 import {Select, SelectItem} from "@heroui/react";
 
 import { getUserSchedule, checkInUser } from "@/queries/schedule/query";
 import { UserProfile } from "@/queries/user/type";
 import { APIError } from "@/libs/axiosClient";
-import { set } from "date-fns";
 
 type ScanQRProps = {
   session: Session | null;
 };
-
-
-const MySelect = extendVariants(Select, {
-    variants: {
-      size: {
-        xl: {
-          trigger: "h-14 px-4",
-          value: "text-xl",
-          // Add other necessary styles for xl size
-        },
-      },
-    },
-  });
 
 const CheckIn = ({ session }: ScanQRProps) => {
   const scanner = useRef<QrScanner>(null);
@@ -114,7 +99,7 @@ const CheckIn = ({ session }: ScanQRProps) => {
         scanner?.current?.stop();
       }
     };
-  }, []);
+  }, [onScanFail, onScanSuccess]);
 
   return (
     <>

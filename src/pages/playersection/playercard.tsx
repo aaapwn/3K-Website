@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useSession } from 'next-auth/react';
 import { Chip } from '@heroui/react';
 import { UserProfile } from '@/queries/user/type';
 import QRCode from "react-qr-code";

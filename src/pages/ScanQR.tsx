@@ -98,7 +98,7 @@ const ScanQR = ({ session }: ScanQRProps) => {
         scanner?.current?.stop();
       }
     };
-  }, []);
+  }, [onScanSuccess, onScanFail]);
 
   return (
     <>

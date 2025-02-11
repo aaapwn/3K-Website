@@ -10,7 +10,6 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerBody,
-  DrawerFooter,
   useDisclosure,
 } from "@heroui/react";
 

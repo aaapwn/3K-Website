@@ -1,12 +1,8 @@
 import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, ModalFooter, Chip } from '@heroui/react';
-// import { Matches } from '@/app/players/[id]/page';
 import { Button } from '@heroui/button';
-
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@heroui/react';
+import { Card, CardBody } from '@heroui/react';
 
-import { Card, CardBody, CardHeader } from '@heroui/react';
-
-import { format, parseISO } from 'date-fns';
 import { User } from '@/queries/user/type';
 
 type MatchesDetailProps = {

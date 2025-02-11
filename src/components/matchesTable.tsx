@@ -1,31 +1,10 @@
 'use client';
 import React from 'react';
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 import { Chip } from '@heroui/react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@heroui/react';
 import MatchesDetail from '@/components/matchesDetail';
 import { Schedule } from '@/queries/schedule/type';
-
-interface match {
-  id: number;
-  date: string;
-  time: string;
-  sport: string;
-  type: string;
-  homeTeam: string;
-  awayTeam: string;
-  venue: string;
-}
-
-interface data {
-  players: Record<
-    number,
-    {
-      homeTeam: { id: number; name: string; registered: boolean }[];
-      awayTeam: { id: number; name: string; registered: boolean }[];
-    }
-  >;
-}
 
 interface MatchesTableProps {
   data: Schedule[];
