@@ -2,7 +2,7 @@ import axiosClient from "@/libs/axiosClient";
 import { UserProfile, User, SportEvent } from "./type";
 
 export const getProfile = (token:string): Promise<UserProfile> => {
-    const res = axiosClient.post("api/user/profile", {}, {
+    const res = axiosClient.post("/user/profile", {}, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -22,7 +22,7 @@ export const getProfile = (token:string): Promise<UserProfile> => {
 };
 
 export const getUserByKey = (token:string, key:string): Promise<User> => {
-    const res = axiosClient.get(`api/user/${key}`, {
+    const res = axiosClient.get(`/user/${key}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -31,7 +31,7 @@ export const getUserByKey = (token:string, key:string): Promise<User> => {
 }
 
 export const registerUser = (token:string, qr_key:string): Promise<User> => {
-    const res = axiosClient.post(`/api/user/register/${qr_key}`, {}, {
+    const res = axiosClient.post(`/user/register/${qr_key}`, {}, {
         headers: {
             Authorization: `Bearer ${token}`,
         },

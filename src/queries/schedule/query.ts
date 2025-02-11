@@ -3,7 +3,7 @@ import { Schedule } from "./type";
 import { UserProfile } from "../user/type";
 
 export const getAllSchedule = (token:string): Promise<Schedule[]> => {
-    const res = axiosClient.get("api/schedule", {
+    const res = axiosClient.get("/schedule", {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -20,7 +20,7 @@ export const getAllSchedule = (token:string): Promise<Schedule[]> => {
 }
 
 export const getUserSchedule = (token:string, qr_key:string): Promise<UserProfile> => {
-    const res = axiosClient.get(`api/schedule/user/${qr_key}`, {
+    const res = axiosClient.get(`/schedule/user/${qr_key}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -40,7 +40,7 @@ export const getUserSchedule = (token:string, qr_key:string): Promise<UserProfil
 }
 
 export const checkInUser = (token:string, qr_key:string, schedule_id: string) => {
-    return axiosClient.post(`api/schedule/user/${qr_key}/checkin/${schedule_id}`, {}, {
+    return axiosClient.post(`/schedule/user/${qr_key}/checkin/${schedule_id}`, {}, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
