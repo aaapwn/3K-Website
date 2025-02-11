@@ -16,7 +16,9 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@heroui/react": "^2.6.13",
+    "@heroui/select": "^2.4.10",
     "@radix-ui/react-dialog": "^1.1.5",
+    "@tanstack/react-query": "^5.66.0",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -29,6 +31,8 @@
     "qr-scanner": "^1.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.1",
+    "react-qr-code": "^2.0.15",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },

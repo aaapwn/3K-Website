@@ -12,48 +12,64 @@ import {
   useDisclosure,
 } from "@heroui/react";
 import { Button } from "@heroui/react";
+import { extendVariants } from "@heroui/react";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import {Select, SelectItem} from "@heroui/react";
 
-import { getUserByKey, registerUser } from "@/queries/user/query";
-import { User } from "@/queries/user/type";
+import { getUserSchedule, checkInUser } from "@/queries/schedule/query";
+import { UserProfile } from "@/queries/user/type";
 import { APIError } from "@/libs/axiosClient";
+import { set } from "date-fns";
 
 type ScanQRProps = {
   session: Session | null;
 };
 
-const ScanQR = ({ session }: ScanQRProps) => {
+
+const MySelect = extendVariants(Select, {
+    variants: {
+      size: {
+        xl: {
+          trigger: "h-14 px-4",
+          value: "text-xl",
+          // Add other necessary styles for xl size
+        },
+      },
+    },
+  });
+
+const CheckIn = ({ session }: ScanQRProps) => {
   const scanner = useRef<QrScanner>(null);
   const videoEl = useRef<HTMLVideoElement>(null);
   const qrBoxEl = useRef<HTMLDivElement>(null);
   const [qrOn, setQrOn] = useState<boolean>(true);
-  const [userData, setUserData] = useState<User>();
-  const router = useRouter();
+  const [userData, setUserData] = useState<UserProfile>();
+  const [selectSchedule, setSelectSchedule] = useState<string>('');
   let tempData = "";
 
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
-  const onRegisterUser = async (qr_key: string) => {
-    const id = toast.loading("กำลังลงทะเบียนข้อมูล...");
+  const onCheckInUser = async (qr_key: string) => {
+    const id = toast.loading("กำลังลงทะเบียนนักกีฬา...");
 
     try {
-        await registerUser(session?.accessToken as string, qr_key);
-        toast.success("ลงทะเบียนข้อมูลสำเร็จ", { id });
+        await checkInUser(session?.accessToken as string, qr_key, selectSchedule);
+        toast.success("ลงทะเบียนนักกีฬาสำเร็จ", { id });
     } catch (error:unknown) {
         const apiError = error as APIError;
         toast.error(apiError.message, { id });
     }
     
     onClose();
-    router.push("/players");
+    setUserData(undefined);
+    setSelectSchedule('');
   }
 
   const onScanSuccess = async (result: QrScanner.ScanResult) => {
     if (result.data === tempData) return;
     tempData = result.data;
 
-    const data = await getUserByKey(
+    const data = await getUserSchedule(
       session?.accessToken as string,
       result.data
     );
@@ -118,18 +134,44 @@ const ScanQR = ({ session }: ScanQRProps) => {
           {() => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                <p className="text-3xl font-normal">คุณคือ</p>
+                <p className="text-3xl font-bold">รายละเอียดผู้เข้าแข่งขัน</p>
               </ModalHeader>
               <ModalBody>
                 <div className="">
-                  <p className="text-3xl font-bold">
+                  <p className="text-2xl font-bold">
                     {`${userData?.prefix_en}${userData?.firstname_en} ${userData?.lastname_en}` ||
                       "ไม่พบข้อมูล"}
                   </p>
-                  <p className="text-3xl font-normal">
-                    {userData?.studentId || "ไม่พบข้อมูล"} |{" "}
+                  <p className="text-2xl font-normal">
+                    {userData?.studentID || "ไม่พบข้อมูล"} |{" "}
                     {userData?.college || "ไม่พบข้อมูล"}
                   </p>
+
+                  <div className="mt-3">
+                    <Select
+                        label="เลือกกีฬาที่ต้องการลงทะเบียน"
+                        selectedKeys={[selectSchedule]}
+                        variant="bordered"
+                        classNames={{
+                            label: "text-base",
+                            value: "text-2xl",
+                            
+                        }}
+                        onChange={(e) => setSelectSchedule(e.target.value)}
+                    >
+                        {
+                           userData?.sportEvents ? (
+                                 userData?.sportEvents.map((sportEvent) => (
+                                      <SelectItem value={sportEvent.id} key={sportEvent.id}>
+                                        {sportEvent.Sport.name}
+                                      </SelectItem>
+                                 ))
+                            ) : (
+                                 <SelectItem value="">ไม่พบข้อมูล</SelectItem>
+                           ) 
+                        }
+                    </Select>
+                  </div>
                 </div>
               </ModalBody>
               <ModalFooter>
@@ -137,13 +179,13 @@ const ScanQR = ({ session }: ScanQRProps) => {
                   onPress={onClose}
                   className="border-tertbg text-xl border-1 rounded-md text-tertbg bg-secondw px-5 py-2"
                 >
-                  ไม่ใช่
+                  ยกเลิก
                 </Button>
                 <Button
-                  onPress={() => onRegisterUser(userData?.qr_key as string)}
+                  onPress={() => onCheckInUser(userData?.qr_key as string)}
                   className="border-firsto text-xl border-1 rounded-md text-white bg-firsto px-5 py-2"
                 >
-                    ใช่
+                    ลงทะเบียน
                 </Button>
               </ModalFooter>
             </>
@@ -154,4 +196,4 @@ const ScanQR = ({ session }: ScanQRProps) => {
   );
 };
 
-export default ScanQR;
+export default CheckIn;

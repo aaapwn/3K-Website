@@ -16,7 +16,6 @@ type MatchesDetailButtonProps = {
 };
 
 const MatchesDetailButton = ({ matchesData }: MatchesDetailButtonProps) => {
-  console.log(matchesData);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>

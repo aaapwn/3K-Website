@@ -1,26 +1,28 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ChevronLeft, UserRoundCheck } from 'lucide-react';
+import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { Session } from "next-auth";
 
-import { useSession } from 'next-auth/react';
+import { getProfile } from "@/queries/user/query";
+import { UserProfile } from "@/queries/user/type";
 
-import PlayerCard from './playersection/playercard';
-import PlayerTable from './playersection/playertable';
-// import { useMemo } from 'react';
-import PlayerNotConnect from './playersection/playetNotConnect';
+import { motion } from "framer-motion";
+import { ChevronLeft } from "lucide-react";
 
-import { Player } from '@/app/players/page';
+import PlayerCard from "./playersection/playercard";
+import PlayerTable from "./playersection/playertable";
+import PlayerNotConnect from "./playersection/playetNotConnect";
 
 type PlayerProfileProps = Readonly<{
-  playerData: Player;
+  session: Session | null;
 }>;
 
-const isRegistered = true;
-
-const PlayerPage = ({ playerData }: PlayerProfileProps) => {
-  const { data: session } = useSession() || {};
+const PlayerPage = ({ session }: PlayerProfileProps) => {
+  const { data, isLoading, isError } = useQuery<UserProfile>({
+    queryKey: ["getProfile"],
+    queryFn: () => getProfile(session?.accessToken as string),
+  });
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-white to-[#FFC72C]/10 px-5 py-5 flex flex-col gap-10">
@@ -29,44 +31,29 @@ const PlayerPage = ({ playerData }: PlayerProfileProps) => {
           href="/"
           className="flex flex-row gap-1 w-fit rounded-full bg-white border-1 border-firsto px-5 py-2 text-firsto"
         >
-          {' '}
           <ChevronLeft />
-          กลับหน้าแรก{' '}
+          กลับหน้าแรก
         </Link>
-        {session?.user?.email?.split('@')[0] === playerData?.studentID ? (
-          <Link
-            href="/"
-            className="flex flex-row w-fit gap-1 rounded-full bg-firsto border-1 border-firsto  px-5 py-2 text-secondw"
-          >
-            {' '}
-            ลงทะเบียนแข่ง <UserRoundCheck />{' '}
-          </Link>
-        ) : (
-          <></>
-        )}
       </div>
 
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="flex xl:flex-row flex-col justify-center gap-5 items-center lg:items-start content-start">
-          {session ? (
-            <>
-              {session?.user?.email?.split('@')[0] === playerData?.studentID && isRegistered ? (
-                <>
-                  <PlayerCard playerData={playerData} />
-                  <PlayerTable />
-                </>
-              ) : (
-                <>
-                  <PlayerNotConnect />
-                </>
-              )}
-            </>
-          ) : (
-            <>
-              <PlayerCard playerData={playerData} />
-              <PlayerTable />
-            </>
-          )}
+          <>
+            {data ? (
+              <>
+                <PlayerCard playerData={data} />
+                <PlayerTable sportEvents={data.sportEvents} />
+              </>
+            ) : (
+              <>
+                <PlayerNotConnect />
+              </>
+            )}
+          </>
         </div>
       </motion.div>
     </div>

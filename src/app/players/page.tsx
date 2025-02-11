@@ -1,7 +1,6 @@
 'use server';
 
-import React from 'react';
-import { use } from 'react';
+import auth from '@/libs/auth';
 
 import PlayerPage from '@/pages/player';
 
@@ -88,11 +87,10 @@ export type Matches = {
   winner: string;
 };
 
-const PlayerProfile = ({ params }: { params: Promise<{ id: string }> }) => {
-  const resolvedParams = use(params);
-  console.log(resolvedParams);
+const PlayerProfile = async () => {
+  const session = await auth();
 
-  return <PlayerPage playerData={playerData} />;
+  return <PlayerPage session={session} />;
 };
 
 export default PlayerProfile;

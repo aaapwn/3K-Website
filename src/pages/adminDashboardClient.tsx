@@ -1,66 +1,65 @@
-'use client';
+"use client";
 
-import { useState, useMemo } from 'react';
-import Link from 'next/link';
-import { Button } from '@heroui/react';
+import { useState, useMemo, useEffect } from "react";
+import Link from "next/link";
+import { Button } from "@heroui/react";
 
-import { Card, CardBody } from '@heroui/react';
+import { Card, CardBody } from "@heroui/react";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
+  useDisclosure,
+} from "@heroui/react";
 
-import { ArrowLeft, CalendarIcon } from 'lucide-react';
-import { format, parseISO } from 'date-fns';
-import MatchesTable from '@/components/matchesTable';
-// import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from '@heroui/react';
+import { ArrowLeft, CalendarIcon } from "lucide-react";
+import { format, parseISO } from "date-fns";
+import MatchesTable from "@/components/matchesTable";
 
-export default function AdminDashboardClient({
-  data,
-}: {
-  data: {
-    matches: Record<
-      string,
-      {
-        id: number;
-        date: string;
-        time: string;
-        sport: string;
-        type: string;
-        homeTeam: string;
-        awayTeam: string;
-        venue: string;
-      }[]
-    >;
-    players: Record<
-      number,
-      {
-        homeTeam: { id: number; name: string; registered: boolean }[];
-        awayTeam: { id: number; name: string; registered: boolean }[];
-      }
-    >;
-  };
-}) {
-  const [selectedDate, setSelectedDate] = useState<string>('2024-06-15');
+import { Schedule } from "@/queries/schedule/type";
+
+type Props = {
+  data: Schedule[];
+};
+
+export default function AdminDashboardClient({ data }: Props) {
+  const [selectedDate, setSelectedDate] = useState<string>(
+    format(new Date(), "yyyy-MM-dd")
+  );
+  const [displayMatches, setDisplayMatches] = useState<Schedule[]>([]);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const handleDateChange = (date: string) => {
-    console.log('Selected date changed to:', date);
+    console.log("Selected date changed to:", date);
     setSelectedDate(date);
   };
 
   const availableDates = useMemo(() => {
-    return data && data.matches ? Object.keys(data.matches).sort() : [];
+    return data
+      .map((match) => match.startDatetime)
+      .reduce((acc: string[], date) => {
+        const formattedDate = format(date, "yyyy-MM-dd");
+        if (!acc.includes(formattedDate)) {
+          acc.push(formattedDate);
+        }
+        return acc;
+      }, []);
   }, [data]);
 
-  const matches = data && data.matches ? data.matches[selectedDate] || [] : [];
-
-  if (typeof window !== 'undefined' && window.innerWidth <= 768) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <p className="text-xl">This dashboard is not available on mobile devices.</p>
-      </div>
+  useEffect(() => {
+    setDisplayMatches(
+      data.filter(
+        (match) => format(match.startDatetime, "yyyy-MM-dd") === selectedDate
+      )
     );
-  }
+  }, [data, selectedDate]);
 
   return (
     <div className="min-h-screen bg-white flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-firsto text-secondw p-6">
+      <aside className=" bg-firsto text-secondw p-6 hidden md:block">
         <Link href="/" className="flex items-center mb-6">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Home
@@ -73,13 +72,13 @@ export default function AdminDashboardClient({
                 variant="solid"
                 className={
                   selectedDate === date
-                    ? 'w-full justify-center text-xl bg-secondw'
-                    : 'w-full justify-center text-xl bg-firsto text-secondw'
+                    ? "w-full justify-center text-xl bg-secondw"
+                    : "w-full justify-center text-xl bg-firsto text-secondw"
                 }
                 onPress={() => handleDateChange(date)}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {format(parseISO(date), 'MMMM d, yyyy')}
+                {format(parseISO(date), "MMMM d, yyyy")}
               </Button>
             </li>
           ))}
@@ -87,12 +86,21 @@ export default function AdminDashboardClient({
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-6 w-full relative">
         <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
 
-        <h2 className="text-2xl font-bold mb-4">รายการแข่งวันที่ : {format(parseISO(selectedDate), 'MMMM d, yyyy')}</h2>
-        {matches.length > 0 ? (
-          <MatchesTable matches={matches} data={data} />
+        <h2 className="text-2xl font-bold mb-4">
+          รายการแข่งวันที่ : {format(parseISO(selectedDate), "MMMM d, yyyy")}
+        </h2>
+        <Button
+          onPress={() => onOpen()}
+          className="border-firsto text-xl border-1 rounded-md text-white bg-firsto px-5 py-2 mb-4"
+        >
+          เลือกวันที่
+        </Button>
+
+        {displayMatches.length > 0 ? (
+          <MatchesTable data={displayMatches} />
         ) : (
           <Card>
             <CardBody className="flex items-center justify-center h-32">
@@ -101,6 +109,34 @@ export default function AdminDashboardClient({
           </Card>
         )}
       </main>
+
+      <Drawer isOpen={isOpen} placement={"bottom"} onOpenChange={onOpenChange}>
+        <DrawerContent>
+          <DrawerHeader className="flex flex-col gap-1 font-bold text-2xl">
+            เลือกวันที่ต้องการ
+          </DrawerHeader>
+          <DrawerBody>
+            <ul className="grid grid-cols-2 pb-8">
+              {availableDates.map((date) => (
+                <li key={date}>
+                  <Button
+                    variant="solid"
+                    className={
+                      selectedDate === date
+                        ? "w-full justify-center text-xl bg-firsto text-secondw"
+                        : "w-full justify-center text-xl bg-secondw"
+                    }
+                    onPress={() => handleDateChange(date)}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {format(parseISO(date), "MMMM d, yyyy")}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 }
