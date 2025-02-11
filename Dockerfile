@@ -12,6 +12,7 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json pnpm-lock.yaml* ./
+
 RUN pnpm i
 
 
@@ -22,7 +23,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # This will do the trick, use the corresponding env file for each environment.
 COPY .env .env
-RUN npm run build
+RUN pnpm run build
 
 # 3. Production image, copy all the files and run next
 FROM base AS runner
