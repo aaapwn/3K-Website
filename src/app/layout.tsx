@@ -8,10 +8,21 @@ import './globals.css';
 
 import AuthProviders from '../components/providers/AuthProviders';
 import UIProviders from '@/components/providers/UIProviders';
+import QueryProviders from '@/components/providers/QueryProviders';
+import ToastProvider from '@/components/providers/ToastProvider';
 
 import auth from '@/libs/auth';
 
-const KMITL2020 = localFont({ src: '../../public/fonts/KMITL 2020 Regular.woff2' });
+const KMITL2020 = localFont({
+  src: [
+    { path: "../../public/fonts/KMITL 2020 Regular.woff2", weight: "400", style: "normal" },
+    { path: "../../public/fonts/KMITL 2020 Bold.woff2", weight: "700", style: "normal" },
+    { path: "../../public/fonts/KMITL 2020 Italic.woff2", weight: "400", style: "italic" },
+    { path: "../../public/fonts/KMITL 2020 Bold Italic.woff2", weight: "700", style: "italic" },
+  ],
+  variable: "--font-kmitl2020", // ✅ ใช้ตัวแปร CSS เพื่อใช้งานกับ Tailwind หรือ Global Styles
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: '3 Kings',
@@ -39,8 +50,11 @@ export default async function RootLayout({
       <body className={`${KMITL2020.className} antialiased`}>
         <AuthProviders>
           <UIProviders>
-            <Nav session={session} />
-            {children}
+            <QueryProviders>
+              <Nav session={session} />
+              <ToastProvider/>
+              {children}
+            </QueryProviders>
           </UIProviders>
         </AuthProviders>
         <Footer />

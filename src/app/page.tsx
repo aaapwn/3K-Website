@@ -1,7 +1,7 @@
 "use server";
 
 import auth from "@/libs/auth";
-import Landing from "@/pages/Landing";
+import Landing from "@/views/Landing";
 
 const Page = async () => {
   const session = await auth()
