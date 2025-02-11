@@ -12,7 +12,7 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async signIn({ account }) {
       try {
-        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/google-login`, {
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/google-login`, {
           token: account?.id_token,
         });
         return true;
@@ -30,7 +30,7 @@ export const authOptions: AuthOptions = {
     async jwt({ token, account }) {
       if (account) {
         try {
-          const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/google-login`, {
+          const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/google-login`, {
             token: account?.id_token,
           });
 
