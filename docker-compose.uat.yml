@@ -9,3 +9,7 @@ services:
       - uat_network
     env_file:
       - .env
+
+networks:
+  uat_network:
+    external: true
