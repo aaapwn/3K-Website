@@ -1,0 +1,208 @@
+{
+  "matches": {
+    "2024-06-15": [
+      {
+        "id": 1,
+        "date": "2024-06-15",
+        "time": "14:00",
+        "sport": "ฟุตบอล",
+        "type": "ทีมชาย",
+        "homeTeam": "KMITL",
+        "awayTeam": "KMUTT",
+        "venue": "สนามมังกร"
+      },
+      {
+        "id": 2,
+        "date": "2024-06-15",
+        "time": "16:30",
+        "sport": "บาสเกตบอล",
+        "type": "ทีมชาย",
+        "homeTeam": "KMUTT",
+        "awayTeam": "KMTNB",
+        "venue": "สนามอินทรี"
+      }
+    ],
+    "2024-06-16": [
+      {
+        "id": 3,
+        "date": "2024-06-16",
+        "time": "15:00",
+        "sport": "ฟุตบอล",
+        "type": "ทีมชาย",
+        "homeTeam": "KMTNB",
+        "awayTeam": "KMITL",
+        "venue": "สนามไททัน"
+      }
+    ],
+    "2024-06-17": [
+      {
+        "id": 4,
+        "date": "2024-06-17",
+        "time": "18:00",
+        "sport": "ฟุตบอล",
+        "type": "ทีมชาย",
+        "homeTeam": "KMITL",
+        "awayTeam": "KMUTT",
+        "venue": "โดมเฮอริเคน"
+      }
+    ]
+  },
+  "players": {
+    "1": {
+      "homeTeam": [
+        {
+          "id": 1,
+          "name": "John Doe",
+          "registered": true
+        },
+        {
+          "id": 2,
+          "name": "Jane Smith",
+          "registered": false
+        },
+        {
+          "id": 3,
+          "name": "Mike Johnson",
+          "registered": true
+        }
+      ],
+      "awayTeam": [
+        {
+          "id": 4,
+          "name": "Sarah Williams",
+          "registered": true
+        },
+        {
+          "id": 5,
+          "name": "Tom Brown",
+          "registered": true
+        },
+        {
+          "id": 6,
+          "name": "Emily Davis",
+          "registered": false
+        }
+      ]
+    },
+    "2": {
+      "homeTeam": [
+        {
+          "id": 7,
+          "name": "Alex Turner",
+          "registered": true
+        },
+        {
+          "id": 8,
+          "name": "Olivia Parker",
+          "registered": true
+        },
+        {
+          "id": 9,
+          "name": "Daniel Lee",
+          "registered": false
+        }
+      ],
+      "awayTeam": [
+        {
+          "id": 10,
+          "name": "Emma Wilson",
+          "registered": true
+        },
+        {
+          "id": 11,
+          "name": "Ryan Taylor",
+          "registered": false
+        },
+        {
+          "id": 12,
+          "name": "Sophia Martinez",
+          "registered": true
+        }
+      ]
+    },
+    "3": {
+      "homeTeam": [
+        {
+          "id": 10,
+          "name": "Emma Wilson",
+          "registered": true
+        },
+        {
+          "id": 11,
+          "name": "Ryan Taylor",
+          "registered": false
+        },
+        {
+          "id": 12,
+          "name": "Sophia Martinez",
+          "registered": true
+        }
+      ],
+      "awayTeam": [
+        {
+          "id": 1,
+          "name": "John Doe",
+          "registered": true
+        },
+        {
+          "id": 2,
+          "name": "Jane Smith",
+          "registered": false
+        },
+        {
+          "id": 3,
+          "name": "Mike Johnson",
+          "registered": true
+        }
+      ]
+    },
+    "4": {
+      "homeTeam": [
+        {
+          "id": 1,
+          "name": "John Doe",
+          "registered": true
+        },
+        {
+          "id": 2,
+          "name": "Jane Smith",
+          "registered": false
+        },
+        {
+          "id": 3,
+          "name": "Mike Johnson",
+          "registered": true
+        }
+      ],
+      "awayTeam": [
+        {
+          "id": 7,
+          "name": "Alex Turner",
+          "registered": true
+        },
+        {
+          "id": 8,
+          "name": "Olivia Parker",
+          "registered": true
+        },
+        {
+          "id": 9,
+          "name": "Daniel Lee",
+          "registered": false
+        }
+      ]
+    }
+  },
+  "sports": [
+    { "en": "football", "th": "ฟุตบอล", "type": ["ทีมชาย", "ทีมหญิง"] },
+    { "en": "petong", "th": "ฟุตซอล" },
+    { "en": "basketball", "th": "บาสเกตบอล" },
+    { "en": "volleyball", "th": "วอลเลย์บอล" },
+    { "en": "badminton", "th": "แบดมินตัน" },
+    { "en": "tableTennis", "th": "เทเบิลเทนนิส" },
+    { "en": "running", "th": "กรีฑา" },
+    { "en": "bowling", "th": "เปตอง" },
+    { "en": "chess", "th": "หมากกระดาน" },
+    { "en": "gaming", "th": "อีสปอร์ต" }
+  ]
+}
