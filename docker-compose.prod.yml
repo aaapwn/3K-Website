@@ -6,8 +6,8 @@ services:
     ports:
       - "3000:3000"
     networks:
-      - frontend3k-prod
+      - 3k_prod_network
 
 networks:
-  frontend3k-prod:
-    driver: bridge
+  3k_prod_network:
+    external: true

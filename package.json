@@ -16,6 +16,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@heroui/button": "^2.2.10",
+    "@heroui/input": "^2.4.10",
     "@heroui/react": "^2.6.13",
     "@heroui/select": "^2.4.10",
     "@radix-ui/react-dialog": "^1.1.5",

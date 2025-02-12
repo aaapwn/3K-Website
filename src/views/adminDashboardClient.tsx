@@ -2,8 +2,11 @@
 
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import { Button } from "@heroui/react";
+import { format, parseISO } from "date-fns";
+import { useQuery } from "@tanstack/react-query";
+import { Session } from "next-auth";
 
+import { Button } from "@heroui/react";
 import { Card, CardBody } from "@heroui/react";
 import {
   Drawer,
@@ -12,23 +15,27 @@ import {
   DrawerBody,
   useDisclosure,
 } from "@heroui/react";
-
 import { ArrowLeft, CalendarIcon } from "lucide-react";
-import { format, parseISO } from "date-fns";
+
 import MatchesTable from "@/components/matchesTable";
 
 import { Schedule } from "@/queries/schedule/type";
+import { getAllSchedule } from '@/queries/schedule/query';
 
-type Props = {
-  data: Schedule[];
-};
+type Props = Readonly<{
+  session: Session | null;
+}>;
 
-export default function AdminDashboardClient({ data }: Props) {
+export default function AdminDashboardClient({ session }: Props) {
   const [selectedDate, setSelectedDate] = useState<string>(
     format(new Date(), "yyyy-MM-dd")
   );
   const [displayMatches, setDisplayMatches] = useState<Schedule[]>([]);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { data } = useQuery<Schedule[]>({
+    queryKey: ["getAllSchedule"],
+    queryFn: () => getAllSchedule(session?.accessToken as string),
+  })
 
   const handleDateChange = (date: string) => {
     console.log("Selected date changed to:", date);
@@ -36,6 +43,9 @@ export default function AdminDashboardClient({ data }: Props) {
   };
 
   const availableDates = useMemo(() => {
+    if (!data) {
+      return [];
+    }
     return data
       .map((match) => match.startDatetime)
       .reduce((acc: string[], date) => {
@@ -49,9 +59,9 @@ export default function AdminDashboardClient({ data }: Props) {
 
   useEffect(() => {
     setDisplayMatches(
-      data.filter(
+      data?.filter(
         (match) => format(match.startDatetime, "yyyy-MM-dd") === selectedDate
-      )
+      ) || []
     );
   }, [data, selectedDate]);
 

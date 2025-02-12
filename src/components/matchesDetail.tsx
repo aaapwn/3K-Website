@@ -22,19 +22,21 @@ export default function MatchesDetail({ players }: MatchesDetailProps) {
             <h1 className="text-5xl">รายชื่อผู้เข้าแข่งขัน</h1>
           </ModalHeader>
           <ModalBody>
-            <div className="flex flex-row justify-center gap-4 text-2xl">
+            <div className="flex flex-row justify-center gap-4 text-2xl max-h-96">
               <Card className="w-full">
                 <CardBody>
                   <Table>
                     <TableHeader>
-                      <TableColumn className="text-2xl">สถาบัน</TableColumn>
+                      <TableColumn className="text-2xl">ลำดับ</TableColumn>
+                      <TableColumn className="text-2xl">สถาบัน/มหาวิทยาลัย</TableColumn>
                       <TableColumn className="text-2xl">รหัสนักศึกษา</TableColumn>
                       <TableColumn className="text-2xl">ชื่อ</TableColumn>
                       <TableColumn className="text-2xl">สถานะ</TableColumn>
                     </TableHeader>
                     <TableBody>
-                      {players.map((player) => (
+                      {players.map((player, index) => (
                         <TableRow key={player.user.id}>
+                          <TableCell className="text-2xl">{index+1}</TableCell>
                           <TableCell className="text-2xl">{player.user.college}</TableCell>
                           <TableCell className="text-2xl">{player.user.studentId}</TableCell>
                           <TableCell className="text-2xl">{`${player.user.prefix_th}${player.user.firstname_th} ${player.user.lastname_th}`}</TableCell>

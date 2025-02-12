@@ -36,7 +36,7 @@ const url = [
   },
   {
     name: "รายชื่อ Admin",
-    href: "/admin/admins",
+    href: "/admin/list",
   }
 ];
 

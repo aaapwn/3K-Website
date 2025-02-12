@@ -21,7 +21,7 @@ const PlayerCard = ({ playerData }: PlayerCardProps) => {
       <div>
         <h1 className="text-3xl font-bold text-firsto">{playerData.college }</h1>
         <h1 className="text-4xl font-bold">
-          {`${playerData.prefix_en}${playerData.firstname_en} ${playerData.lastname_en}`}
+          {`${playerData.prefix_th}${playerData.firstname_th} ${playerData.lastname_th}`}
         </h1>
       </div>
       <div className="flex flex-row gap-1.5 items-center content-center">
