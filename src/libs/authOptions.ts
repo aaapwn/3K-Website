@@ -11,7 +11,7 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async signIn({ account }) {
-
+      console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
       try {
         console.log("before login");
         await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/google-login`, {
