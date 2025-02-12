@@ -23,13 +23,13 @@ export default function SportPage({ sportData }: sportPageProps) {
             </CardHeader>
             <Divider />
             <CardBody>
-              <p>
+              <p className="text-xl px-10">
                 เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์
                 มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16{' '}
               </p>
             </CardBody>
             <Divider />
-            <CardFooter className="flex gap-2 w-full flex-wrap">
+            <CardFooter className="flex gap-2 w-full flex-wrap px-10">
               {sport?.type?.map((type, index) => (
                 <Chip key={sport.en + index} className="text-xl py-2">
                   {type}

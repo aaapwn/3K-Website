@@ -2,17 +2,24 @@
 
 import { Session } from 'next-auth';
 import { Button } from '@heroui/button';
+import Link from 'next/link';
 import { Chip } from '@heroui/react';
 import Image from 'next/image';
 import { BlurFade } from '@/components/ui/blur-fade';
 import heroImage from '@public/images/logo.webp';
+import { signIn } from 'next-auth/react';
 //dynamic import cuz i've makes a little change in the warpbg eiei
 import { WarpBackground } from '@/components/ui/warp-background';
 
 const HeroSection = ({ session }: { session: Session | null }) => {
   return (
-    <WarpBackground className="bg-secondy/5 px-5 py-10" beamSize={2} beamDuration={4} gridColor="#7B818930">
-      <div className="grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto my-0 gap-0">
+    <WarpBackground
+      className="bg-secondy/5 px-5 xl:min-h-svh items-center justify-center align-middle justify-items-center"
+      beamSize={2}
+      beamDuration={4}
+      gridColor="#7B818930"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full mx-auto -my-10 gap-0 md:px-32">
         {/* <div className="md:px-12 flex md:flex-row flex-col justify-between items-center gap-10 max-w-7xl mx-auto my-0"> */}
         <div className="flex flex-col md:gap-5 gap-5 justify-center">
           <Chip className="bg-secondy p-5 text-base md:text-lg">รู้จักกับ 3K Games</Chip>
@@ -31,27 +38,33 @@ const HeroSection = ({ session }: { session: Session | null }) => {
           </h2>
           {session ? (
             <div className="flex gap-5 md:flex-row flex-col">
-              <Button onPress={() => null} className="bg-firsto text-secondw rounded-md text-medium px-10">
-                ลงทะเบียน
-              </Button>
-              <Button
-                onPress={() => null}
-                className="bg-secondw text-tertbg rounded-md text-medium border-tertbg border-1 px-10"
-              >
-                กำหนดการ
-              </Button>
+              <Link href="/players">
+                <Button onPress={() => {}} className="bg-firsto text-secondw rounded-md text-medium px-10">
+                  ลงทะเบียน
+                </Button>
+              </Link>
+              <Link href="/schedule">
+                <Button
+                  onPress={() => null}
+                  className="bg-secondw w-full text-tertbg rounded-md text-medium border-tertbg border-1 px-10"
+                >
+                  กำหนดการ
+                </Button>
+              </Link>
             </div>
           ) : (
             <div className="flex md:gap-5 gap-2 md:flex-row flex-col">
-              <Button onPress={() => null} className="bg-firsto text-secondw rounded-md text-medium px-10">
+              <Button onPress={() => signIn('google')} className="bg-firsto text-secondw rounded-md text-medium px-10">
                 เข้าสู่ระบบ
               </Button>
-              <Button
-                onPress={() => null}
-                className="bg-secondw text-tertbg rounded-md text-medium border-tertbg border-1 px-10"
-              >
-                กำหนดการ
-              </Button>
+              <Link href="/schedule">
+                <Button
+                  onPress={() => null}
+                  className="bg-secondw w-full text-tertbg rounded-md text-medium border-tertbg border-1 px-10"
+                >
+                  กำหนดการ
+                </Button>
+              </Link>
             </div>
           )}
         </div>
