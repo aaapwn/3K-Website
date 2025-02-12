@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 
 import localFont from 'next/font/local';
 
-import Nav from '@/components/nav/nav';
 import Footer from '@/components/footer/footer';
 import './globals.css';
 
@@ -10,8 +9,6 @@ import AuthProviders from '../components/providers/AuthProviders';
 import UIProviders from '@/components/providers/UIProviders';
 import QueryProviders from '@/components/providers/QueryProviders';
 import ToastProvider from '@/components/providers/ToastProvider';
-
-import auth from '@/libs/auth';
 
 const KMITL2020 = localFont({
   src: [
@@ -40,7 +37,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
   return (
     <html lang="en">
       <head>
@@ -51,7 +47,6 @@ export default async function RootLayout({
         <AuthProviders>
           <UIProviders>
             <QueryProviders>
-              <Nav session={session} />
               <ToastProvider/>
               {children}
             </QueryProviders>

@@ -15,18 +15,16 @@ export default function MatchesTable({ data }: MatchesTableProps) {
     <>
       <Table>
         <TableHeader>
-          <TableColumn className="text-2xl">วันที่</TableColumn>
           <TableColumn className="text-2xl">เวลา</TableColumn>
           <TableColumn className="text-2xl">ประเภทกีฬา</TableColumn>
           <TableColumn className="text-2xl">สนาม</TableColumn>
           <TableColumn className="text-2xl">ผลการแข่งขัน</TableColumn>
-          <TableColumn className="text-2xl text-end">รายละเอียด</TableColumn>
+          <TableColumn className="text-2xl text-end">รายชื่อผู้เข้าแข่งขัน</TableColumn>
         </TableHeader>
         <TableBody>
           {data.map((match) => (
             <TableRow key={match.id}>
-              <TableCell className="text-2xl">{format(match.startDatetime, 'dd MMM y')}</TableCell>
-              <TableCell className="text-2xl">{match.startDatetime.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })}</TableCell>
+              <TableCell className="text-2xl">{match.startDatetime.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })} - {match.endDatetime.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })}</TableCell>
               <TableCell className="text-2xl space-x-2">
                 <Chip variant="bordered" className="bg-firsto/10 text-firsto border-firsto text-xl">
                   {match.sport.category}

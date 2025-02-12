@@ -23,27 +23,24 @@ type NavProps = Readonly<{ session: Session | null }>;
 
 const url = [
   {
-    name: "หน้าแรก",
-    href: "/",
+    name: "ตารางการแข่งขัน",
+    href: "/admin/dashboard",
   },
   {
-    name: "กฏระเบียบ/PDPA",
-    href: "/pdpa",
+    name: "ลงทะเบียนผู้เข้าแข่งขัน",
+    href: "/admin/checkin",
+  },
+  {
+    name: "รายชื่อผู้เข้าแข่งขัน",
+    href: "/admin/players",
+  },
+  {
+    name: "รายชื่อ Admin",
+    href: "/admin/admins",
   }
 ];
 
-const adminUrl = [
-  {
-    name: 'Dashboard',
-    href: '/admin/dashboard',
-  },
-  {
-    name: 'Checkin',
-    href: '/admin/checkin',
-  }
-]
-
-const Nav = ({ session }: NavProps) => {
+const AdminNavbar = ({ session }: NavProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const pathname = usePathname();
 
@@ -66,19 +63,6 @@ const Nav = ({ session }: NavProps) => {
             {item.name}
           </Link>
         ))}
-        {
-          session?.user.role === 'admin' && adminUrl.map((item) => (
-            <Link
-              key={item.name}
-              className={`hover:bg-tertbg/20 flex justify-center items-center px-4 duration-200 rounded-md ${
-                item.href === pathname && "text-firsto"
-              }`}
-              href={item.href}
-            >
-              {item.name}
-            </Link>
-          ))
-        }
       </div>
       <div className="flex-row flex gap-2 justify-self-end border-l-2 border-tertbg/20 pl-3">
         {session ? (
@@ -136,18 +120,6 @@ const Nav = ({ session }: NavProps) => {
                       {item.name}
                     </Link>
                   ))}
-                  {
-                    session?.user.role === 'admin' && adminUrl.map((item, index) => (
-                      <Link
-                        onClick={onOpenChange}
-                        href={item.href}
-                        key={index}
-                        className={`w-full rounded-none p-4 text-xl text-center ${pathname === item.href && "text-firsto"}`}
-                      >
-                        {item.name}
-                      </Link>
-                    ))
-                  }
                 </DrawerBody>
               </>
             )}
@@ -158,4 +130,4 @@ const Nav = ({ session }: NavProps) => {
   );
 };
 
-export default Nav;
+export default AdminNavbar;

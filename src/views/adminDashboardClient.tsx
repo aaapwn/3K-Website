@@ -93,7 +93,7 @@ export default function AdminDashboardClient({ data }: Props) {
         </h2>
         <Button
           onPress={() => onOpen()}
-          className="border-firsto text-xl border-1 rounded-md text-white bg-firsto px-5 py-2 mb-4"
+          className="border-firsto text-xl border-1 rounded-md text-white bg-firsto px-5 py-2 mb-4 md:hidden"
         >
           เลือกวันที่
         </Button>

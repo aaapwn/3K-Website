@@ -19,10 +19,7 @@ export default function MatchesDetail({ players }: MatchesDetailProps) {
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
         <ModalContent className="max-w-6xl">
           <ModalHeader className="flex flex-col gap-2">
-            <h1 className="text-5xl">Match Details</h1>
-            {/* <h2 className="text-3xl font-normal">
-              {match.homeTeam} vs {match.awayTeam} - {format(parseISO(match.date), 'PPP')} at {match.time}
-            </h2> */}
+            <h1 className="text-5xl">รายชื่อผู้เข้าแข่งขัน</h1>
           </ModalHeader>
           <ModalBody>
             <div className="flex flex-row justify-center gap-4 text-2xl">
@@ -62,7 +59,7 @@ export default function MatchesDetail({ players }: MatchesDetailProps) {
         </ModalContent>
       </Modal>
       <Button onPress={onOpen} variant="bordered" size="lg" className="text-xl">
-        ดูรายละเอียด
+        รายชื่อผู้เข้าแข่งขัน
       </Button>
     </>
   );
