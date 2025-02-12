@@ -6,10 +6,10 @@ services:
     ports:
       - "3001:3000"
     networks:
-      - uat_network
+      - 3k_uat_network
     env_file:
       - .env
 
 networks:
-  uat_network:
+  3k_uat_network:
     external: true
