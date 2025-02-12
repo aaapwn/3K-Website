@@ -5,8 +5,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    container_name: frontend-prod
     networks:
       - 3k_prod_network
+    env_file:
+      - .env
 
 networks:
   3k_prod_network:

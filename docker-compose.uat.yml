@@ -7,6 +7,7 @@ services:
       - "3001:3000"
     networks:
       - 3k_uat_network
+    container_name: frontend-uat
     env_file:
       - .env
 
