@@ -24,13 +24,15 @@ const HeroSection = ({ session }: { session: Session | null }) => {
         <div className="flex flex-col md:gap-5 gap-5 justify-center">
           <Chip className="bg-secondy p-5 text-base md:text-lg">รู้จักกับ 3K Games</Chip>
           <div className="flex-col gap-1">
-            <h1 className="font-bold xl:text-8xl md:text-6xl text-5xl text-firsto">
+            <h1 className="font-bold xl:text-9xl md:text-7xl text-6xl text-firsto">
               ฟุตบอลประเพณี
               <br />
               <strong className="text-secondb">ชิงถ้วยพระราชทาน</strong>
             </h1>
             <h1 className="font-bold xl:text-3xl md:text-2xl text-xl text-firsto">
-              สมเด็จพระกนิษฐาธิราชเจ้า กรมสมเด็จพระเทพรัตนราชสุดาฯ สยามบรมราชกุมารี และกีฬา 3 พระจอมเกล้า ครั้งที่ 16
+              สมเด็จพระกนิษฐาธิราชเจ้า กรมสมเด็จพระเทพรัตนราชสุดาฯ สยามบรมราชกุมารี
+              <br />
+              และกีฬา 3 พระจอมเกล้า ครั้งที่ 16
             </h1>
           </div>
           <h2 className="text-lg md:text-xl text-tertbg">
@@ -39,14 +41,14 @@ const HeroSection = ({ session }: { session: Session | null }) => {
           {session ? (
             <div className="flex gap-5 md:flex-row flex-col">
               <Link href="/players">
-                <Button onPress={() => {}} className="bg-firsto text-secondw rounded-md text-medium px-10">
+                <Button onPress={() => {}} className="bg-firsto text-secondw rounded-md text-2xl px-10">
                   ลงทะเบียน
                 </Button>
               </Link>
               <Link href="/schedule">
                 <Button
                   onPress={() => null}
-                  className="bg-secondw w-full text-tertbg rounded-md text-medium border-tertbg border-1 px-10"
+                  className="bg-secondw w-full text-tertbg rounded-md text-2xl border-tertbg border-1 px-10"
                 >
                   กำหนดการ
                 </Button>
@@ -54,13 +56,13 @@ const HeroSection = ({ session }: { session: Session | null }) => {
             </div>
           ) : (
             <div className="flex md:gap-5 gap-2 md:flex-row flex-col">
-              <Button onPress={() => signIn('google')} className="bg-firsto text-secondw rounded-md text-medium px-10">
+              <Button onPress={() => signIn('google')} className="bg-firsto text-secondw rounded-md text-2xl px-10">
                 เข้าสู่ระบบ
               </Button>
               <Link href="/schedule">
                 <Button
                   onPress={() => null}
-                  className="bg-secondw w-full text-tertbg rounded-md text-medium border-tertbg border-1 px-10"
+                  className="bg-secondw w-full text-tertbg rounded-md text-2xl border-tertbg border-1 px-10"
                 >
                   กำหนดการ
                 </Button>

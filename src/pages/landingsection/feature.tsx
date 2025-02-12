@@ -63,7 +63,7 @@ const columns = [
 ];
 const FeatureSection = () => {
   return (
-    <div className="py-16 px-5 md:px-20 flex md:flex-row flex-col justify-between items-stretch bg-secondw gap-10">
+    <div className="pb-16 px-5 md:px-20 flex md:flex-row flex-col justify-between items-stretch bg-secondw gap-10">
       <div className="w-full flex flex-col gap-5">
         <div className="flex md:flex-row flex-col justify-between items-center">
           <h1 className="font-bold lg:text-5xl text-4xl leading-[64px]">สรุปเหรียญรางวัล</h1>

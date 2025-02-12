@@ -63,10 +63,6 @@ export default function MatchesSchedulePage({ filteredMatches, sports, players }
     <div className="min-h-screen bg-white flex w-full lg:flex-row flex-col">
       {/* Sidebar */}
       <aside className="w-64 bg-firsto text-secondw p-6 lg:block hidden">
-        <Link href="/" className="flex items-center mb-6">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Home
-        </Link>
         <h2 className="text-xl font-bold mb-4">Select Sport</h2>
         <ul className="space-y-2">
           {sports?.map((sport) => (
@@ -132,7 +128,7 @@ export default function MatchesSchedulePage({ filteredMatches, sports, players }
 
         <h2 className="text-2xl font-bold mb-4">กีฬา : {selectedSport}</h2>
         {matches.length > 0 ? (
-          <MatchesTable matches={matches} players={players} />
+          <MatchesTable matches={matches} players={players} isShowresult={true} />
         ) : (
           <Card>
             <CardBody className="flex items-center justify-center h-32">

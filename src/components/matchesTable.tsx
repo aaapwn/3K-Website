@@ -17,6 +17,8 @@ interface match {
 }
 
 type MatchesTableProps = {
+  isAdmin?: boolean;
+  isShowresult?: boolean;
   matches: match[];
   players: Record<
     number,
@@ -27,7 +29,7 @@ type MatchesTableProps = {
   >;
 };
 
-export default function MatchesTable({ matches, players }: MatchesTableProps) {
+export default function MatchesTable({ matches, players, isShowresult = false, isAdmin = false }: MatchesTableProps) {
   return (
     <>
       <Table>
@@ -38,8 +40,9 @@ export default function MatchesTable({ matches, players }: MatchesTableProps) {
           <TableColumn className="text-2xl">ทีมA</TableColumn>
           <TableColumn className="text-2xl">ทีมB</TableColumn>
           <TableColumn className="text-2xl">สนาม</TableColumn>
-          <TableColumn className="text-2xl">ผลการแข่งขัน</TableColumn>
-          <TableColumn className="text-2xl text-end">รายละเอียด</TableColumn>
+          <TableColumn className={isShowresult === true ? 'text-2xl' : 'hidden'}>ผลการแข่งขัน</TableColumn>
+          {/* <TableColumn className="text-2xl">ผลการแข่งขัน</TableColumn> */}
+          <TableColumn className={isShowresult === true ? 'text-2xl text-end' : 'hidden'}>รายละเอียด</TableColumn>
         </TableHeader>
         <TableBody>
           {matches.map((match) => (
@@ -54,9 +57,9 @@ export default function MatchesTable({ matches, players }: MatchesTableProps) {
               <TableCell className="text-2xl">{match.homeTeam}</TableCell>
               <TableCell className="text-2xl">{match.awayTeam}</TableCell>
               <TableCell className="text-2xl">{match.venue}</TableCell>
-              <TableCell className="text-2xl">-</TableCell>
-              <TableCell className="text-2xl text-end">
-                <MatchesDetail match={match} players={players} />
+              <TableCell className={isShowresult === true ? 'text-2xl' : 'hidden'}>-</TableCell>
+              <TableCell className={isShowresult === true ? 'text-2xl text-end' : 'hidden'}>
+                <MatchesDetail match={match} players={players} isAdmin={isAdmin} />
               </TableCell>
             </TableRow>
           ))}

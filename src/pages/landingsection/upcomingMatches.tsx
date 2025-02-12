@@ -30,7 +30,7 @@ const UpcomingSection = ({ filteredMatches, players }: UpcomingSectionProps) => 
     : [];
 
   return (
-    <div className="py-16 px-5 md:px-20 flex flex-col justify-center items-center bg-secondw gap-10">
+    <div className="pt-16 px-5 md:px-20 flex flex-col justify-center items-center bg-secondw gap-10">
       <p className="text-6xl font-bold">การแข่งขันที่กำลังจะมาถึง</p>
       {matches.length > 0 ? (
         <MatchesTable matches={matches} players={players} />

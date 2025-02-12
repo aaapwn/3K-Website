@@ -58,13 +58,13 @@ const Nav = ({ session }: NavProps) => {
             <Link href="/players" className="border-1 px-3 py-1 rounded-sm">
               {session.user?.name?.split(' ')[0]}
             </Link>
-            <Button onPress={() => signOut()} className="bg-firsto text-secondw rounded-sm text-medium">
+            <Button onPress={() => signOut()} className="bg-firsto text-secondw rounded-sm text-xl">
               ออกจากระบบ
             </Button>
           </div>
         ) : (
           <div>
-            <Button onPress={() => signIn('google')} className="bg-firsto text-secondw rounded-sm text-medium">
+            <Button onPress={() => signIn('google')} className="bg-firsto text-secondw rounded-sm text-xl">
               เข้าสู่ระบบ
             </Button>
           </div>
