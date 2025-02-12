@@ -16,8 +16,7 @@ interface match {
   venue: string;
 }
 
-
-interface MatchesTableProps {
+type MatchesTableProps = {
   matches: match[];
   players: Record<
     number,
@@ -26,7 +25,7 @@ interface MatchesTableProps {
       awayTeam: { id: number; name: string; registered: boolean }[];
     }
   >;
-}
+};
 
 export default function MatchesTable({ matches, players }: MatchesTableProps) {
   return (

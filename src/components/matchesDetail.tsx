@@ -20,6 +20,7 @@ type match = {
 };
 
 type MatchesDetailProps = {
+  isAdmin?: boolean;
   match: match;
   players: Record<
     number,
@@ -29,6 +30,10 @@ type MatchesDetailProps = {
     }
   >;
   // selectedDate: string;
+};
+
+MatchesDetail.defaultProps = {
+  isAdmin: false,
 };
 
 export default function MatchesDetail({ match, players }: MatchesDetailProps) {
@@ -44,8 +49,8 @@ export default function MatchesDetail({ match, players }: MatchesDetailProps) {
             </h2>
           </ModalHeader>
           <ModalBody>
-            <div className="flex flex-row justify-center gap-4 text-2xl">
-              <Card className="w-full">
+            <div className="grid grid-cols-7 text-center items-center justify-items-center text-2xl">
+              <Card className="w-full col-span-3">
                 <CardHeader>{match.homeTeam}</CardHeader>
                 <CardBody>
                   <Table>
@@ -72,8 +77,8 @@ export default function MatchesDetail({ match, players }: MatchesDetailProps) {
                   </Table>
                 </CardBody>
               </Card>
-              <p className="w-1/4 text-center">0-0</p>
-              <Card className="w-full">
+              <p className="text-3xl font-normal text-secondw bg-firsto rounded-md w-fit px-5 py-2">99-0</p>
+              <Card className="w-full col-span-3">
                 <CardHeader>{match.awayTeam}</CardHeader>
                 <CardBody>
                   <Table>
@@ -105,6 +110,7 @@ export default function MatchesDetail({ match, players }: MatchesDetailProps) {
           <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
+
       <Button onPress={onOpen} variant="bordered" size="lg" className="text-xl">
         ดูรายละเอียด
       </Button>
