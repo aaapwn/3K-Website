@@ -39,9 +39,9 @@ const Footer = () => {
                         เลขที่ 1 ซอยฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพฯ 10520<br />
                     </p>
                 </div>
-                <Link rel="noopener noreferrer" target="_blank" href={'https://www.placeholderpayments.com/legal/terms-of-service.html'} className='underline'>
-                    Term of servicePrivacy policyCookie policy
-                </Link>
+                {/* <Link rel="noopener noreferrer" target="_blank" href={'https://www.placeholderpayments.com/legal/terms-of-service.html'} className='underline'>
+                    Term of service Privacy policy Cookie policy
+                </Link> */}
             </div>
             <div className="flex-col px-2.5 justify-between hidden md:flex">
                 <div className=''>

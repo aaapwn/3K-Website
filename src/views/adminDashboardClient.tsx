@@ -38,7 +38,6 @@ export default function AdminDashboardClient({ session }: Props) {
   })
 
   const handleDateChange = (date: string) => {
-    console.log("Selected date changed to:", date);
     setSelectedDate(date);
   };
 

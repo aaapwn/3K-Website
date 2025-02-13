@@ -118,18 +118,21 @@ const ScanQR = ({ session }: ScanQRProps) => {
           {() => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                <p className="text-3xl font-normal">คุณคือ</p>
+                <p className="text-3xl bold">เจอข้อมูลของคุณแล้ว! 🎉</p>
               </ModalHeader>
               <ModalBody>
                 <div className="">
-                  <p className="text-3xl font-bold">
-                    {`${userData?.prefix_en}${userData?.firstname_en} ${userData?.lastname_en}` ||
+                  <p className="text-2xl font-bold">
+                    ชื่อ: {`${userData?.prefix_th}${userData?.firstname_th} ${userData?.lastname_th}` ||
                       "ไม่พบข้อมูล"}
                   </p>
-                  <p className="text-3xl font-normal">
-                    {userData?.studentId || "ไม่พบข้อมูล"} |{" "}
-                    {userData?.college || "ไม่พบข้อมูล"}
+                  <p className="text-2xl font-normal">
+                    รหัสนักศึกษา: {userData?.studentId || "ไม่พบข้อมูล"}
                   </p>
+                  <p className="text-2xl font-normal">
+                    สถาบัน/มหาวิทยาลัย: {userData?.college || "ไม่พบข้อมูล"}
+                  </p>
+                  <p className="text-red-700 text-lg font-bold mt-3">ข้อมูลถูกต้องหรือไม่ ?</p>
                 </div>
               </ModalBody>
               <ModalFooter>

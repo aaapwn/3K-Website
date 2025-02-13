@@ -22,6 +22,7 @@ export type UserProfile = {
     firstname_en: string;
     lastname_en: string;
     college: string;
+    shirtNumber: number;
     sportEvents: SportEvent[];
 }
 

@@ -8,6 +8,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import heroImage from "@public/images/logo.webp";
 //dynamic import cuz i've makes a little change in the warpbg eiei
 import { WarpBackground } from "@/components/ui/warp-background";
+import { signIn } from "next-auth/react";
 
 const HeroSection = ({ session }: { session: Session | null }) => {
   return (
@@ -40,23 +41,16 @@ const HeroSection = ({ session }: { session: Session | null }) => {
           </h2>
           {session ? (
             <div className="flex gap-5 md:flex-row flex-col">
-              <Button
-                onPress={() => null}
+              {/* <Button
                 className="bg-firsto text-secondw rounded-md text-medium px-10"
               >
-                ลงทะเบียน
-              </Button>
-              <Button
-                onPress={() => null}
-                className="bg-secondw text-tertbg rounded-md text-medium border-tertbg border-1 px-10"
-              >
                 กำหนดการ
-              </Button>
+              </Button> */}
             </div>
           ) : (
             <div className="flex md:gap-5 gap-2 md:flex-row flex-col">
               <Button
-                onPress={() => null}
+                onPress={() => signIn("google")}
                 className="bg-firsto text-secondw rounded-md text-medium px-10"
               >
                 เข้าสู่ระบบ
