@@ -11,24 +11,20 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async signIn({ account }) {
-      console.log("API URL:", process.env.SERVER_API_URL);
       try {
-        console.log("before login");
         await axios.post(`${process.env.SERVER_API_URL}/auth/google-login`, {
           token: account?.id_token,
         });
-        console.log("after login");
         return true;
       } catch (error) {
-        console.error("Login failed:", error);
+        console.error("Sign In Error:", error);
         return false;
       }
     },
     async redirect({ url, baseUrl }) {
-      if (url.startsWith(baseUrl)) {
-        return url;
-      }
-      return baseUrl;
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
     },
     async jwt({ token, account }) {
       if (account) {

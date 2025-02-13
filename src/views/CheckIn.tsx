@@ -123,15 +123,10 @@ const CheckIn = ({ session }: ScanQRProps) => {
               </ModalHeader>
               <ModalBody>
                 <div className="">
-                  <p className="text-2xl font-bold">
-                    {`${userData?.prefix_en}${userData?.firstname_en} ${userData?.lastname_en}` ||
-                      "ไม่พบข้อมูล"}
-                  </p>
-                  <p className="text-2xl font-normal">
-                    {userData?.studentID || "ไม่พบข้อมูล"} |{" "}
-                    {userData?.college || "ไม่พบข้อมูล"}
-                  </p>
-
+                  <p><b>ชื่อ: </b>{`${userData?.prefix_th}${userData?.firstname_th} ${userData?.lastname_th}`}</p>
+                  <p><b>รหัสนักศึกษา: </b>{userData?.studentID || 'ไม่พบข้อมูล'}</p>
+                  <p><b>สถาบัน/มหาวิทยาลัย: </b>{userData?.college || 'ไม่พบข้อมูล'}</p>
+                  <p><b>หมายเลขเสื้อ: </b>{userData?.shirtNumber || 'ไม่พบข้อมูล'}</p>
                   <div className="mt-3">
                     <Select
                         label="เลือกกีฬาที่ต้องการลงทะเบียน"

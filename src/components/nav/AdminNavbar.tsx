@@ -71,7 +71,7 @@ const AdminNavbar = ({ session }: NavProps) => {
               {session.user?.name?.split(" ")[0]}
             </Link>
             <Button
-              onPress={() => signOut()}
+              onPress={() => signOut({callbackUrl: "/"})}
               className="bg-firsto text-secondw rounded-sm text-medium"
             >
               ออกจากระบบ
