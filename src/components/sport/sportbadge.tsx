@@ -23,7 +23,7 @@ const SportBadge = (props: SportBadgeProps) => {
   return (
     <div className={`flex justify-center gap-5 items-center flex-col ${props.className}`}>
       <div
-        className={`flex justify-center items-center rounded-full bg-secondw drop-shadow-xl hover:scale-110 duration-200 hover:rotate-12 ${props.padding}`}
+        className={`flex justify-center items-center rounded-full p-4 bg-secondw drop-shadow-xl hover:scale-110 duration-200 hover:rotate-12 ${props.padding}`}
       >
         {props.sport === 'badminton' && <BadmintonShuttleIcon />}
         {props.sport === 'chess' && <Chess02Icon />}

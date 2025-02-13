@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@heroui/button';
+import Link from 'next/link';
 
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue } from '@heroui/react';
 
@@ -67,12 +68,13 @@ const FeatureSection = () => {
       <div className="w-full flex flex-col gap-5">
         <div className="flex md:flex-row flex-col justify-between items-center">
           <h1 className="font-bold lg:text-5xl text-4xl leading-[64px]">สรุปเหรียญรางวัล</h1>
-          <Button
-            onPress={() => null}
-            className="bg-secondw text-firsto rounded-md text-xl border-firsto border-1 px-10"
-          >
-            สำหรับฟุตบอล <strong>Click</strong>
-          </Button>
+          <Link href={'/football'}>
+            <Button
+              className="bg-secondw text-firsto rounded-md text-xl border-firsto border-1 px-10"
+            >
+              สำหรับฟุตบอล <strong>Click</strong>
+            </Button>
+          </Link>
         </div>
         <Table isStriped aria-label="table with dynamic content">
           <TableHeader columns={columns} className="bg-firsto">

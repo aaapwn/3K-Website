@@ -10,26 +10,9 @@ import UpcomingSection from '@/views/landingsection/upcomingMatches';
 
 type LandingProps = Readonly<{
   session: Session | null;
-  filteredMatches: {
-    id: number;
-    date: string;
-    time: string;
-    sport: string;
-    type: string;
-    homeTeam: string;
-    awayTeam: string;
-    venue: string;
-  }[];
-  players: Record<
-    number,
-    {
-      homeTeam: { id: number; name: string; registered: boolean }[];
-      awayTeam: { id: number; name: string; registered: boolean }[];
-    }
-  >;
 }>;
 
-const Landing = ({ session, filteredMatches, players }: LandingProps) => {
+const Landing = ({ session }: LandingProps) => {
   return (
     <div className="bg-secondw">
       <HeroSection session={session} />
