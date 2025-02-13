@@ -586,5 +586,43 @@
       "type": ["หมากฮอส", "หมากรุกไทย", "หมากรุกสากล", "หมากล้อม", "Crossword", "A-math"]
     },
     { "en": "gaming", "th": "อีสปอร์ต", "type": ["RoV", "Valorant"] }
+  ],
+  "soccer_score": [
+    {
+      "key": "1",
+      "name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+      "played": 2,
+      "won": 2,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 6,
+      "goalsAgainst": 1,
+      "goalDifference": 5,
+      "points": 6
+    },
+    {
+      "key": "2",
+      "name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+      "played": 2,
+      "won": 2,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 6,
+      "goalsAgainst": 1,
+      "goalDifference": 5,
+      "points": 8
+    },
+    {
+      "key": "3",
+      "name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+      "played": 2,
+      "won": 2,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 6,
+      "goalsAgainst": 1,
+      "goalDifference": 5,
+      "points": 9
+    }
   ]
 }

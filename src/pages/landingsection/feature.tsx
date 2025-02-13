@@ -94,7 +94,7 @@ const FeatureSection = () => {
         </Table>
       </div>
       <div className="w-full flex flex-col gap-5">
-        <h1 className="font-bold lg:text-5xl text-4xl leading-[64px]">สนามแข่งขัน</h1>
+        <h1 className="font-bold lg:text-5xl text-4xl leading-[64px] md:text-start text-center">สนามแข่งขัน</h1>
         <iframe
           src="https://www.google.com/maps/d/embed?mid=1JorzL06nDG1LWV_XP52JvFHCyp3VIBs&ehbc=2E312F"
           className="min-h-[400px]"
