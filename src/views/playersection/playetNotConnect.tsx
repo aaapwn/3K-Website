@@ -14,7 +14,7 @@ const PlayerNotConnect = () => {
                 <br />
                 เพื่อเริ่มต้นใช้งานโปรไฟล์ของคุณอย่างเต็มประสิทธิภาพ กรุณาสแกน QR Code บนป้ายชื่อของคุณเพื่อเชื่อมโยงข้อมูลทันที!
             </p>
-            <Link className='bg-firsto text-2xl font-bold px-10 py-2 rounded-md text-secondw'>
+            <Link className='bg-firsto text-2xl font-bold px-10 py-2 rounded-md text-secondw' href='/scan-qr'>
                 แสกนQR Code ทันที
             </Link>
 

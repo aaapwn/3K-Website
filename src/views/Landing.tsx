@@ -1,12 +1,12 @@
-'use client';
-import { Session } from 'next-auth';
+"use client";
+import { Session } from "next-auth";
 
-import HeroSection from '@/pages/landingsection/hero';
+import HeroSection from '@/views/landingsection/hero';
 import SportSection from './landingsection/sportlist';
 import Banner from './landingsection/banner';
 import FeatureSection from './landingsection/feature';
 import { motion } from 'framer-motion';
-import UpcomingSection from '@/pages/landingsection/upcomingMatches';
+import UpcomingSection from '@/views/landingsection/upcomingMatches';
 
 type LandingProps = Readonly<{
   session: Session | null;

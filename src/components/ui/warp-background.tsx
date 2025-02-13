@@ -1,7 +1,7 @@
-'use client';
-import { cn } from '@/lib/utils';
-import { motion } from 'motion/react';
-import React, { HTMLAttributes, useCallback, useMemo } from 'react';
+"use client"
+import { cn } from "@/libs/utils";
+import { motion } from "motion/react";
+import React, { HTMLAttributes, useCallback, useMemo } from "react";
 
 export interface WarpBackgroundProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -92,7 +92,7 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
           } as React.CSSProperties
         }
         className={
-          'pointer-events-none absolute left-0 top-0 size-full overflow-hidden [container-type:size] [perspective:var(--perspective)] [transform-style:preserve-3d]'
+          "pointer-events-none absolute left-0 top-0 size-full overflow-hidden [container-type:size] [perspective:var(--perspective)] [transform-style:preserve-3d]"
         }
       >
         {/* top side */}

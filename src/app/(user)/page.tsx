@@ -1,7 +1,7 @@
 'use server';
 
 import auth from '@/libs/auth';
-import Landing from '@/pages/Landing';
+import Landing from '@/views/Landing';
 import matchesData from '@public/mock.json';
 
 async function getMatchesData() {
