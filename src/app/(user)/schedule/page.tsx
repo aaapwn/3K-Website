@@ -2,7 +2,7 @@
 
 // Mock data for matches and players
 import matchesData from '@public/mock.json';
-import MatchesSchedulePage from '@/pages/schedulePage';
+import MatchesSchedulePage from '@/views/schedulePage';
 
 async function getMatchesData() {
   await new Promise((resolve) => setTimeout(resolve, 1000));

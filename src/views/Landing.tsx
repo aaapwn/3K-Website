@@ -34,7 +34,7 @@ const Landing = ({ session, filteredMatches, players }: LandingProps) => {
     <div className="bg-secondw">
       <HeroSection session={session} />
       <Banner />
-      <UpcomingSection filteredMatches={filteredMatches} players={players} />
+      <UpcomingSection session={session} />
       <FeatureSection />
       <Banner />
       <motion.div whileInView={{ opacity: 1 }}>
