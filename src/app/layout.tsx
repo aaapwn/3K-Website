@@ -9,6 +9,7 @@ import AuthProviders from '../components/providers/AuthProviders';
 import UIProviders from '@/components/providers/UIProviders';
 import QueryProviders from '@/components/providers/QueryProviders';
 import ToastProvider from '@/components/providers/ToastProvider';
+import Transition from '@/app/Transition';
 
 const KMITL2020 = localFont({
   src: [
@@ -76,7 +77,7 @@ export default async function RootLayout({
           <UIProviders>
             <QueryProviders>
               <ToastProvider />
-              {children}
+              <Transition>{children}</Transition>
             </QueryProviders>
           </UIProviders>
         </AuthProviders>

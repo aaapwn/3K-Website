@@ -108,7 +108,7 @@ export default function AdminDashboardClient({ session }: Props) {
         </Button>
 
         {displayMatches.length > 0 ? (
-          <MatchesTable data={displayMatches} />
+          <MatchesTable data={displayMatches} option={{date: false}} />
         ) : (
           <Card>
             <CardBody className="flex items-center justify-center h-32">
