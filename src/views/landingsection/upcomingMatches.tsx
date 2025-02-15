@@ -23,7 +23,9 @@ const UpcomingSection = ({ session }:Props) => {
     <div className="pt-16 px-5 md:px-20 flex flex-col justify-center items-center bg-secondw gap-10">
       <p className="text-6xl font-bold">การแข่งขันที่กำลังจะมาถึง</p>
       {data ? (
-        <MatchesTable data={data} />
+        <MatchesTable data={data.filter((schedule) => {
+          return new Date(schedule.startDatetime) > new Date();
+        })} option={{result: false, players: false}}/>
       ) : (
         <Card>
           <CardBody className="flex items-center justify-center h-32">

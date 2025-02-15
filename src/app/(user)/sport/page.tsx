@@ -1,6 +1,6 @@
 import React from 'react';
 import data from '@public/mock.json';
-import SportPage from '@/pages/sportPage';
+import SportPage from '@/views/sportPage';
 
 async function getData() {
     await new Promise((resolve) => setTimeout(resolve, 1000));

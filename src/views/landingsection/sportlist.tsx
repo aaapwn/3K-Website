@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@heroui/button';
 import SportBadge from '@/components/sport/sportbadge';
 
 type Sport = {

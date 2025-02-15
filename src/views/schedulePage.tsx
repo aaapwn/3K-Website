@@ -108,7 +108,7 @@ export default function MatchesSchedulePage({ session }: matchesScheduleProps) {
             <DropdownMenu aria-label="Static Actions text-xl">
               {sports?.map((sport, i) => (
                 <DropdownItem
-                  key={sport}
+                  key={i}
                   className={
                     selectedSport === sport
                       ? 'w-full justify-center text-xl bg-firsto text-secondw'

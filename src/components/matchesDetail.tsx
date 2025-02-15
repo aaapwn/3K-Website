@@ -39,7 +39,7 @@ export default function MatchesDetail({ players }: MatchesDetailProps) {
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
         <ModalContent className="max-w-6xl">
           <ModalHeader className="flex flex-col gap-2">
-            <h1 className="text-5xl">รายชื่อผู้เข้าแข่งขัน</h1>
+            <h1 className="text-xl">รายชื่อผู้เข้าแข่งขัน</h1>
           </ModalHeader>
           <ModalBody className="flex flex-col justify-center gap-4 text-2xl max-h-[70vh]">
             <div className="overflow-y-auto">
