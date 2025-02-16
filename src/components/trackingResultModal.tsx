@@ -5,7 +5,6 @@ import {
   ModalBody,
   useDisclosure,
   ModalFooter,
-  Chip,
 } from "@heroui/react";
 import { Button } from "@heroui/button";
 import {
@@ -17,9 +16,6 @@ import {
   TableCell,
 } from "@heroui/react";
 import { Card, CardBody } from "@heroui/react";
-import { Tabs, Tab } from "@heroui/react";
-
-import { User } from "@/queries/user/type";
 import { TrackResult } from "@/queries/schedule/type";
 
 type Props = {

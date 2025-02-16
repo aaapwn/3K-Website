@@ -9,7 +9,6 @@ async function getData() {
 
 const Page = async () => {
     const sportData = (await getData()).sports;
-    console.log(sportData);
     return (
         <div className="min-h-screen pb-10">
             <div className="w-full flex flex-row justify-between items-center relative p-10 bg-firsto">

@@ -34,7 +34,6 @@ export default function MatchesSchedulePage({ session }: matchesScheduleProps) {
   const [displayMatches, setDisplayMatches] = useState<Schedule[]>([]);
   const [sports, setSports] = useState<string[]>([]);
   const handleSportChange = (sport: string) => {
-    console.log('Selected sport changed to:', sport);
     setSelectedSport(sport);
   };
   const { data } = useQuery<Schedule[]>({
