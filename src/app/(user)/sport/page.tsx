@@ -14,7 +14,7 @@ const Page = async () => {
             <div className="w-full flex flex-row justify-between items-center relative p-10 bg-firsto">
                 <p className='text-6xl font-bold text-secondw'>รายการกีฬา</p>
             </div>
-            <SportPage sportData={data.sports} />
+            <SportPage sportData={sportData} />
         </div>
     );
 };
