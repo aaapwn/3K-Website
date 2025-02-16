@@ -43,3 +43,4 @@ export type User = {
     updatedAt: string
   }
   
+export type College = 'KMITL' | 'KMUTNB' | 'KMUTT' 

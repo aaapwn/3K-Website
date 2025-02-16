@@ -1,23 +1,18 @@
 'use client';
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@heroui/react';
 
-type FootballTableProps = {
-  footballData: {
-    key: string;
-    name: string;
-    played: number;
-    won: number;
-    drawn: number;
-    lost: number;
-    goalsFor: number;
-    goalsAgainst: number;
-    goalDifference: number;
-    points: number;
-  }[];
-};
+import { getFootballSummary } from '@/queries/result/qurey';
+import { FootballSumary } from '@/queries/result/type';
 
-export default function FootballTable({ footballData }: FootballTableProps) {
+export default function FootballTable() {
+  const { data } = useQuery<FootballSumary[]>({
+    queryKey: ['football-summary'],
+    queryFn: getFootballSummary,
+  });
+
   return (
     <>
       <Table>
@@ -34,19 +29,17 @@ export default function FootballTable({ footballData }: FootballTableProps) {
           <TableColumn className="text-2xl">Pts</TableColumn>
         </TableHeader>
         <TableBody>
-          {footballData
-            .sort((a, b) => b.points - a.points)
-            .map((team, index) => (
-              <TableRow key={team.key}>
+          {(data || []).map((team, index) => (
+              <TableRow key={index}>
                 <TableCell className="text-2xl">{index + 1}</TableCell>
-                <TableCell className="text-2xl">{team.name}</TableCell>
+                <TableCell className="text-2xl">{team.team}</TableCell>
                 <TableCell className="text-2xl">{team.played}</TableCell>
-                <TableCell className="text-2xl">{team.won}</TableCell>
-                <TableCell className="text-2xl">{team.drawn}</TableCell>
-                <TableCell className="text-2xl">{team.lost}</TableCell>
+                <TableCell className="text-2xl">{team.win}</TableCell>
+                <TableCell className="text-2xl">{team.draw}</TableCell>
+                <TableCell className="text-2xl">{team.lose}</TableCell>
                 <TableCell className="text-2xl">{team.goalsFor}</TableCell>
                 <TableCell className="text-2xl">{team.goalsAgainst}</TableCell>
-                <TableCell className="text-2xl">{team.goalDifference}</TableCell>
+                <TableCell className="text-2xl">{team.goalsDiff}</TableCell>
                 <TableCell className="text-2xl">{team.points}</TableCell>
               </TableRow>
             ))}
