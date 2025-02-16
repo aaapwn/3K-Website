@@ -25,7 +25,7 @@ const UpcomingSection = ({ session }:Props) => {
       {data ? (
         <MatchesTable data={data.filter((schedule) => {
           return new Date(schedule.startDatetime) > new Date();
-        })} option={{result: false, players: false}}/>
+        }).slice(0, 5)} option={{result: false, players: false}}/>
       ) : (
         <Card>
           <CardBody className="flex items-center justify-center h-32">
