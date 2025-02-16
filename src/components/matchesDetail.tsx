@@ -57,11 +57,11 @@ export default function MatchesDetail({ players, option }: MatchesDetailProps) {
     new Set(players.map((player) => player.user.college))
   );
 
-  const getDisplayRow = (player: { user: User; isCheckin: boolean }) => {
+  const getDisplayRow = (player: { user: User; isCheckin: boolean }, index:number) => {
     return displayColumn.map((key) => {
       switch (key.key) {
         case 'index':
-          return '';
+          return index + 1;
         case 'studentId':
           return player.user.studentId;
         case 'name':
@@ -110,9 +110,9 @@ export default function MatchesDetail({ players, option }: MatchesDetailProps) {
                                   .map((player, index) => (
                                     <TableRow key={index}>
                                       {
-                                        getDisplayRow(player).map((cell, i) => (
+                                        getDisplayRow(player, index).map((cell, i) => (
                                           <TableCell key={i} className="text-2xl">
-                                            {cell || index + 1}
+                                            {cell}
                                           </TableCell>
                                         ))
                                       }

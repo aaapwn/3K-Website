@@ -33,11 +33,11 @@ const column = [
 export default function TrackingModalResult({ data }: Props) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const getDisplayRow = (result: TrackResult) => {
+  const getDisplayRow = (result: TrackResult, index: number) => {
     return column.map((key) => {
       switch (key.key) {
         case "index":
-          return "";
+          return index + 1;
         case "college":
           return result.user.college;
         case "studentId":
@@ -75,8 +75,9 @@ export default function TrackingModalResult({ data }: Props) {
                       {
                         data.map((result, index) => (
                           <TableRow key={result.id}>
-                            {getDisplayRow(result).map((cell, i) => (
-                              <TableCell key={i} className='text-xl'>{cell || index + 1}</TableCell>
+                            {getDisplayRow(result, index).map((cell, i) => (
+                              
+                              <TableCell key={i} className='text-xl'>{cell}</TableCell>
                             ))}
                           </TableRow>
                         ))
@@ -90,7 +91,7 @@ export default function TrackingModalResult({ data }: Props) {
           <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
-      <Button onPress={onOpen} variant="bordered" size="lg" className="text-xl">
+      <Button onPress={onOpen} variant="bordered" size="lg" className="text-xl bg-green-300 border-green-500">
         ดูผลการแข่งขัน
       </Button>
     </>
