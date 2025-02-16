@@ -9,6 +9,7 @@ import AuthProviders from '../components/providers/AuthProviders';
 import UIProviders from '@/components/providers/UIProviders';
 import QueryProviders from '@/components/providers/QueryProviders';
 import ToastProvider from '@/components/providers/ToastProvider';
+import Transition from '@/app/Transition';
 
 const KMITL2020 = localFont({
   src: [
@@ -22,6 +23,7 @@ const KMITL2020 = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://3kgames.16th.kmitl.ac.th'),
   title: '3 Kings',
   description: 'ร่วมเป็นส่วนหนึ่งของประเพณีอันทรงเกียรติและการแข่งขันฟุตบอลที่ยิ่งใหญ่ที่สุดของ 3 สถาบัน',
   icons: [
@@ -76,7 +78,7 @@ export default async function RootLayout({
           <UIProviders>
             <QueryProviders>
               <ToastProvider />
-              {children}
+              <Transition>{children}</Transition>
             </QueryProviders>
           </UIProviders>
         </AuthProviders>

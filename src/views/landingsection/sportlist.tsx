@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import SportBadge from "@/components/sport/sportbadge";
+import SportBadge from '@/components/sport/sportbadge';
 
 type Sport = {
-    en: string;
-    th: string;
-}
+  en: string;
+  th: string;
+};
 
 const sports: Sport[] = [
-    { en: 'football', th: 'ฟุตบอล' },
-    { en: 'petong', th: 'ฟุตซอล' },
-    { en: 'basketball', th: 'บาสเกตบอล' },
-    { en: 'volleyball', th: 'วอลเลย์บอล' },
-    { en: 'badminton', th: 'แบดมินตัน' },
-    { en: 'tableTennis', th: 'เทเบิลเทนนิส' },
-    { en: 'running', th: 'กรีฑา' },
-    { en: 'bowling', th: 'เปตอง' },
-    { en: 'chess', th: 'หมากกระดาน' },
-    { en: 'gaming', th: 'อีสปอร์ต' },
-]
+  { en: 'football', th: 'ฟุตบอล' },
+  { en: 'petong', th: 'ฟุตซอล' },
+  { en: 'basketball', th: 'บาสเกตบอล' },
+  { en: 'volleyball', th: 'วอลเลย์บอล' },
+  { en: 'badminton', th: 'แบดมินตัน' },
+  { en: 'tableTennis', th: 'เทเบิลเทนนิส' },
+  { en: 'running', th: 'กรีฑา' },
+  { en: 'petong', th: 'เปตอง' },
+  { en: 'chess', th: 'หมากกระดาน' },
+  { en: 'gaming', th: 'อีสปอร์ต' },
+];
 
 const SportSection = () => {
     return (
