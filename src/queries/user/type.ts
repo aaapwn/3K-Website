@@ -40,7 +40,6 @@ export type User = {
     shirtNumber: number
     college: string
     createdAt: string
-    updatedAt: string
   }
   
 export type College = 'KMITL' | 'KMUTNB' | 'KMUTT' 

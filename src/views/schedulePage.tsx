@@ -24,7 +24,6 @@ import {
   FootballIcon,
   VolleyballIcon,
 } from '@components/sport/sporticon';
-// import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from '@heroui/react';
 
 type matchesScheduleProps = {
   session: Session | null;
@@ -130,7 +129,7 @@ export default function MatchesSchedulePage({ session }: matchesScheduleProps) {
 
         <h2 className="text-2xl font-bold mb-4">กีฬา : {selectedSport}</h2>
         {displayMatches.length > 0 ? (
-          <MatchesTable data={displayMatches} />
+          <MatchesTable data={displayMatches} playerStatus={false}/>
         ) : (
           <Card>
             <CardBody className="flex items-center justify-center h-32">

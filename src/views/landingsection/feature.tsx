@@ -70,21 +70,30 @@ const FeatureSection = () => {
             )}
           </TableHeader>
           <TableBody emptyContent={"ไม่พบข้อมูล"}>
-            {data
-              ? data.medals.map((college, index) => {
-                  return (
-                    <TableRow key={index}>
-                      <TableCell className="text-secondb font-thin text-2xl">
-                        {college.college?.toString() || "N/A"}
-                      </TableCell>
-                      <TableCell className="text-secondb font-thin text-2xl">{college.gold || 0}</TableCell>
-                      <TableCell className="text-secondb font-thin text-2xl">{college.silver || 0}</TableCell>
-                      <TableCell className="text-secondb font-thin text-2xl">{college.bronze || 0}</TableCell>
-                      <TableCell className="text-secondb font-thin text-2xl">{college.total || 0}</TableCell>
-                    </TableRow>
-                  );
-                })
-              : []}
+            <>
+              {data
+                ? data.medals.map((college, index) => {
+                    return (
+                      <TableRow key={index}>
+                        <TableCell className="text-secondb font-thin text-2xl">
+                          {college.college?.toString() || "N/A"}
+                        </TableCell>
+                        <TableCell className="text-secondb font-thin text-2xl">{college.gold || 0}</TableCell>
+                        <TableCell className="text-secondb font-thin text-2xl">{college.silver || 0}</TableCell>
+                        <TableCell className="text-secondb font-thin text-2xl">{college.bronze || 0}</TableCell>
+                        <TableCell className="text-secondb font-thin text-2xl">{college.total || 0}</TableCell>
+                      </TableRow>
+                    );
+                  })
+                : []}
+              <TableRow>
+                <TableCell className="text-secondb font-thin text-2xl">รวม</TableCell>
+                <TableCell className="text-secondb font-thin text-2xl">{getKeyValue(data?.total, "gold")}</TableCell>
+                <TableCell className="text-secondb font-thin text-2xl">{getKeyValue(data?.total, "silver")}</TableCell>
+                <TableCell className="text-secondb font-thin text-2xl">{getKeyValue(data?.total, "bronze")}</TableCell>
+                <TableCell className="text-secondb font-thin text-2xl">{getKeyValue(data?.total, "total")}</TableCell>
+              </TableRow>
+            </>
           </TableBody>
         </Table>
       </div>

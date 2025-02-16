@@ -21,18 +21,64 @@ import { Tabs, Tab } from "@heroui/react";
 
 import { User } from "@/queries/user/type";
 
+type DisplayOption = {
+  index: boolean;
+  studentId: boolean;
+  name: boolean;
+  status: boolean;
+}
+
+const defaultDisplayOption: DisplayOption = {
+  index: true,
+  studentId: true,
+  name: true,
+  status: true,
+};
+
 type MatchesDetailProps = {
   players: {
     user: User;
     isCheckin: boolean;
   }[];
+  option?: Partial<DisplayOption>;
 };
 
-export default function MatchesDetail({ players }: MatchesDetailProps) {
+const column = [
+  { key: 'index', label: 'ลำดับ' },
+  { key: 'studentId', label: 'รหัสนักศึกษา' },
+  { key: 'name', label: 'ชื่อ' },
+  { key: 'status', label: 'สถานะ' },
+]
+
+export default function MatchesDetail({ players, option }: MatchesDetailProps) {
+  const displayColumn = column.filter((col) => option?.[col.key as keyof DisplayOption] ?? defaultDisplayOption[col.key as keyof DisplayOption]);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const college = Array.from(
     new Set(players.map((player) => player.user.college))
   );
+
+  const getDisplayRow = (player: { user: User; isCheckin: boolean }) => {
+    return displayColumn.map((key) => {
+      switch (key.key) {
+        case 'index':
+          return '';
+        case 'studentId':
+          return player.user.studentId;
+        case 'name':
+          return `${player.user.prefix_th}${player.user.firstname_th} ${player.user.lastname_th}`;
+        case 'status':
+          return player.isCheckin ? (
+            <Chip className="bg-green-500 text-secondw">ลงทะเบียนแล้ว</Chip>
+          ) : (
+            <Chip variant="bordered" className="text-red-500">
+              ยังไม่ลงทะเบียน
+            </Chip>
+          );
+        default:
+          return '';
+      }
+    });
+  }
 
   return (
     <>
@@ -51,28 +97,28 @@ export default function MatchesDetail({ players }: MatchesDetailProps) {
                         <CardBody>
                           <Table>
                             <TableHeader>
-                              <TableColumn className="text-2xl">ลำดับ</TableColumn>
-                              <TableColumn className="text-2xl">รหัสนักศึกษา</TableColumn>
-                              <TableColumn className="text-2xl">ชื่อ</TableColumn>
-                              <TableColumn className="text-2xl">สถานะ</TableColumn>
+                              {displayColumn.map((col) => (
+                                <TableColumn key={col.key} className="text-2xl">
+                                  {col.label}
+                                </TableColumn>
+                              ))}
                             </TableHeader>
                             <TableBody>
-                              {players.filter((player) => player.user.college === col).map((player, index) => (
-                                <TableRow key={player.user.id}>
-                                  <TableCell className="text-2xl">{index+1}</TableCell>
-                                  <TableCell className="text-2xl">{player.user.studentId}</TableCell>
-                                  <TableCell className="text-2xl">{`${player.user.prefix_th}${player.user.firstname_th} ${player.user.lastname_th}`}</TableCell>
-                                  <TableCell className="text-2xl">
-                                    {player.isCheckin ? (
-                                      <Chip className="bg-green-500 text-xl text-secondw">ลงทะเบียนแล้ว</Chip>
-                                    ) : (
-                                      <Chip variant="bordered" className="text-red-500 text-xl">
-                                        ยังไม่ลงทะเบียน
-                                      </Chip>
-                                    )}
-                                  </TableCell>
-                                </TableRow>
-                              ))}
+                              {
+                                players
+                                  .filter((player) => player.user.college === col)
+                                  .map((player, index) => (
+                                    <TableRow key={index}>
+                                      {
+                                        getDisplayRow(player).map((cell, i) => (
+                                          <TableCell key={i} className="text-2xl">
+                                            {cell || index + 1}
+                                          </TableCell>
+                                        ))
+                                      }
+                                    </TableRow>
+                                  ))
+                              }
                             </TableBody>
                           </Table>
                         </CardBody>

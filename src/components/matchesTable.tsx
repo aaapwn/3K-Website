@@ -5,6 +5,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 import MatchesDetail from '@/components/matchesDetail';
 import { Schedule } from '@/queries/schedule/type';
 import { format } from 'date-fns';
+import TrackingModalResult from './trackingResultModal';
 
 interface DisplayOption {
   date: boolean;
@@ -29,6 +30,7 @@ const defaultDisplayOption: DisplayOption = {
 interface MatchesTableProps {
   data: Schedule[];
   option?: Partial<DisplayOption>;
+  playerStatus?: boolean;
 }
 
 const column = [
@@ -41,7 +43,7 @@ const column = [
   { key: 'players', label: 'รายชื่อผู้เข้าแข่งขัน' },
 ]
 
-export default function MatchesTable({ data, option }: MatchesTableProps) {
+export default function MatchesTable({ data, option, playerStatus = true }: MatchesTableProps) {
   const displayColumn = column.filter((col) => option?.[col.key as keyof DisplayOption] ?? defaultDisplayOption[col.key as keyof DisplayOption]);
 
   const getDisplayRow = (match: Schedule) => {
@@ -67,9 +69,9 @@ export default function MatchesTable({ data, option }: MatchesTableProps) {
         case 'team':
           return Array.from(new Set(match.players.map((player) => player.user.college))).join(' VS ');
         case 'result':
-          return '-';
+          return match.result?.type === 'Track' ? <TrackingModalResult data={match.result.data} /> : !match.result ? '-' : <p className='text-green-600 font-bold'>{`${match.result?.data.teamA} ${match.result?.data.scoreA} - ${match.result?.data.scoreB} ${match.result?.data.teamB}`}</p>;
         case 'players':
-          return <MatchesDetail players={match.players} />;
+          return <MatchesDetail players={match.players} option={{status: playerStatus}} />;
         default:
           return null;
       }
