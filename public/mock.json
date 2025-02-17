@@ -1,9 +1,9 @@
 {
   "matches": {
-    "2025-06-15": [
+    "2024-06-15": [
       {
         "id": 1,
-        "date": "2025-06-15",
+        "date": "2024-06-15",
         "time": "14:00",
         "sport": "ฟุตบอล",
         "type": "ทีมชาย",
@@ -13,7 +13,7 @@
       },
       {
         "id": 2,
-        "date": "2025-06-15",
+        "date": "2024-06-15",
         "time": "16:30",
         "sport": "บาสเกตบอล",
         "type": "ทีมชาย",
@@ -22,114 +22,28 @@
         "venue": "สนามอินทรี"
       }
     ],
-    "2025-06-16": [
+    "2024-06-16": [
       {
         "id": 3,
-        "date": "2025-06-16",
+        "date": "2024-06-16",
         "time": "15:00",
         "sport": "ฟุตบอล",
         "type": "ทีมชาย",
         "homeTeam": "KMTNB",
         "awayTeam": "KMITL",
         "venue": "สนามไททัน"
-      },
-      {
-        "id": 4,
-        "date": "2025-06-16",
-        "time": "17:00",
-        "sport": "ฟุตซอล",
-        "type": "ทีมชาย",
-        "homeTeam": "KMITL",
-        "awayTeam": "KMUTT",
-        "venue": "สนามฟุตซอล"
       }
     ],
-    "2025-06-17": [
+    "2024-06-17": [
       {
-        "id": 5,
-        "date": "2025-06-17",
+        "id": 4,
+        "date": "2024-06-17",
         "time": "18:00",
         "sport": "ฟุตบอล",
         "type": "ทีมชาย",
         "homeTeam": "KMITL",
         "awayTeam": "KMUTT",
         "venue": "โดมเฮอริเคน"
-      },
-      {
-        "id": 6,
-        "date": "2025-06-17",
-        "time": "20:00",
-        "sport": "วอลเลย์บอล",
-        "type": "ทีมหญิง",
-        "homeTeam": "KMUTT",
-        "awayTeam": "KMTNB",
-        "venue": "สนามวอลเลย์บอล"
-      }
-    ],
-    "2025-06-18": [
-      {
-        "id": 7,
-        "date": "2025-06-18",
-        "time": "10:00",
-        "sport": "แบดมินตัน",
-        "type": "มือ1 คู่ชาย",
-        "homeTeam": "KMITL",
-        "awayTeam": "KMUTT",
-        "venue": "สนามแบดมินตัน"
-      },
-      {
-        "id": 8,
-        "date": "2025-06-18",
-        "time": "14:00",
-        "sport": "เทเบิลเทนนิส",
-        "type": "มือ2 เดี่ยวหญิง",
-        "homeTeam": "KMTNB",
-        "awayTeam": "KMITL",
-        "venue": "สนามเทเบิลเทนนิส"
-      }
-    ],
-    "2025-06-19": [
-      {
-        "id": 9,
-        "date": "2025-06-19",
-        "time": "09:00",
-        "sport": "กรีฑา",
-        "type": "100เมตร ชาย",
-        "homeTeam": "KMITL",
-        "awayTeam": "KMUTT",
-        "venue": "สนามกรีฑา"
-      },
-      {
-        "id": 10,
-        "date": "2025-06-19",
-        "time": "11:00",
-        "sport": "เปตอง",
-        "type": "คู่หญิง",
-        "homeTeam": "KMUTT",
-        "awayTeam": "KMTNB",
-        "venue": "สนามเปตอง"
-      }
-    ],
-    "2025-06-20": [
-      {
-        "id": 11,
-        "date": "2025-06-20",
-        "time": "13:00",
-        "sport": "หมากกระดาน",
-        "type": "หมากรุกไทย ทีมชาย",
-        "homeTeam": "KMITL",
-        "awayTeam": "KMUTT",
-        "venue": "สนามหมากกระดาน"
-      },
-      {
-        "id": 12,
-        "date": "2025-06-20",
-        "time": "15:00",
-        "sport": "อีสปอร์ต",
-        "type": "RoV",
-        "homeTeam": "KMTNB",
-        "awayTeam": "KMITL",
-        "venue": "สนามอีสปอร์ต"
       }
     ]
   },
@@ -209,35 +123,35 @@
     "3": {
       "homeTeam": [
         {
-          "id": 13,
-          "name": "Chris Evans",
+          "id": 10,
+          "name": "Emma Wilson",
           "registered": true
         },
         {
-          "id": 14,
-          "name": "Natalie Portman",
+          "id": 11,
+          "name": "Ryan Taylor",
           "registered": false
         },
         {
-          "id": 15,
-          "name": "Robert Downey",
+          "id": 12,
+          "name": "Sophia Martinez",
           "registered": true
         }
       ],
       "awayTeam": [
         {
-          "id": 16,
-          "name": "Scarlett Johansson",
+          "id": 1,
+          "name": "John Doe",
           "registered": true
         },
         {
-          "id": 17,
-          "name": "Mark Ruffalo",
+          "id": 2,
+          "name": "Jane Smith",
           "registered": false
         },
         {
-          "id": 18,
-          "name": "Chris Hemsworth",
+          "id": 3,
+          "name": "Mike Johnson",
           "registered": true
         }
       ]
@@ -245,384 +159,50 @@
     "4": {
       "homeTeam": [
         {
-          "id": 19,
-          "name": "Tom Holland",
+          "id": 1,
+          "name": "John Doe",
           "registered": true
         },
         {
-          "id": 20,
-          "name": "Zendaya",
+          "id": 2,
+          "name": "Jane Smith",
           "registered": false
         },
         {
-          "id": 21,
-          "name": "Benedict Cumberbatch",
+          "id": 3,
+          "name": "Mike Johnson",
           "registered": true
         }
       ],
       "awayTeam": [
         {
-          "id": 22,
-          "name": "Chadwick Boseman",
+          "id": 7,
+          "name": "Alex Turner",
           "registered": true
         },
         {
-          "id": 23,
-          "name": "Letitia Wright",
+          "id": 8,
+          "name": "Olivia Parker",
+          "registered": true
+        },
+        {
+          "id": 9,
+          "name": "Daniel Lee",
           "registered": false
-        },
-        {
-          "id": 24,
-          "name": "Michael B. Jordan",
-          "registered": true
-        }
-      ]
-    },
-    "5": {
-      "homeTeam": [
-        {
-          "id": 25,
-          "name": "Chris Pratt",
-          "registered": true
-        },
-        {
-          "id": 26,
-          "name": "Zoe Saldana",
-          "registered": false
-        },
-        {
-          "id": 27,
-          "name": "Dave Bautista",
-          "registered": true
-        }
-      ],
-      "awayTeam": [
-        {
-          "id": 28,
-          "name": "Vin Diesel",
-          "registered": true
-        },
-        {
-          "id": 29,
-          "name": "Bradley Cooper",
-          "registered": false
-        },
-        {
-          "id": 30,
-          "name": "Karen Gillan",
-          "registered": true
-        }
-      ]
-    },
-    "6": {
-      "homeTeam": [
-        {
-          "id": 31,
-          "name": "Paul Rudd",
-          "registered": true
-        },
-        {
-          "id": 32,
-          "name": "Evangeline Lilly",
-          "registered": false
-        },
-        {
-          "id": 33,
-          "name": "Michael Douglas",
-          "registered": true
-        }
-      ],
-      "awayTeam": [
-        {
-          "id": 34,
-          "name": "Michelle Pfeiffer",
-          "registered": true
-        },
-        {
-          "id": 35,
-          "name": "Laurence Fishburne",
-          "registered": false
-        },
-        {
-          "id": 36,
-          "name": "Hannah John-Kamen",
-          "registered": true
-        }
-      ]
-    },
-    "7": {
-      "homeTeam": [
-        {
-          "id": 37,
-          "name": "Brie Larson",
-          "registered": true
-        },
-        {
-          "id": 38,
-          "name": "Samuel L. Jackson",
-          "registered": false
-        },
-        {
-          "id": 39,
-          "name": "Ben Mendelsohn",
-          "registered": true
-        }
-      ],
-      "awayTeam": [
-        {
-          "id": 40,
-          "name": "Jude Law",
-          "registered": true
-        },
-        {
-          "id": 41,
-          "name": "Gemma Chan",
-          "registered": false
-        },
-        {
-          "id": 42,
-          "name": "Lashana Lynch",
-          "registered": true
-        }
-      ]
-    },
-    "8": {
-      "homeTeam": [
-        {
-          "id": 43,
-          "name": "Tom Hiddleston",
-          "registered": true
-        },
-        {
-          "id": 44,
-          "name": "Idris Elba",
-          "registered": false
-        },
-        {
-          "id": 45,
-          "name": "Anthony Hopkins",
-          "registered": true
-        }
-      ],
-      "awayTeam": [
-        {
-          "id": 46,
-          "name": "Cate Blanchett",
-          "registered": true
-        },
-        {
-          "id": 47,
-          "name": "Tessa Thompson",
-          "registered": false
-        },
-        {
-          "id": 48,
-          "name": "Jeff Goldblum",
-          "registered": true
-        }
-      ]
-    },
-    "9": {
-      "homeTeam": [
-        {
-          "id": 49,
-          "name": "Josh Brolin",
-          "registered": true
-        },
-        {
-          "id": 50,
-          "name": "Zoe Saldana",
-          "registered": false
-        },
-        {
-          "id": 51,
-          "name": "Chris Pratt",
-          "registered": true
-        }
-      ],
-      "awayTeam": [
-        {
-          "id": 52,
-          "name": "Dave Bautista",
-          "registered": true
-        },
-        {
-          "id": 53,
-          "name": "Bradley Cooper",
-          "registered": false
-        },
-        {
-          "id": 54,
-          "name": "Vin Diesel",
-          "registered": true
-        }
-      ]
-    },
-    "10": {
-      "homeTeam": [
-        {
-          "id": 55,
-          "name": "Robert Downey Jr.",
-          "registered": true
-        },
-        {
-          "id": 56,
-          "name": "Chris Evans",
-          "registered": false
-        },
-        {
-          "id": 57,
-          "name": "Mark Ruffalo",
-          "registered": true
-        }
-      ],
-      "awayTeam": [
-        {
-          "id": 58,
-          "name": "Chris Hemsworth",
-          "registered": true
-        },
-        {
-          "id": 59,
-          "name": "Scarlett Johansson",
-          "registered": false
-        },
-        {
-          "id": 60,
-          "name": "Jeremy Renner",
-          "registered": true
-        }
-      ]
-    },
-    "11": {
-      "homeTeam": [
-        {
-          "id": 61,
-          "name": "Paul Bettany",
-          "registered": true
-        },
-        {
-          "id": 62,
-          "name": "Elizabeth Olsen",
-          "registered": false
-        },
-        {
-          "id": 63,
-          "name": "Benedict Cumberbatch",
-          "registered": true
-        }
-      ],
-      "awayTeam": [
-        {
-          "id": 64,
-          "name": "Tom Holland",
-          "registered": true
-        },
-        {
-          "id": 65,
-          "name": "Zendaya",
-          "registered": false
-        },
-        {
-          "id": 66,
-          "name": "Jacob Batalon",
-          "registered": true
-        }
-      ]
-    },
-    "12": {
-      "homeTeam": [
-        {
-          "id": 67,
-          "name": "Chadwick Boseman",
-          "registered": true
-        },
-        {
-          "id": 68,
-          "name": "Letitia Wright",
-          "registered": false
-        },
-        {
-          "id": 69,
-          "name": "Danai Gurira",
-          "registered": true
-        }
-      ],
-      "awayTeam": [
-        {
-          "id": 70,
-          "name": "Michael B. Jordan",
-          "registered": true
-        },
-        {
-          "id": 71,
-          "name": "Lupita Nyong'o",
-          "registered": false
-        },
-        {
-          "id": 72,
-          "name": "Winston Duke",
-          "registered": true
         }
       ]
     }
   },
   "sports": [
-    { "en": "football", "th": "ฟุตบอล", "type": ["ฟุตบอล"] },
-    { "en": "futsal", "th": "ฟุตซอล", "type": ["ฟุตซอล"] },
-    { "en": "basketball", "th": "บาสเกตบอล", "type": ["บาสเกตบอล"] },
-    { "en": "volleyball", "th": "วอลเลย์บอล", "type": ["วอลเลย์บอล"] },
-    { "en": "badminton", "th": "แบดมินตัน", "type": ["มือ1", "มือ2"] },
-    { "en": "tableTennis", "th": "เทเบิลเทนนิส", "type": ["มือ1", "มือ2"] },
-    {
-      "en": "running",
-      "th": "กรีฑา",
-      "type": ["100เมตร", "200เมตร", "400เมตร", "800เมตร", "5000เมตร", "4x100เมตร", "วิ่งผลัดเมดเลย์"]
-    },
-    { "en": "petong", "th": "เปตอง", "type": ["เปตอง"] },
-    {
-      "en": "chess",
-      "th": "หมากกระดาน",
-      "type": ["หมากฮอส", "หมากรุกไทย", "หมากรุกสากล", "หมากล้อม", "Crossword", "A-math"]
-    },
-    { "en": "gaming", "th": "อีสปอร์ต", "type": ["RoV", "Valorant"] }
-  ],
-  "soccer_score": [
-    {
-      "key": "1",
-      "name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
-      "played": 2,
-      "won": 2,
-      "drawn": 0,
-      "lost": 0,
-      "goalsFor": 6,
-      "goalsAgainst": 1,
-      "goalDifference": 5,
-      "points": 6
-    },
-    {
-      "key": "2",
-      "name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
-      "played": 2,
-      "won": 2,
-      "drawn": 0,
-      "lost": 0,
-      "goalsFor": 6,
-      "goalsAgainst": 1,
-      "goalDifference": 5,
-      "points": 8
-    },
-    {
-      "key": "3",
-      "name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
-      "played": 2,
-      "won": 2,
-      "drawn": 0,
-      "lost": 0,
-      "goalsFor": 6,
-      "goalsAgainst": 1,
-      "goalDifference": 5,
-      "points": 9
-    }
+    { "en": "football", "th": "ฟุตบอล", "type": ["ทีมชาย", "ทีมหญิง"] },
+    { "en": "petong", "th": "ฟุตซอล" },
+    { "en": "basketball", "th": "บาสเกตบอล" },
+    { "en": "volleyball", "th": "วอลเลย์บอล" },
+    { "en": "badminton", "th": "แบดมินตัน" },
+    { "en": "tableTennis", "th": "เทเบิลเทนนิส" },
+    { "en": "running", "th": "กรีฑา" },
+    { "en": "bowling", "th": "เปตอง" },
+    { "en": "chess", "th": "หมากกระดาน" },
+    { "en": "gaming", "th": "อีสปอร์ต" }
   ]
 }
