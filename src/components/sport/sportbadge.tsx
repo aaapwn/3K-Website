@@ -1,50 +1,30 @@
-'use client';
+"use client";
 
-import {
-  BadmintonShuttleIcon,
-  Chess02Icon,
-  GameController03Icon,
-  WorkoutRunIcon,
-  BowlingBallIcon,
-  TableTennisBatIcon,
-  BasketballIcon,
-  FootballIcon,
-  VolleyballIcon,
-} from './sporticon';
+import { BadmintonShuttleIcon, Chess02Icon, GameController03Icon, WorkoutRunIcon, BowlingBallIcon, TableTennisBatIcon, BasketballIcon, FootballIcon, VolleyballIcon } from "./sporticon";
 
 interface SportBadgeProps {
-  children?: React.ReactNode;
-  sport: string;
-  className?: string;
-  padding?: string;
+    children: React.ReactNode;
+    sport: string;
 }
 
 const SportBadge = (props: SportBadgeProps) => {
-  return (
-    <div className={`flex justify-center gap-5 items-center flex-col ${props.className}`}>
-      <div
-        className={`flex justify-center items-center rounded-full p-4 bg-secondw drop-shadow-xl hover:scale-110 duration-200 hover:rotate-12 ${props.padding}`}
-      >
-        {props.sport === 'badminton' && <BadmintonShuttleIcon />}
-        {props.sport === 'chess' && <Chess02Icon />}
-        {props.sport === 'gaming' && <GameController03Icon />}
-        {props.sport === 'running' && <WorkoutRunIcon />}
-        {props.sport === 'petong' && <BowlingBallIcon />}
-        {props.sport === 'tableTennis' && <TableTennisBatIcon />}
-        {props.sport === 'basketball' && <BasketballIcon />}
-        {props.sport === 'football' && <FootballIcon />}
-        {props.sport === 'futsal' && <FootballIcon />}
-        {props.sport === 'volleyball' && <VolleyballIcon />}
-      </div>
-
-      {props.children && <p className="text-3xl font-bold">{props.children}</p>}
-    </div>
-  );
-};
-
-SportBadge.defaultProps = {
-  className: '',
-  padding: 'p-10',
-};
+    return (
+        <div className="flex justify-center gap-5 items-center flex-col md:scale-100 scale-85">
+            <div className="flex justify-center items-center rounded-full bg-secondw p-10 drop-shadow-xl hover:scale-110 duration-200 hover:rotate-12">
+                {props.sport === 'badminton' && <BadmintonShuttleIcon />}
+                {props.sport === 'chess' && <Chess02Icon />}
+                {props.sport === 'gaming' && <GameController03Icon />}
+                {props.sport === 'running' && <WorkoutRunIcon />}
+                {props.sport === 'bowling' && <BowlingBallIcon />}
+                {props.sport === 'tableTennis' && <TableTennisBatIcon />}
+                {props.sport === 'basketball' && <BasketballIcon />}
+                {props.sport === 'football' && <FootballIcon />}
+                {props.sport === 'petong' && <FootballIcon />}
+                {props.sport === 'volleyball' && <VolleyballIcon />}
+            </div>
+            <p className="text-3xl font-bold">{props.children}</p>
+        </div >
+    );
+}
 
 export default SportBadge;

@@ -29,10 +29,6 @@ const url = [
   {
     name: "กฏระเบียบ/PDPA",
     href: "/pdpa",
-  },
-  {
-    name: "ตารางการแข่งขัน",
-    href: "/schedule",
   }
 ];
 
