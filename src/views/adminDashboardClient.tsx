@@ -1,25 +1,19 @@
-"use client";
+'use client';
 
-import { useState, useMemo, useEffect } from "react";
-import Link from "next/link";
-import { format, parseISO } from "date-fns";
-import { useQuery } from "@tanstack/react-query";
-import { Session } from "next-auth";
+import { useState, useMemo, useEffect } from 'react';
+import Link from 'next/link';
+import { format, parseISO } from 'date-fns';
+import { useQuery } from '@tanstack/react-query';
+import { Session } from 'next-auth';
 
-import { Button } from "@heroui/react";
-import { Card, CardBody } from "@heroui/react";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerBody,
-  useDisclosure,
-} from "@heroui/react";
-import { ArrowLeft, CalendarIcon } from "lucide-react";
+import { Button } from '@heroui/react';
+import { Card, CardBody } from '@heroui/react';
+import { Drawer, DrawerContent, DrawerHeader, DrawerBody, useDisclosure } from '@heroui/react';
+import { ArrowLeft, CalendarIcon } from 'lucide-react';
 
-import MatchesTable from "@/components/matchesTable";
+import MatchesTable from '@/components/matchesTable';
 
-import { Schedule } from "@/queries/schedule/type";
+import { Schedule } from '@/queries/schedule/type';
 import { getAllSchedule } from '@/queries/schedule/query';
 
 type Props = Readonly<{
@@ -27,15 +21,13 @@ type Props = Readonly<{
 }>;
 
 export default function AdminDashboardClient({ session }: Props) {
-  const [selectedDate, setSelectedDate] = useState<string>(
-    format(new Date(), "yyyy-MM-dd")
-  );
+  const [selectedDate, setSelectedDate] = useState<string>(format(new Date(), 'yyyy-MM-dd'));
   const [displayMatches, setDisplayMatches] = useState<Schedule[]>([]);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { data } = useQuery<Schedule[]>({
-    queryKey: ["getAllSchedule"],
+    queryKey: ['getAllSchedule'],
     queryFn: () => getAllSchedule(session?.accessToken as string),
-  })
+  });
 
   const handleDateChange = (date: string) => {
     setSelectedDate(date);
@@ -48,7 +40,7 @@ export default function AdminDashboardClient({ session }: Props) {
     return data
       .map((match) => match.startDatetime)
       .reduce((acc: string[], date) => {
-        const formattedDate = format(date, "yyyy-MM-dd");
+        const formattedDate = format(date, 'yyyy-MM-dd');
         if (!acc.includes(formattedDate)) {
           acc.push(formattedDate);
         }
@@ -57,11 +49,7 @@ export default function AdminDashboardClient({ session }: Props) {
   }, [data]);
 
   useEffect(() => {
-    setDisplayMatches(
-      data?.filter(
-        (match) => format(match.startDatetime, "yyyy-MM-dd") === selectedDate
-      ) || []
-    );
+    setDisplayMatches(data?.filter((match) => format(match.startDatetime, 'yyyy-MM-dd') === selectedDate) || []);
   }, [data, selectedDate]);
 
   return (
@@ -80,13 +68,13 @@ export default function AdminDashboardClient({ session }: Props) {
                 variant="solid"
                 className={
                   selectedDate === date
-                    ? "w-full justify-center text-xl bg-secondw"
-                    : "w-full justify-center text-xl bg-firsto text-secondw"
+                    ? 'w-full justify-center text-xl bg-secondw'
+                    : 'w-full justify-center text-xl bg-firsto text-secondw'
                 }
                 onPress={() => handleDateChange(date)}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {format(parseISO(date), "MMMM d, yyyy")}
+                {format(parseISO(date), 'MMMM d, yyyy')}
               </Button>
             </li>
           ))}
@@ -97,9 +85,7 @@ export default function AdminDashboardClient({ session }: Props) {
       <main className="flex-1 p-6 w-full relative">
         <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
 
-        <h2 className="text-2xl font-bold mb-4">
-          รายการแข่งวันที่ : {format(parseISO(selectedDate), "MMMM d, yyyy")}
-        </h2>
+        <h2 className="text-2xl font-bold mb-4">รายการแข่งวันที่ : {format(parseISO(selectedDate), 'MMMM d, yyyy')}</h2>
         <Button
           onPress={() => onOpen()}
           className="border-firsto text-xl border-1 rounded-md text-white bg-firsto px-5 py-2 mb-4 md:hidden"
@@ -108,7 +94,7 @@ export default function AdminDashboardClient({ session }: Props) {
         </Button>
 
         {displayMatches.length > 0 ? (
-          <MatchesTable data={displayMatches} option={{date: false}} />
+          <MatchesTable data={displayMatches} option={{ date: false, editable: true }} />
         ) : (
           <Card>
             <CardBody className="flex items-center justify-center h-32">
@@ -118,11 +104,9 @@ export default function AdminDashboardClient({ session }: Props) {
         )}
       </main>
 
-      <Drawer isOpen={isOpen} placement={"bottom"} onOpenChange={onOpenChange}>
+      <Drawer isOpen={isOpen} placement={'bottom'} onOpenChange={onOpenChange}>
         <DrawerContent>
-          <DrawerHeader className="flex flex-col gap-1 font-bold text-2xl">
-            เลือกวันที่ต้องการ
-          </DrawerHeader>
+          <DrawerHeader className="flex flex-col gap-1 font-bold text-2xl">เลือกวันที่ต้องการ</DrawerHeader>
           <DrawerBody>
             <ul className="grid grid-cols-2 pb-8">
               {availableDates.map((date) => (
@@ -131,13 +115,13 @@ export default function AdminDashboardClient({ session }: Props) {
                     variant="solid"
                     className={
                       selectedDate === date
-                        ? "w-full justify-center text-xl bg-firsto text-secondw"
-                        : "w-full justify-center text-xl bg-secondw"
+                        ? 'w-full justify-center text-xl bg-firsto text-secondw'
+                        : 'w-full justify-center text-xl bg-secondw'
                     }
                     onPress={() => handleDateChange(date)}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {format(parseISO(date), "MMMM d, yyyy")}
+                    {format(parseISO(date), 'MMMM d, yyyy')}
                   </Button>
                 </li>
               ))}

@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import toast from 'react-hot-toast';
+import { Session } from 'next-auth';
 
 const otherSportsMatches = [
   { id: '1', name: 'Match 1' },
@@ -79,8 +80,6 @@ function AthleticsForm({ onSubmit }: AthleticsFormProps) {
     name: 'players',
   });
 
-  const selectedMatch = athleticsMatches.find((match) => match.id === form.watch('matchId'));
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -136,7 +135,9 @@ function AthleticsForm({ onSubmit }: AthleticsFormProps) {
             )}
           />
         ))}
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="text-secondw bg-firsto w-full">
+          Submit
+        </Button>
       </form>
     </Form>
   );
@@ -144,9 +145,10 @@ function AthleticsForm({ onSubmit }: AthleticsFormProps) {
 
 interface OtherSportsFormProps {
   onSubmit: SubmitHandler<OtherSportsFormData>;
+  session: Session | null;
 }
 
-function OtherSportsForm({ onSubmit }: OtherSportsFormProps) {
+function OtherSportsForm({ onSubmit, session }: OtherSportsFormProps) {
   const form = useForm<OtherSportsFormData>({
     resolver: zodResolver(otherSportsSchema),
     defaultValues: {
@@ -189,7 +191,7 @@ function OtherSportsForm({ onSubmit }: OtherSportsFormProps) {
           name="homeTeamScore"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Home Team Score</FormLabel>
+              <FormLabel></FormLabel>
               <FormControl>
                 <Input type="number" {...field} />
               </FormControl>
@@ -210,13 +212,15 @@ function OtherSportsForm({ onSubmit }: OtherSportsFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="text-secondw bg-firsto w-full">
+          Submit
+        </Button>
       </form>
     </Form>
   );
 }
 
-export default function AddResultForm() {
+export default function AddResultForm({ session }: { session: Session | null }) {
   const [selectedSport, setSelectedSport] = useState<'athletics' | 'other'>('other');
   const router = useRouter();
 
@@ -227,27 +231,29 @@ export default function AddResultForm() {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Add Result</CardTitle>
-        <CardDescription>Select sport and fill in the details</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Select value={selectedSport} onValueChange={(value) => setSelectedSport(value as 'athletics' | 'other')}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select Sport" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="athletics">Athletics</SelectItem>
-            <SelectItem value="other">Other</SelectItem>
-          </SelectContent>
-        </Select>
-        {selectedSport === 'athletics' ? (
-          <AthleticsForm onSubmit={handleFormSubmit} />
-        ) : (
-          <OtherSportsForm onSubmit={handleFormSubmit} />
-        )}
-      </CardContent>
-    </Card>
+    <div className="min-h-screen bg-white flex flex-col px-24 py-24 justify-items-center items-center text-4xl">
+      <Card className="w-1/2">
+        <CardHeader>
+          <CardTitle>เพิ่มผลการแข่งขัน</CardTitle>
+          <CardDescription>เลือกกีฬาและกรอกรายละเอียด</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Select value={selectedSport} onValueChange={(value) => setSelectedSport(value as 'athletics' | 'other')}>
+            <SelectTrigger>
+              <SelectValue placeholder="เลือกกีฬา" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="athletics">กรีฑา</SelectItem>
+              <SelectItem value="other">อื่นๆ</SelectItem>
+            </SelectContent>
+          </Select>
+          {selectedSport === 'athletics' ? (
+            <AthleticsForm onSubmit={handleFormSubmit} />
+          ) : (
+            <OtherSportsForm onSubmit={handleFormSubmit} session={session} />
+          )}
+        </CardContent>
+      </Card>
+    </div>
   );
 }
