@@ -76,12 +76,14 @@ export default function MatchesTable({ data, option }: MatchesTableProps) {
         case 'team':
           return Array.from(new Set(match.players.map((player) => player.user.college))).join(' VS ');
         case 'result':
-          // return match.result ? match.result : '-';
-          // return match.result ? JSON.stringify(match.result) : '-';
           return match.sport.category === 'กรีฑา'
             ? 'เดี๋ยวมาบอก รอแปป'
-            : match.result['data'].scoreA + ' - ' + match.result['data'].scoreB;
-        // return match.result.scoreA + ' - ' + match.result.scoreB;
+            : match.result
+            ? Array.isArray(match.result.data)
+              ? 'ยังไม่มีผลการแข่งขัน'
+              : `${match.result.data.teamA} ${match.result.data.scoreA} - ${match.result.data.scoreB} ${match.result.data.teamB}`
+            : 'ยังไม่มีผลการแข่งขัน';
+        // return '-';
         case 'players':
           return <MatchesDetail players={match.players} />;
         case 'editable':

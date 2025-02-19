@@ -4,7 +4,7 @@ export type Schedule = {
     id: string;
     startDatetime: Date;
     endDatetime: Date;
-    // result: Object;
+    result: EventData | AthleticsData;
     sport: {
         name: string;
         category: string;
@@ -16,7 +16,7 @@ export type Schedule = {
     }[];
 }
 
-type EventData = {
+export type EventData = {
     data: {
         scoreA: number;
         scoreB: number;
@@ -26,7 +26,7 @@ type EventData = {
     type: string;
 }
 
-type AtleticsData = {
+export type AthleticsData = {
     data: {
         userId: string;
         time: number;

@@ -12,9 +12,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useFieldArray, SubmitHandler } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import toast from 'react-hot-toast';
+// import { Schedule, } from '@/queries/schedule/type';
 
 // import { User } from "@/queries/user/type";
-import { Schedule } from '@/queries/schedule/type';
+import { Schedule, AthleticsData, EventData } from '@/queries/schedule/type';
 
 const matchesSchema = z.object({
   matchId: z.string().min(1, 'Match ID is required'),
@@ -40,12 +41,16 @@ type AthleticsFormData = z.infer<typeof athleticsSchema>;
 type OtherSportsFormData = z.infer<typeof matchesSchema>;
 
 interface AthleticsFormProps {
-  match: Schedule;
+  match: Schedule & {
+    result: AthleticsData;
+  };
   onSubmit: SubmitHandler<AthleticsFormData>;
 }
 
 interface OtherSportsFormProps {
-  match: Schedule;
+  match: Schedule & {
+    result: EventData;
+  };
   onSubmit: SubmitHandler<OtherSportsFormData>;
 }
 
@@ -58,7 +63,7 @@ function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
       matchId: match.id,
       players: match.players.map((player, index) => ({
         playerID: player.user.id,
-        time: match.result['data'][index].time, // Use existing time if available, otherwise default to 99
+        time: match.result?.data[index]?.time ?? 0,
       })),
     },
   });
@@ -103,8 +108,8 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
     resolver: zodResolver(matchesSchema),
     defaultValues: {
       matchId: match.id,
-      scoreA: match.result['data'].scoreA,
-      scoreB: match.result['data'].scoreB,
+      scoreA: match.result?.data?.scoreA ?? 0,
+      scoreB: match.result?.data?.scoreB ?? 0,
     },
   });
 
@@ -145,7 +150,7 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
 
 export default function MatchesResultForm({ match }: MatchesResultProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleFormSubmit: SubmitHandler<AthleticsFormData | OtherSportsFormData> = (data) => {
     toast.success('Form submitted successfully!');
@@ -164,9 +169,9 @@ export default function MatchesResultForm({ match }: MatchesResultProps) {
           <ModalBody className="flex flex-col justify-center gap-4 text-2xl max-h-[70vh]">
             <div className="overflow-y-auto">
               {match.sport.category === 'กรีฑา' ? (
-                <AthleticsForm onSubmit={handleFormSubmit} match={match} />
+                <AthleticsForm onSubmit={handleFormSubmit} match={match as Schedule & { result: AthleticsData }} />
               ) : (
-                <OtherSportForm onSubmit={handleFormSubmit} match={match} />
+                <OtherSportForm onSubmit={handleFormSubmit} match={match as Schedule & { result: EventData }} />
               )}
             </div>
           </ModalBody>
