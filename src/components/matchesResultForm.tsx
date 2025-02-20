@@ -1,12 +1,8 @@
 import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, ModalFooter, Chip } from '@heroui/react';
 import { Button } from '@heroui/button';
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@heroui/react';
-import { Card, CardBody } from '@heroui/react';
-import { Tabs, Tab } from '@heroui/react';
 import { z } from 'zod';
 // import { format } from 'date-fns';
 // import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useFieldArray, SubmitHandler } from 'react-hook-form';
@@ -93,7 +89,7 @@ function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
             )}
           />
         ))}
-        <Button type="submit" className="text-secondw bg-firsto w-full my-5">
+        <Button type="submit" className="text-secondw bg-firsto w-full my-5 text-2xl">
           Submit
         </Button>
       </form>
@@ -140,7 +136,7 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="text-secondw bg-firsto w-full">
+        <Button type="submit" className="text-secondw bg-firsto w-full text-2xl my-5">
           Submit
         </Button>
       </form>
