@@ -83,7 +83,7 @@ function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
                   {match.players[index].user.firstname_th} {match.players[index].user.lastname_th}
                 </FormLabel>
                 <FormControl>
-                  <Input {...field} className="text-2xl" />
+                  <Input type="number" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
                 </FormControl>
               </FormItem>
             )}
@@ -119,7 +119,7 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
             <FormItem>
               <FormLabel>{Array.from(new Set(match.players.map((player) => player.user.college)))[0]}</FormLabel>
               <FormControl>
-                <Input type="number" {...field} />
+                <Input type="number" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
               </FormControl>
             </FormItem>
           )}
@@ -131,7 +131,7 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
             <FormItem>
               <FormLabel>{Array.from(new Set(match.players.map((player) => player.user.college)))[1]}</FormLabel>
               <FormControl>
-                <Input type="number" {...field} />
+                <Input type="number" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
               </FormControl>
             </FormItem>
           )}
