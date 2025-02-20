@@ -97,7 +97,7 @@ function MedalFormFunction({ onSubmit }: MedalFormProps) {
             <FormItem>
               <FormLabel>Gold Medals</FormLabel>
               <FormControl>
-                <Input type="string" {...field} />
+                <Input type="number" value={field.value} onChange={(e) => field.onChange(Number(e.target.value))} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -110,7 +110,7 @@ function MedalFormFunction({ onSubmit }: MedalFormProps) {
             <FormItem>
               <FormLabel>Silver Medals</FormLabel>
               <FormControl>
-                <Input type="string" {...field} />
+                <Input type="number" value={field.value} onChange={(e) => field.onChange(Number(e.target.value))} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -123,7 +123,7 @@ function MedalFormFunction({ onSubmit }: MedalFormProps) {
             <FormItem>
               <FormLabel>Bronze Medals</FormLabel>
               <FormControl>
-                <Input type="string" {...field} />
+                <Input type="number" value={field.value} onChange={(e) => field.onChange(Number(e.target.value))} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -137,7 +137,6 @@ function MedalFormFunction({ onSubmit }: MedalFormProps) {
 
 export default function MedalForm() {
   const [medals, setMedals] = useState<Record<string, Medals>>(allScores);
-  const router = useRouter();
 
   const handleFormSubmit: SubmitHandler<MedalFormData> = (data) => {
     setMedals((prevMedals) => ({
