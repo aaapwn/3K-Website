@@ -9,13 +9,12 @@ async function getData() {
 
 const Page = async () => {
     const sportData = (await getData()).sports;
-    console.log(sportData);
     return (
         <div className="min-h-screen pb-10">
             <div className="w-full flex flex-row justify-between items-center relative p-10 bg-firsto">
                 <p className='text-6xl font-bold text-secondw'>รายการกีฬา</p>
             </div>
-            <SportPage sportData={data.sports} />
+            <SportPage sportData={sportData} />
         </div>
     );
 };

@@ -6,6 +6,7 @@ import MatchesDetail from '@/components/matchesDetail';
 import { Schedule } from '@/queries/schedule/type';
 import { format } from 'date-fns';
 import MatchesResultForm from './matchesResultForm';
+import TrackingModalResult from './trackingResultModal';
 
 interface DisplayOption {
   date: boolean;
@@ -32,6 +33,7 @@ const defaultDisplayOption: DisplayOption = {
 interface MatchesTableProps {
   data: Schedule[];
   option?: Partial<DisplayOption>;
+  playerStatus?: boolean;
 }
 
 const column = [
@@ -44,6 +46,7 @@ const column = [
   { key: 'players', label: 'รายชื่อผู้เข้าแข่งขัน' },
   { key: 'editable', label: 'แก้ไขผลการแข่งขัน' },
 ];
+
 
 export default function MatchesTable({ data, option }: MatchesTableProps) {
   const displayColumn = column.filter(
@@ -77,7 +80,7 @@ export default function MatchesTable({ data, option }: MatchesTableProps) {
           return Array.from(new Set(match.players.map((player) => player.user.college))).join(' VS ');
         case 'result':
           return match.sport.category === 'กรีฑา'
-            ? 'เดี๋ยวมาบอก รอแปป'
+            ? match.result?.type === 'Track' ? <TrackingModalResult data={match.result.data} /> : !match.result ? '-' : <p className='text-green-600 font-bold'>{`${match.result?.data.teamA} ${match.result?.data.scoreA} - ${match.result?.data.scoreB} ${match.result?.data.teamB}`}</p>;
             : match.result
             ? Array.isArray(match.result.data)
               ? 'ยังไม่มีผลการแข่งขัน'

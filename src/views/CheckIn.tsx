@@ -44,7 +44,7 @@ const CheckIn = ({ session }: ScanQRProps) => {
         const apiError = error as APIError;
         toast.error(apiError.message, { id });
     }
-    
+
     onClose();
     setUserData(undefined);
     setSelectSchedule('');
@@ -135,20 +135,20 @@ const CheckIn = ({ session }: ScanQRProps) => {
                         classNames={{
                             label: "text-base",
                             value: "text-2xl",
-                            
+
                         }}
                         onChange={(e) => setSelectSchedule(e.target.value)}
                     >
                         {
                            userData?.sportEvents ? (
                                  userData?.sportEvents.map((sportEvent) => (
-                                      <SelectItem value={sportEvent.id} key={sportEvent.id}>
-                                        {sportEvent.Sport.name}
-                                      </SelectItem>
+                                    <SelectItem value={sportEvent.id} key={sportEvent.id}>
+                                      {`${sportEvent.Sport.category}(${sportEvent.Sport.name})`} - {`${sportEvent.startDatetime.toLocaleDateString("th-TH")}(${sportEvent.startDatetime.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })})`}
+                                    </SelectItem>
                                  ))
                             ) : (
                                  <SelectItem value="">ไม่พบข้อมูล</SelectItem>
-                           ) 
+                           )
                         }
                     </Select>
                   </div>
