@@ -38,21 +38,3 @@ export type Schedule = {
         isCheckin: boolean;
     }[];
 }
-
-export type EventData = {
-    data: {
-        scoreA: number;
-        scoreB: number;
-        teamA: string;
-        teamB: string;
-    }
-    type: string;
-}
-
-export type AthleticsData = {
-    data: {
-        userId: string;
-        time: number;
-    }[]
-    type: string;
-}
