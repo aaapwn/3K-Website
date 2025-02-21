@@ -54,23 +54,26 @@ const CheckIn = ({ session }: ScanQRProps) => {
     if (result.data === tempData) return;
     tempData = result.data;
 
-    const data = await getUserSchedule(
-      session?.accessToken as string,
-      result.data
-    );
-
-    if (data) {
-        onOpen();
-        setUserData(data);
-    } else {
-        toast.error("ไม่พบข้อมูลผู้ใช้", { id: "error" });
+    try {
+      const data = await getUserSchedule(
+        session?.accessToken as string,
+        result.data
+      );
+      if (!data) {
+        toast.error("ไม่พบข้อมูลผู้เข้าแข่งขัน");
+        return;
+      }
+      setUserData(data);
+      onOpen();
+    } catch (error:unknown) {
+      const apiError = error as APIError;
+      toast.error(apiError.message);
     }
-
   };
 
   // Fail
   const onScanFail = (err: string | Error) => {
-    console.log(err);
+    console.log("aaa", err);
     tempData = "";
   };
 
