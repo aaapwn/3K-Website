@@ -24,6 +24,7 @@ import {
 import toast from "react-hot-toast";
 
 import { Schedule, TrackResult, MatchResult } from "@/queries/schedule/type";
+import { postScheduleResult } from "@/queries/schedule/query";
 
 const matchesSchema = z.object({
   matchId: z.string().min(1, "Match ID is required"),
@@ -59,8 +60,6 @@ interface OtherSportsFormProps {
 }
 
 function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
-  const originalResult = match.result;
-  console.log(originalResult);
   const form = useForm<AthleticsFormData>({
     resolver: zodResolver(athleticsSchema),
     defaultValues: {
@@ -115,8 +114,6 @@ function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
 }
 
 function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
-  const originalResult = match.result;
-  console.log(originalResult);
   const form = useForm<OtherSportsFormData>({
     resolver: zodResolver(matchesSchema),
     defaultValues: {
@@ -194,9 +191,7 @@ export default function MatchesResultForm({ match }: MatchesResultProps) {
     AthleticsFormData | OtherSportsFormData
   > = (data) => {
     toast.success("Form submitted successfully!");
-    console.log(data);
-    // push data to database
-    // router.push('/admin/dashboard');
+    postScheduleResult(match.id, match.id, data);
   };
 
   return (

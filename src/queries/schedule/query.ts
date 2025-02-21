@@ -47,4 +47,10 @@ export const checkInUser = (token:string, qr_key:string, schedule_id: string) =>
     });
 }
 
-
+export const postScheduleResult = (token:string, schedule_id: string, result: any) => {
+    return axiosClient.post(`/schedule/${schedule_id}/result`, result, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+}
