@@ -1,28 +1,42 @@
-import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, ModalFooter, Chip } from '@heroui/react';
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  useDisclosure,
+  ModalFooter,
+  Chip,
+} from "@heroui/react";
 
-import { Button } from '@heroui/button';
-import { z } from 'zod';
+import { Button } from "@heroui/button";
+import { z } from "zod";
 
-import { Input } from '@/components/ui/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, useFieldArray, SubmitHandler } from 'react-hook-form';
-import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
-import toast from 'react-hot-toast';
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, useFieldArray, SubmitHandler } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
+import toast from "react-hot-toast";
 
-import { Schedule, AthleticsData, EventData } from '@/queries/schedule/type';
+import { Schedule, TrackResult, MatchResult } from "@/queries/schedule/type";
 
 const matchesSchema = z.object({
-  matchId: z.string().min(1, 'Match ID is required'),
-  scoreA: z.number().min(0, 'Score must be 0 or higher'),
-  scoreB: z.number().min(0, 'Score must be 0 or higher'),
+  matchId: z.string().min(1, "Match ID is required"),
+  scoreA: z.number().min(0, "Score must be 0 or higher"),
+  scoreB: z.number().min(0, "Score must be 0 or higher"),
 });
 
 const athleticsSchema = z.object({
-  matchId: z.string().min(1, 'Match ID is required'),
+  matchId: z.string().min(1, "Match ID is required"),
   players: z.array(
     z.object({
       playerID: z.string(),
-      time: z.number().min(0, 'Finish time must be 0 or higher'),
+      time: z.number().min(0, "Finish time must be 0 or higher"),
     })
   ),
 });
@@ -35,16 +49,12 @@ type AthleticsFormData = z.infer<typeof athleticsSchema>;
 type OtherSportsFormData = z.infer<typeof matchesSchema>;
 
 interface AthleticsFormProps {
-  match: Schedule & {
-    result: AthleticsData;
-  };
+  match: Schedule;
   onSubmit: SubmitHandler<AthleticsFormData>;
 }
 
 interface OtherSportsFormProps {
-  match: Schedule & {
-    result: EventData;
-  };
+  match: Schedule;
   onSubmit: SubmitHandler<OtherSportsFormData>;
 }
 
@@ -57,14 +67,14 @@ function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
       matchId: match.id,
       players: match.players.map((player, index) => ({
         playerID: player.user.id,
-        time: match.result?.data[index]?.time ?? 0,
+        time: (match.result?.data as TrackResult[])[index]?.time ?? 0,
       })),
     },
   });
 
   const { fields } = useFieldArray({
     control: form.control,
-    name: 'players',
+    name: "players",
   });
 
   return (
@@ -78,7 +88,8 @@ function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-2xl">
-                  {match.players[index].user.firstname_th} {match.players[index].user.lastname_th}
+                  {match.players[index].user.firstname_th}{" "}
+                  {match.players[index].user.lastname_th}
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -92,7 +103,10 @@ function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
             )}
           />
         ))}
-        <Button type="submit" className="text-secondw bg-firsto w-full my-5 text-2xl">
+        <Button
+          type="submit"
+          className="text-secondw bg-firsto w-full my-5 text-2xl"
+        >
           Submit
         </Button>
       </form>
@@ -107,8 +121,8 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
     resolver: zodResolver(matchesSchema),
     defaultValues: {
       matchId: match.id,
-      scoreA: match.result?.data?.scoreA ?? 0,
-      scoreB: match.result?.data?.scoreB ?? 0,
+      scoreA: (match.result?.data as MatchResult)?.scoreA ?? 0,
+      scoreB: (match.result?.data as MatchResult)?.scoreB ?? 0,
     },
   });
 
@@ -121,7 +135,11 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="custom-input">
-                {Array.from(new Set(match.players.map((player) => player.user.college)))[0]}
+                {
+                  Array.from(
+                    new Set(match.players.map((player) => player.user.college))
+                  )[0]
+                }
               </FormLabel>
               <FormControl>
                 <Input
@@ -140,7 +158,11 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="custom-input">
-                {Array.from(new Set(match.players.map((player) => player.user.college)))[1]}
+                {
+                  Array.from(
+                    new Set(match.players.map((player) => player.user.college))
+                  )[1]
+                }
               </FormLabel>
               <FormControl>
                 <Input
@@ -153,7 +175,10 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="text-secondw bg-firsto w-full text-2xl my-5">
+        <Button
+          type="submit"
+          className="text-secondw bg-firsto w-full text-2xl my-5"
+        >
           Submit
         </Button>
       </form>
@@ -165,8 +190,10 @@ export default function MatchesResultForm({ match }: MatchesResultProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   // const router = useRouter();
 
-  const handleFormSubmit: SubmitHandler<AthleticsFormData | OtherSportsFormData> = (data) => {
-    toast.success('Form submitted successfully!');
+  const handleFormSubmit: SubmitHandler<
+    AthleticsFormData | OtherSportsFormData
+  > = (data) => {
+    toast.success("Form submitted successfully!");
     console.log(data);
     // push data to database
     // router.push('/admin/dashboard');
@@ -181,10 +208,16 @@ export default function MatchesResultForm({ match }: MatchesResultProps) {
           </ModalHeader>
           <ModalBody className="flex flex-col justify-center gap-4 text-2xl max-h-[70vh]">
             <div className="overflow-y-auto">
-              {match.sport.category === 'กรีฑา' ? (
-                <AthleticsForm onSubmit={handleFormSubmit} match={match as Schedule & { result: AthleticsData }} />
+              {match.sport.category === "กรีฑา" ? (
+                <AthleticsForm
+                  onSubmit={handleFormSubmit}
+                  match={match as Schedule}
+                />
               ) : (
-                <OtherSportForm onSubmit={handleFormSubmit} match={match as Schedule & { result: EventData }} />
+                <OtherSportForm
+                  onSubmit={handleFormSubmit}
+                  match={match as Schedule}
+                />
               )}
             </div>
           </ModalBody>

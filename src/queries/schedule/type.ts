@@ -27,7 +27,7 @@ export type Schedule = {
     id: string;
     startDatetime: Date;
     endDatetime: Date;
-    result: EventData | AthleticsData;
+    result: EventResult | null;
     sport: {
         name: string;
         category: string;
