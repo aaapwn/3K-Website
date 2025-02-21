@@ -5,6 +5,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 import MatchesDetail from '@/components/matchesDetail';
 import { Schedule } from '@/queries/schedule/type';
 import { format } from 'date-fns';
+import MatchesResultForm from './matchesResultForm';
 import TrackingModalResult from './trackingResultModal';
 
 interface DisplayOption {
@@ -15,6 +16,7 @@ interface DisplayOption {
   team: boolean;
   result: boolean;
   players: boolean;
+  editable: boolean;
 }
 
 const defaultDisplayOption: DisplayOption = {
@@ -25,6 +27,7 @@ const defaultDisplayOption: DisplayOption = {
   team: true,
   result: true,
   players: true,
+  editable: false,
 };
 
 interface MatchesTableProps {
@@ -41,10 +44,14 @@ const column = [
   { key: 'team', label: 'ทีม' },
   { key: 'result', label: 'ผลการแข่งขัน' },
   { key: 'players', label: 'รายชื่อผู้เข้าแข่งขัน' },
-]
+  { key: 'editable', label: 'แก้ไขผลการแข่งขัน' },
+];
 
-export default function MatchesTable({ data, option, playerStatus = true }: MatchesTableProps) {
-  const displayColumn = column.filter((col) => option?.[col.key as keyof DisplayOption] ?? defaultDisplayOption[col.key as keyof DisplayOption]);
+
+export default function MatchesTable({ data, option }: MatchesTableProps) {
+  const displayColumn = column.filter(
+    (col) => option?.[col.key as keyof DisplayOption] ?? defaultDisplayOption[col.key as keyof DisplayOption]
+  );
 
   const getDisplayRow = (match: Schedule) => {
     return displayColumn.map((key) => {
@@ -52,10 +59,13 @@ export default function MatchesTable({ data, option, playerStatus = true }: Matc
         case 'date':
           return format(match.startDatetime, 'dd/MM/yyyy');
         case 'time':
-          return `${match.startDatetime.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })} - ${match.endDatetime.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })}`;
+          return `${match.startDatetime.toLocaleTimeString('th-TH', {
+            hour: '2-digit',
+            minute: '2-digit',
+          })} - ${match.endDatetime.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })}`;
         case 'sport':
           return (
-            <div className='flex gap-x-1'>
+            <div className="flex gap-x-1">
               <Chip variant="bordered" className="bg-firsto/10 text-firsto border-firsto text-lg">
                 {match.sport.category}
               </Chip>
@@ -69,17 +79,26 @@ export default function MatchesTable({ data, option, playerStatus = true }: Matc
         case 'team':
           return Array.from(new Set(match.players.map((player) => player.user.college))).join(' VS ');
         case 'result':
-          return match.result?.type === 'Track' ? <TrackingModalResult data={match.result.data} /> : !match.result ? '-' : <p className='text-green-600 font-bold'>{`${match.result?.data.teamA} ${match.result?.data.scoreA} - ${match.result?.data.scoreB} ${match.result?.data.teamB}`}</p>;
+          return match.sport.category === 'กรีฑา'
+            ? match.result?.type === 'Track' ? <TrackingModalResult data={match.result.data} /> : !match.result ? '-' : <p className='text-green-600 font-bold'>{`${match.result?.data.teamA} ${match.result?.data.scoreA} - ${match.result?.data.scoreB} ${match.result?.data.teamB}`}</p>;
+            : match.result
+            ? Array.isArray(match.result.data)
+              ? 'ยังไม่มีผลการแข่งขัน'
+              : `${match.result.data.teamA} ${match.result.data.scoreA} - ${match.result.data.scoreB} ${match.result.data.teamB}`
+            : 'ยังไม่มีผลการแข่งขัน';
+        // return '-';
         case 'players':
-          return <MatchesDetail players={match.players} option={{status: playerStatus}} />;
+          return <MatchesDetail players={match.players} />;
+        case 'editable':
+          return <MatchesResultForm match={match} />;
         default:
           return null;
       }
     });
-  }
+  };
   return (
     <>
-      <Table>
+      <Table className="w-full">
         <TableHeader>
           {displayColumn.map((key) => (
             <TableColumn key={key.key} className="text-2xl">
@@ -91,7 +110,9 @@ export default function MatchesTable({ data, option, playerStatus = true }: Matc
           {data.map((match) => (
             <TableRow key={match.id}>
               {getDisplayRow(match).map((cell, i) => (
-                <TableCell key={i} className='text-xl'>{cell}</TableCell>
+                <TableCell key={i} className="text-xl">
+                  {cell}
+                </TableCell>
               ))}
             </TableRow>
           ))}
