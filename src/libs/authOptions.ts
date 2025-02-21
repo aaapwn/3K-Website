@@ -11,7 +11,6 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async signIn({ account }) {
-      console.log(process.env.GOOGLE_CLIENT_ID)
       try {
         await axios.post(`${process.env.SERVER_API_URL}/auth/google-login`, {
           token: account?.id_token,
@@ -52,4 +51,5 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
+  debug: true,
 };
