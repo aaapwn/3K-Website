@@ -38,3 +38,12 @@ export const registerUser = (token:string, qr_key:string): Promise<User> => {
     }).then((res) => res.data);
     return res;
 }
+
+export const getAllUsers = (token:string): Promise<User[]> => {
+    const res = axiosClient.get("/user", {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }).then((res) => res.data);
+    return res;
+}

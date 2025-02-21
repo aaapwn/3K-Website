@@ -6,15 +6,21 @@ import {
   useDisclosure,
   ModalFooter,
   Chip,
-  CardHeader,
-} from '@heroui/react';
-import { Button } from '@heroui/button';
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@heroui/react';
-import { Card, CardBody } from '@heroui/react';
-import { useState } from 'react';
+} from "@heroui/react";
+import { Button } from "@heroui/button";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "@heroui/react";
+import { Card, CardBody } from "@heroui/react";
+import { useState } from "react";
 // import { Tabs, Tab } from '@heroui/react';
 
-import { User } from '@/queries/user/type';
+import { User } from "@/queries/user/type";
 
 type DisplayOption = {
   index: boolean;
@@ -39,19 +45,23 @@ type MatchesDetailProps = {
 };
 
 const column = [
-  { key: 'index', label: 'ลำดับ' },
-  { key: 'studentId', label: 'รหัสนักศึกษา' },
-  { key: 'name', label: 'ชื่อ' },
-  { key: 'status', label: 'สถานะ' },
+  { key: "index", label: "ลำดับ" },
+  { key: "studentId", label: "รหัสนักศึกษา" },
+  { key: "name", label: "ชื่อ" },
+  { key: "status", label: "สถานะ" },
 ];
 
 export default function MatchesDetail({ players, option }: MatchesDetailProps) {
   const displayColumn = column.filter(
-    (col) => option?.[col.key as keyof DisplayOption] ?? defaultDisplayOption[col.key as keyof DisplayOption]
+    (col) =>
+      option?.[col.key as keyof DisplayOption] ??
+      defaultDisplayOption[col.key as keyof DisplayOption]
   );
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const college = Array.from(new Set(players.map((player) => player.user.college)));
+  const college = Array.from(
+    new Set(players.map((player) => player.user.college))
+  );
 
   const [selectedCollege, setSelectedCollege] = useState<string>(college[0]);
 
@@ -61,16 +71,19 @@ export default function MatchesDetail({ players, option }: MatchesDetailProps) {
     onOpen();
   };
 
-  const getDisplayRow = (player: { user: User; isCheckin: boolean }, index: number) => {
+  const getDisplayRow = (
+    player: { user: User; isCheckin: boolean },
+    index: number
+  ) => {
     return displayColumn.map((key) => {
       switch (key.key) {
-        case 'index':
+        case "index":
           return index + 1;
-        case 'studentId':
+        case "studentId":
           return player.user.studentId;
-        case 'name':
+        case "name":
           return `${player.user.prefix_th}${player.user.firstname_th} ${player.user.lastname_th}`;
-        case 'status':
+        case "status":
           return player.isCheckin ? (
             <Chip className="bg-green-500 text-secondw">ลงทะเบียนแล้ว</Chip>
           ) : (
@@ -79,59 +92,59 @@ export default function MatchesDetail({ players, option }: MatchesDetailProps) {
             </Chip>
           );
         default:
-          return '';
+          return "";
       }
     });
   };
 
   return (
     <>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center" className="hello there">
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="center"
+        className="hello there"
+      >
         <ModalContent className="max-w-6xl">
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-2">
-                <h1 className="text-4xl">รายชื่อผู้เข้าแข่งขัน</h1>
-                <h1 className="text-2xl">{selectedCollege}</h1>
-                <h2 className="text-xl" >
-                  {/* mathces detail */}
-                  
-                </h2>
-              </ModalHeader>
+          <ModalHeader className="flex flex-col gap-2">
+            <h1 className="text-4xl">รายชื่อผู้เข้าแข่งขัน</h1>
+            <h1 className="text-2xl">{selectedCollege}</h1>
+            <h2 className="text-xl">{/* mathces detail */}</h2>
+          </ModalHeader>
 
-              <ModalBody className="flex flex-col justify-center gap-4 text-2xl max-h-[70vh]">
-                <div className="overflow-y-auto">
-                  <Card key={selectedCollege}>
-                    <CardBody>
-                      <Table>
-                        <TableHeader>
-                          {displayColumn.map((col) => (
-                            <TableColumn key={col.key} className="text-2xl">
-                              {col.label}
-                            </TableColumn>
-                          ))}
-                        </TableHeader>
-                        <TableBody>
-                          {players
-                            .filter((player) => player.user.college === selectedCollege)
-                            .map((player, index) => (
-                              <TableRow key={index}>
-                                {getDisplayRow(player, index).map((cell, i) => (
-                                  <TableCell key={i} className="text-2xl">
-                                    {cell || 'N/A'}
-                                  </TableCell>
-                                ))}
-                              </TableRow>
+          <ModalBody className="flex flex-col justify-center gap-4 text-2xl max-h-[70vh]">
+            <div className="overflow-y-auto">
+              <Card key={selectedCollege}>
+                <CardBody>
+                  <Table>
+                    <TableHeader>
+                      {displayColumn.map((col) => (
+                        <TableColumn key={col.key} className="text-2xl">
+                          {col.label}
+                        </TableColumn>
+                      ))}
+                    </TableHeader>
+                    <TableBody>
+                      {players
+                        .filter(
+                          (player) => player.user.college === selectedCollege
+                        )
+                        .map((player, index) => (
+                          <TableRow key={index}>
+                            {getDisplayRow(player, index).map((cell, i) => (
+                              <TableCell key={i} className="text-2xl">
+                                {cell || "N/A"}
+                              </TableCell>
                             ))}
-                        </TableBody>
-                      </Table>
-                    </CardBody>
-                  </Card>
-                </div>
-              </ModalBody>
-              <ModalFooter></ModalFooter>
-            </>
-          )}
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </CardBody>
+              </Card>
+            </div>
+          </ModalBody>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
       <div className="gap-1 flex">
