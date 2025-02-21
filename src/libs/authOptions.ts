@@ -52,4 +52,5 @@ export const authOptions: AuthOptions = {
     strategy: "jwt",
   },
   debug: true,
+  useSecureCookies: process.env.NODE_ENV === "production",
 };
