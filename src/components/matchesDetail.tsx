@@ -118,7 +118,7 @@ export default function MatchesDetail({ players, option }: MatchesDetailProps) {
                               <TableRow key={index}>
                                 {getDisplayRow(player, index).map((cell, i) => (
                                   <TableCell key={i} className="text-2xl">
-                                    {cell}
+                                    {cell || 'N/A'}
                                   </TableCell>
                                 ))}
                               </TableRow>
