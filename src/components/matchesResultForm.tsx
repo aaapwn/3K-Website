@@ -1,16 +1,14 @@
 import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, ModalFooter, Chip } from '@heroui/react';
+
 import { Button } from '@heroui/button';
 import { z } from 'zod';
-// import { format } from 'date-fns';
-// import { useState } from 'react';
+
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useFieldArray, SubmitHandler } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import toast from 'react-hot-toast';
-// import { Schedule, } from '@/queries/schedule/type';
 
-// import { User } from "@/queries/user/type";
 import { Schedule, AthleticsData, EventData } from '@/queries/schedule/type';
 
 const matchesSchema = z.object({
