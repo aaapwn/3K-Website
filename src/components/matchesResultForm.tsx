@@ -83,7 +83,12 @@ function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
                   {match.players[index].user.firstname_th} {match.players[index].user.lastname_th}
                 </FormLabel>
                 <FormControl>
-                  <Input type="number" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
+                  <Input
+                    className="custom-input"
+                    type="number"
+                    {...field}
+                    onChange={(e) => field.onChange(Number(e.target.value))}
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -117,9 +122,16 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
           name="scoreA"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{Array.from(new Set(match.players.map((player) => player.user.college)))[0]}</FormLabel>
+              <FormLabel className="custom-input">
+                {Array.from(new Set(match.players.map((player) => player.user.college)))[0]}
+              </FormLabel>
               <FormControl>
-                <Input type="number" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
+                <Input
+                  className="custom-input"
+                  type="number"
+                  {...field}
+                  onChange={(e) => field.onChange(Number(e.target.value))}
+                />
               </FormControl>
             </FormItem>
           )}
@@ -129,9 +141,16 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
           name="scoreB"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{Array.from(new Set(match.players.map((player) => player.user.college)))[1]}</FormLabel>
+              <FormLabel className="custom-input">
+                {Array.from(new Set(match.players.map((player) => player.user.college)))[1]}
+              </FormLabel>
               <FormControl>
-                <Input type="number" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
+                <Input
+                  className="custom-input"
+                  type="number"
+                  {...field}
+                  onChange={(e) => field.onChange(Number(e.target.value))}
+                />
               </FormControl>
             </FormItem>
           )}
