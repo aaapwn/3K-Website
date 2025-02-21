@@ -41,7 +41,7 @@ type MatchesDetailProps = {
     user: User;
     isCheckin: boolean;
   }[];
-  option?: Partial<DisplayOption>;
+  option?: DisplayOption;
 };
 
 const column = [

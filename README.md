@@ -13,8 +13,6 @@ second, install require package and setting up
 ```bash
 pnpm install
 
-pnpm db:migrate
-
 pnpm run dev
 ```
 

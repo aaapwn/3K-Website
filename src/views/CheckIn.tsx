@@ -143,7 +143,7 @@ const CheckIn = ({ session }: ScanQRProps) => {
                            userData?.sportEvents ? (
                                  userData?.sportEvents.map((sportEvent) => (
                                       <SelectItem value={sportEvent.id} key={sportEvent.id}>
-                                        {sportEvent.Sport.name}
+                                        {`${sportEvent.Sport.category}(${sportEvent.Sport.name})`} - {`${sportEvent.startDatetime.toLocaleDateString("th-TH")}(${sportEvent.startDatetime.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })})`}
                                       </SelectItem>
                                  ))
                             ) : (
