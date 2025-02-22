@@ -7,7 +7,6 @@ import {
   ModalFooter,
   // Chip,
 } from "@heroui/react";
-
 import { Button } from "@heroui/button";
 import { z } from "zod";
 
@@ -24,6 +23,11 @@ import {
 import toast from "react-hot-toast";
 
 import { Schedule, TrackResult, MatchResult } from "@/queries/schedule/type";
+import { useMutation } from "@tanstack/react-query";
+import { createMatchResult } from "@/queries/result/qurey";
+import { CreateMatchResult } from "@/queries/result/type";
+import { useSession } from "next-auth/react";
+import { QueryClient } from "@tanstack/react-query";
 
 const matchesSchema = z.object({
   matchId: z.string().min(1, "Match ID is required"),
@@ -55,12 +59,10 @@ interface AthleticsFormProps {
 
 interface OtherSportsFormProps {
   match: Schedule;
-  onSubmit: SubmitHandler<OtherSportsFormData>;
+  onClose: () => void;
 }
 
 function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
-  const originalResult = match.result;
-  console.log(originalResult);
   const form = useForm<AthleticsFormData>({
     resolver: zodResolver(athleticsSchema),
     defaultValues: {
@@ -114,9 +116,9 @@ function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
   );
 }
 
-function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
-  const originalResult = match.result;
-  console.log(originalResult);
+function OtherSportForm({ match, onClose }: OtherSportsFormProps) {
+  const { data: session } = useSession();
+  const queryClient = new QueryClient();
   const form = useForm<OtherSportsFormData>({
     resolver: zodResolver(matchesSchema),
     defaultValues: {
@@ -125,21 +127,47 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
       scoreB: (match.result?.data as MatchResult)?.scoreB ?? 0,
     },
   });
+  const college = Array.from(
+    new Set(match.players.map((player) => player.user.college))
+  )
+  const matchResultMutation = useMutation({
+    mutationFn: (data: CreateMatchResult) => createMatchResult(session?.accessToken as string, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getAllSchedule"]});
+    },
+  });
+
+  const handleMatchResultSubmit: SubmitHandler<OtherSportsFormData> = (data) => {
+    const id = toast.loading("กำลังบันทึกผลการแข่งขัน...");
+
+    const body: CreateMatchResult = {
+      matchId: data.matchId,
+      homeTeam: college[0],
+      awayTeam: college[1],
+      scoreA: data.scoreA,
+      scoreB: data.scoreB,
+    };
+    matchResultMutation.mutate(body, {
+      onSuccess: () => {
+        toast.success("บันทึกผลการแข่งขันสำเร็จ", { id });
+        onClose();
+      },
+      onError: () => {
+        toast.error("เกิดข้อผิดพลาดในการบันทึกผลการแข่งขัน", { id });
+      },
+    });
+  }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(handleMatchResultSubmit)}>
         <FormField
           control={form.control}
           name="scoreA"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="custom-input">
-                {
-                  Array.from(
-                    new Set(match.players.map((player) => player.user.college))
-                  )[0]
-                }
+                { college[0] }
               </FormLabel>
               <FormControl>
                 <Input
@@ -159,9 +187,7 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
             <FormItem>
               <FormLabel className="custom-input">
                 {
-                  Array.from(
-                    new Set(match.players.map((player) => player.user.college))
-                  )[1]
+                  college[1]
                 }
               </FormLabel>
               <FormControl>
@@ -187,17 +213,12 @@ function OtherSportForm({ onSubmit, match }: OtherSportsFormProps) {
 }
 
 export default function MatchesResultForm({ match }: MatchesResultProps) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  // const router = useRouter();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
-  const handleFormSubmit: SubmitHandler<
-    AthleticsFormData | OtherSportsFormData
-  > = (data) => {
-    toast.success("Form submitted successfully!");
+  const handleAthleticsResultSubmit: SubmitHandler<AthleticsFormData> = (data) => {
+    toast.success("Athletics Result submitted successfully!");
     console.log(data);
-    // push data to database
-    // router.push('/admin/dashboard');
-  };
+  }
 
   return (
     <>
@@ -210,12 +231,12 @@ export default function MatchesResultForm({ match }: MatchesResultProps) {
             <div className="overflow-y-auto">
               {match.sport.category === "กรีฑา" ? (
                 <AthleticsForm
-                  onSubmit={handleFormSubmit}
+                  onSubmit={handleAthleticsResultSubmit}
                   match={match as Schedule}
                 />
               ) : (
                 <OtherSportForm
-                  onSubmit={handleFormSubmit}
+                  onClose={onClose}
                   match={match as Schedule}
                 />
               )}
