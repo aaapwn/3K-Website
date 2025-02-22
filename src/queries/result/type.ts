@@ -27,3 +27,11 @@ export type MedalSummary = {
         total: number;
     }
 }
+
+export type CreateMatchResult = {
+    matchId: string;
+    homeTeam: string;
+    awayTeam: string;
+    scoreA: number;
+    scoreB: number;
+}

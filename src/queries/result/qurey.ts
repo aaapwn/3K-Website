@@ -1,7 +1,7 @@
 import axiosClient from "@/libs/axiosClient";
 
 import { MedalSummary } from "./type";
-import { FootballSumary } from "./type";
+import { FootballSumary, CreateMatchResult } from "./type";
 
 export const getFootballSummary = () : Promise<FootballSumary[]> => {
     const res = axiosClient.get("/result/football/summary").then((res) => {
@@ -15,4 +15,12 @@ export const getMedalSummary = () : Promise<MedalSummary> => {
         return res.data as MedalSummary;
     });
     return res;
+}
+
+export const createMatchResult = (token:string, data: CreateMatchResult) => {
+    return axiosClient.post("/result/match", data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
 }
