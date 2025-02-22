@@ -5,7 +5,7 @@ import {
   ModalBody,
   useDisclosure,
   ModalFooter,
-  Chip,
+  // Chip,
 } from "@heroui/react";
 
 import { Button } from "@heroui/button";
