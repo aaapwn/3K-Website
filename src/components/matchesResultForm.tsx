@@ -35,7 +35,6 @@ import {
 } from "@/queries/result/type";
 import { useSession } from "next-auth/react";
 import { QueryClient } from "@tanstack/react-query";
-import { create } from "domain";
 
 const matchesSchema = z.object({
   matchId: z.string().min(1, "Match ID is required"),
@@ -88,10 +87,6 @@ function AthleticsForm({ match, onClose }: AthleticsFormProps) {
     control: form.control,
     name: "players",
   });
-
-  const college = Array.from(
-    new Set(match.players.map((player) => player.user.college))
-  );
 
   const athleticsresultMutation = useMutation({
     mutationFn: (data: CreataeAthleticResult) =>
