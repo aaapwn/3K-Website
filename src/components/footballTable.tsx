@@ -3,14 +3,17 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@heroui/react';
+import { useSearchParams } from 'next/navigation';
 
-import { getFootballSummary } from '@/queries/result/qurey';
-import { FootballSumary } from '@/queries/result/type';
+import { getSportResultSummary } from '@/queries/result/qurey';
+import { SportResultSumary } from '@/queries/result/type';
 
 export default function FootballTable() {
-  const { data } = useQuery<FootballSumary[]>({
-    queryKey: ['football-summary'],
-    queryFn: getFootballSummary,
+  const searchParams = useSearchParams();
+  const sport = searchParams.get('sport') || 'Football';
+  const { data } = useQuery<SportResultSumary[]>({
+    queryKey: [`sportResultSummary`, sport],
+    queryFn: () => getSportResultSummary(sport),
   });
 
   return (

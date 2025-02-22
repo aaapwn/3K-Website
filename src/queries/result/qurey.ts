@@ -1,11 +1,11 @@
 import axiosClient from "@/libs/axiosClient";
 
 import { CreataeAthleticResult, MedalSummary } from "./type";
-import { FootballSumary, CreateMatchResult } from "./type";
+import { SportResultSumary, CreateMatchResult } from "./type";
 
-export const getFootballSummary = () : Promise<FootballSumary[]> => {
-    const res = axiosClient.get("/result/football/summary").then((res) => {
-        return res.data as FootballSumary[];
+export const getSportResultSummary = (sport: string) : Promise<SportResultSumary[]> => {
+    const res = axiosClient.get(`/result/summary?sport=${sport}`).then((res) => {
+        return res.data as SportResultSumary[];
     });
     return res;
 }

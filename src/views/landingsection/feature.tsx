@@ -52,9 +52,9 @@ const FeatureSection = () => {
           <h1 className="font-bold lg:text-5xl text-4xl leading-[64px]">
             สรุปเหรียญรางวัล
           </h1>
-          <Link href={"/football"}>
-            <Button className="bg-secondw text-firsto rounded-md text-xl border-firsto border-1 px-10">
-              สำหรับฟุตบอล <strong>Click</strong>
+          <Link href={"/result-summary"}>
+            <Button className="bg-secondw text-firsto rounded-md text-xl border-firsto border-1 px-10 font-bold">
+              สำดับคะแนนกีฬา
             </Button>
           </Link>
         </div>

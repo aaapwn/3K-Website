@@ -1,6 +1,6 @@
 import { College } from "../user/type";
 
-export type FootballSumary = {
+export type SportResultSumary = {
     team: string;
     played: number;
     win: number;
