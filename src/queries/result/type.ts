@@ -14,7 +14,7 @@ export type SportResultSumary = {
 
 export type MedalSummary = {
     medals: {
-        college: College;
+        college: 'สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง' | 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี' | 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ';
         gold: number;
         silver: number;
         bronze: number;
@@ -42,4 +42,22 @@ export type CreataeAthleticResult = {
         userId : string;
         time: number;
     }[];
+}
+
+export type UpdateMedal = {
+  KMITL: {
+    gold: number;
+    silver: number;
+    bronze: number;
+  },
+  KMUTT: {
+    gold: number;
+    silver: number;
+    bronze: number;
+  },
+  KMUTNB: {
+    gold: number;
+    silver: number;
+    bronze: number;
+  }
 }

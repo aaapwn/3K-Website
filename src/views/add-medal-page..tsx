@@ -1,184 +1,213 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-// import { useRouter } from 'next/navigation';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import * as z from 'zod';
-import { Button } from '@heroui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import toast from 'react-hot-toast';
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import * as z from "zod";
+import { Button } from "@heroui/button";
+import { Form } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getMedalSummary } from "@/queries/result/qurey";
+import { MedalSummary } from "@/queries/result/type";
+import { updateMedal } from "@/queries/result/qurey";
+import { UpdateMedal } from "@/queries/result/type";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "@heroui/react"; // ✅ ตรวจสอบ import
+import { useEffect } from "react";
+import { Session } from "next-auth";
+import toast from "react-hot-toast";
 
-interface Medals {
-  gold: number;
-  silver: number;
-  bronze: number;
-}
-
-const allScores: Record<string, Medals> = {
-  KMITL: {
-    gold: 1,
-    silver: 0,
-    bronze: 0,
-  },
-  KMUTT: {
-    gold: 0,
-    silver: 1,
-    bronze: 0,
-  },
-  KMUTNB: {
-    gold: 0,
-    silver: 0,
-    bronze: 1,
-  },
-};
-
-const scoreSchema = z.object({
-  team: z.enum(['KMITL', 'KMUTT', 'KMUTNB']),
-  gold: z.number().min(0, 'Gold must be 0 or higher'),
-  silver: z.number().min(0, 'Silver must be 0 or higher'),
-  bronze: z.number().min(0, 'Bronze must be 0 or higher'),
+// ✅ สร้าง Schema สำหรับ Medal
+const medalSchema = z.object({
+  gold: z.number().int().nonnegative(),
+  silver: z.number().int().nonnegative(),
+  bronze: z.number().int().nonnegative(),
 });
 
-type MedalFormData = z.infer<typeof scoreSchema>;
+// ✅ สร้าง Schema สำหรับ Team
+const universityMedalSchema = z.object({
+  team: z.enum(["KMITL", "KMUTT", "KMUTNB"]),
+  KMITL: medalSchema,
+  KMUTT: medalSchema,
+  KMUTNB: medalSchema,
+});
 
-interface MedalFormProps {
-  onSubmit: SubmitHandler<MedalFormData>;
-}
+type MedalFormData = z.infer<typeof universityMedalSchema>;
 
-function MedalFormFunction({ onSubmit }: MedalFormProps) {
+type MedalFormProps = {
+  session: Session | null;
+};
+
+
+export default function MedalForm({ session }: MedalFormProps) {
+  const queryClient = useQueryClient();
+  const { data } = useQuery<MedalSummary>({
+    queryKey: ["medal-summary"],
+    queryFn: getMedalSummary,
+  });
+  const mutation = useMutation({
+    mutationFn: (data:UpdateMedal) => updateMedal(session?.accessToken ?? "", data),
+  });
+
   const form = useForm<MedalFormData>({
-    resolver: zodResolver(scoreSchema),
     defaultValues: {
-      team: 'KMITL',
-      gold: 0,
-      silver: 0,
-      bronze: 0,
+      KMITL: {
+        gold: 0,
+        silver: 0,
+        bronze: 0,
+      },
+      KMUTT: {
+        gold: 0,
+        silver: 0,
+        bronze: 0,
+      },
+      KMUTNB: {
+        gold: 0,
+        silver: 0,
+        bronze: 0,
+      },
     },
   });
 
-  return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="team"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Team</FormLabel>
-              <FormControl>
-                <Select
-                  value={field.value}
-                  onValueChange={(value) => form.setValue('team', value as 'KMITL' | 'KMUTT' | 'KMUTNB')}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select Team" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Object.keys(allScores).map((team) => (
-                      <SelectItem key={team} value={team}>
-                        {team}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="gold"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Gold Medals</FormLabel>
-              <FormControl>
-                <Input type="number" value={field.value} onChange={(e) => field.onChange(Number(e.target.value))} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="silver"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Silver Medals</FormLabel>
-              <FormControl>
-                <Input type="number" value={field.value} onChange={(e) => field.onChange(Number(e.target.value))} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="bronze"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Bronze Medals</FormLabel>
-              <FormControl>
-                <Input type="number" value={field.value} onChange={(e) => field.onChange(Number(e.target.value))} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
-  );
-}
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        KMITL: {
+          gold: data.medals.find((medal) => medal.college === "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง")?.gold ?? 0,
+          silver: data.medals.find((medal) => medal.college === "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง")?.silver ?? 0,
+          bronze: data.medals.find((medal) => medal.college === "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง")?.bronze ?? 0,
+        },
+        KMUTT: {
+          gold: data.medals.find((medal) => medal.college === "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี")?.gold ?? 0,
+          silver: data.medals.find((medal) => medal.college === "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี")?.silver ?? 0,
+          bronze: data.medals.find((medal) => medal.college === "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี")?.bronze ?? 0,
+        },
+        KMUTNB: {
+          gold: data.medals.find((medal) => medal.college === "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ")?.gold ?? 0,
+          silver: data.medals.find((medal) => medal.college === "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ")?.silver ?? 0,
+          bronze: data.medals.find((medal) => medal.college === "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ")?.bronze ?? 0,
+        },
+      });
+    }
+  }, [data]);
 
-export default function MedalForm() {
-  const [medals, setMedals] = useState<Record<string, Medals>>(allScores);
-
-  const handleFormSubmit: SubmitHandler<MedalFormData> = (data) => {
-    setMedals((prevMedals) => ({
-      ...prevMedals,
-      [data.team]: {
-        gold: data.gold,
-        silver: data.silver,
-        bronze: data.bronze,
+  const onSubmit: SubmitHandler<MedalFormData> = (values) => {
+    const id = toast.loading("กำลังบันทึกข้อมูล...");
+    mutation.mutate(values, {
+      onSuccess: () => {
+        toast.success("บันทึกข้อมูลสำเร็จ", { id });
+        queryClient.invalidateQueries({ queryKey: ["medal-summary"] });
       },
-    }));
-    toast.success('Form submitted successfully!');
+      onError: () => {
+        toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล", { id });
+      },
+    });
+
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Medal Standings</CardTitle>
-        <CardDescription>View and edit medal counts for each team</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <table>
-          <thead>
-            <tr>
-              <th>Team</th>
-              <th>Gold</th>
-              <th>Silver</th>
-              <th>Bronze</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.entries(medals).map(([team, counts]) => (
-              <tr key={team}>
-                <td>{team}</td>
-                <td>{counts.gold}</td>
-                <td>{counts.silver}</td>
-                <td>{counts.bronze}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <MedalFormFunction onSubmit={handleFormSubmit} />
-      </CardContent>
-    </Card>
+    <div className="min-h-dvh relative">
+      <div className="w-full bg-firsto py-10 px-5 md:px-20">
+        <h1 className="text-5xl text-white">แก้ไขเหรียญรางวัล</h1>
+      </div>
+      <div className="max-w-5xl mx-auto mt-20">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <Table className="">
+              <TableHeader>
+                <TableColumn className="text-xl bg-firsto text-white">สถาบัน/มหาวิทยาลัย</TableColumn>
+                <TableColumn className="text-xl bg-firsto text-white">Gold</TableColumn>
+                <TableColumn className="text-xl bg-firsto text-white">Silver</TableColumn>
+                <TableColumn className="text-xl bg-firsto text-white">Bronze</TableColumn>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell className="text-lg">KMITL</TableCell>
+                  <TableCell>
+                    <Controller
+                      name="KMITL.gold"
+                      control={form.control}
+                      render={({ field }) => <Input {...field} type="number" onChange={(e) => field.onChange(Number(e.target.value))} />}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Controller
+                      name="KMITL.silver"
+                      control={form.control}
+                      render={({ field }) => <Input {...field} type="number" onChange={(e) => field.onChange(Number(e.target.value))} />}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Controller
+                      name="KMITL.bronze"
+                      control={form.control}
+                      render={({ field }) => <Input {...field} type="number" onChange={(e) => field.onChange(Number(e.target.value))} />}
+                    />
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell className="text-lg">KMUTT</TableCell>
+                  <TableCell>
+                    <Controller
+                      name="KMUTT.gold"
+                      control={form.control}
+                      render={({ field }) => <Input {...field} type="number" onChange={(e) => field.onChange(Number(e.target.value))} />}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Controller
+                      name="KMUTT.silver"
+                      control={form.control}
+                      render={({ field }) => <Input {...field} type="number" onChange={(e) => field.onChange(Number(e.target.value))} />}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Controller
+                      name="KMUTT.bronze"
+                      control={form.control}
+                      render={({ field }) => <Input {...field} type="number" onChange={(e) => field.onChange(Number(e.target.value))} />}
+                    />
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell className="text-lg">KMUTNB</TableCell>
+                  <TableCell>
+                    <Controller
+                      name="KMUTNB.gold"
+                      control={form.control}
+                      render={({ field }) => <Input {...field} type="number" onChange={(e) => field.onChange(Number(e.target.value))} />}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Controller
+                      name="KMUTNB.silver"
+                      control={form.control}
+                      render={({ field }) => <Input {...field} type="number" onChange={(e) => field.onChange(Number(e.target.value))} />}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Controller
+                      name="KMUTNB.bronze"
+                      control={form.control}
+                      render={({ field }) => <Input {...field} type="number" onChange={(e) => field.onChange(Number(e.target.value))} />}
+                    />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+            <div className="flex justify-end mb-5">
+              <Button type="submit" className="bg-firsto text-white mt-5">บันทึก</Button>
+            </div>
+          </form>
+        </Form>
+      </div>
+    </div>
   );
 }

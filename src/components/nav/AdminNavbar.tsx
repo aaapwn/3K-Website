@@ -35,6 +35,10 @@ const url = [
     href: "/admin/players",
   },
   {
+    name: "เหรียญรางวัล",
+    href: "/admin/medal",
+  },
+  {
     name: "รายชื่อ Admin",
     href: "/admin/list",
   }
