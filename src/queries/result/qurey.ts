@@ -26,7 +26,7 @@ export const createMatchResult = (token:string, data: CreateMatchResult) => {
 }
 
 export const createAthleticResult = (token:string, data: CreataeAthleticResult) => {
-    return axiosClient.post("/result/match", data, {
+    return axiosClient.post("/result/running", data, {
         headers: {
             Authorization: `Bearer ${token}`,
         },

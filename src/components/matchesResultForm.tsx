@@ -108,8 +108,8 @@ function AthleticsForm({ match, onClose }: AthleticsFormProps) {
     const id = toast.loading("กำลังบันทึกผลการแข่งขัน...");
     const body: CreataeAthleticResult = {
       matchId: data.matchId,
-      players: data.players.map((player) => ({
-        id: player.playerID,
+      results: data.players.map((player) => ({
+        userId: player.playerID,
         time: player.time,
       })),
     };

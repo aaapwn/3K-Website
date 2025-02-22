@@ -38,8 +38,8 @@ export type CreateMatchResult = {
 
 export type CreataeAthleticResult = {
     matchId: string;
-    players: {
-        id : string;
+    results: {
+        userId : string;
         time: number;
     }[];
 }
