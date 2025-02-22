@@ -1,6 +1,6 @@
 import axiosClient from "@/libs/axiosClient";
 
-import { MedalSummary } from "./type";
+import { CreataeAthleticResult, MedalSummary } from "./type";
 import { FootballSumary, CreateMatchResult } from "./type";
 
 export const getFootballSummary = () : Promise<FootballSumary[]> => {
@@ -18,6 +18,14 @@ export const getMedalSummary = () : Promise<MedalSummary> => {
 }
 
 export const createMatchResult = (token:string, data: CreateMatchResult) => {
+    return axiosClient.post("/result/match", data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+}
+
+export const createAthleticResult = (token:string, data: CreataeAthleticResult) => {
     return axiosClient.post("/result/match", data, {
         headers: {
             Authorization: `Bearer ${token}`,

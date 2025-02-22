@@ -25,10 +25,17 @@ import toast from "react-hot-toast";
 import { Schedule, TrackResult, MatchResult } from "@/queries/schedule/type";
 
 import { useMutation } from "@tanstack/react-query";
-import { createMatchResult } from "@/queries/result/qurey";
-import { CreateMatchResult } from "@/queries/result/type";
+import {
+  createMatchResult,
+  createAthleticResult,
+} from "@/queries/result/qurey";
+import {
+  CreataeAthleticResult,
+  CreateMatchResult,
+} from "@/queries/result/type";
 import { useSession } from "next-auth/react";
 import { QueryClient } from "@tanstack/react-query";
+import { create } from "domain";
 
 const matchesSchema = z.object({
   matchId: z.string().min(1, "Match ID is required"),
@@ -55,7 +62,7 @@ type OtherSportsFormData = z.infer<typeof matchesSchema>;
 
 interface AthleticsFormProps {
   match: Schedule;
-  onSubmit: SubmitHandler<AthleticsFormData>;
+  onClose: () => void;
 }
 
 interface OtherSportsFormProps {
@@ -63,7 +70,9 @@ interface OtherSportsFormProps {
   onClose: () => void;
 }
 
-function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
+function AthleticsForm({ match, onClose }: AthleticsFormProps) {
+  const { data: session } = useSession();
+  const queryClient = new QueryClient();
   const form = useForm<AthleticsFormData>({
     resolver: zodResolver(athleticsSchema),
     defaultValues: {
@@ -80,9 +89,44 @@ function AthleticsForm({ onSubmit, match }: AthleticsFormProps) {
     name: "players",
   });
 
+  const college = Array.from(
+    new Set(match.players.map((player) => player.user.college))
+  );
+
+  const athleticsresultMutation = useMutation({
+    mutationFn: (data: CreataeAthleticResult) =>
+      createAthleticResult(session?.accessToken as string, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getAllSchedule"] });
+    },
+  });
+
+  const handleAthleticsResultSubmit: SubmitHandler<AthleticsFormData> = (
+    data
+  ) => {
+    console.log(data);
+    const id = toast.loading("กำลังบันทึกผลการแข่งขัน...");
+    const body: CreataeAthleticResult = {
+      matchId: data.matchId,
+      players: data.players.map((player) => ({
+        id: player.playerID,
+        time: player.time,
+      })),
+    };
+    athleticsresultMutation.mutate(body, {
+      onSuccess: () => {
+        toast.success("บันทึกผลการแข่งขันสำเร็จ", { id });
+        onClose();
+      },
+      onError: () => {
+        toast.error("เกิดข้อผิดพลาดในการบันทึกผลการแข่งขัน", { id });
+      },
+    });
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(handleAthleticsResultSubmit)}>
         {fields.map((field, index) => (
           <FormField
             key={field.id}
@@ -213,13 +257,6 @@ function OtherSportForm({ match, onClose }: OtherSportsFormProps) {
 export default function MatchesResultForm({ match }: MatchesResultProps) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
-  const handleAthleticsResultSubmit: SubmitHandler<AthleticsFormData> = (
-    data
-  ) => {
-    toast.success("Athletics Result submitted successfully!");
-    console.log(data);
-  };
-
   return (
     <>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
@@ -230,10 +267,7 @@ export default function MatchesResultForm({ match }: MatchesResultProps) {
           <ModalBody className="flex flex-col justify-center gap-4 text-2xl max-h-[70vh]">
             <div className="overflow-y-auto">
               {match.sport.category === "กรีฑา" ? (
-                <AthleticsForm
-                  onSubmit={handleAthleticsResultSubmit}
-                  match={match as Schedule}
-                />
+                <AthleticsForm onClose={onClose} match={match as Schedule} />
               ) : (
                 <OtherSportForm onClose={onClose} match={match as Schedule} />
               )}

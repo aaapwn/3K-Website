@@ -35,3 +35,11 @@ export type CreateMatchResult = {
     scoreA: number;
     scoreB: number;
 }
+
+export type CreataeAthleticResult = {
+    matchId: string;
+    players: {
+        id : string;
+        time: number;
+    }[];
+}
