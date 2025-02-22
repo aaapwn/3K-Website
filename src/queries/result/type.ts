@@ -1,5 +1,3 @@
-import { College } from "../user/type";
-
 export type SportResultSumary = {
     team: string;
     played: number;

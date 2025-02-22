@@ -1,7 +1,6 @@
 "use client";
 
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import * as z from "zod";
 import { Button } from "@heroui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -22,22 +21,23 @@ import { useEffect } from "react";
 import { Session } from "next-auth";
 import toast from "react-hot-toast";
 
-// ✅ สร้าง Schema สำหรับ Medal
-const medalSchema = z.object({
-  gold: z.number().int().nonnegative(),
-  silver: z.number().int().nonnegative(),
-  bronze: z.number().int().nonnegative(),
-});
-
-// ✅ สร้าง Schema สำหรับ Team
-const universityMedalSchema = z.object({
-  team: z.enum(["KMITL", "KMUTT", "KMUTNB"]),
-  KMITL: medalSchema,
-  KMUTT: medalSchema,
-  KMUTNB: medalSchema,
-});
-
-type MedalFormData = z.infer<typeof universityMedalSchema>;
+type MedalFormData = {
+  KMITL: {
+    gold: number;
+    silver: number;
+    bronze: number;
+  };
+  KMUTT: {
+    gold: number;
+    silver: number;
+    bronze: number;
+  };
+  KMUTNB: {
+    gold: number;
+    silver: number;
+    bronze: number;
+  };
+}
 
 type MedalFormProps = {
   session: Session | null;
