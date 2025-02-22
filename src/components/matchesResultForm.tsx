@@ -34,7 +34,7 @@ import {
   CreateMatchResult,
 } from "@/queries/result/type";
 import { useSession } from "next-auth/react";
-import { QueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 
 const matchesSchema = z.object({
   matchId: z.string().min(1, "Match ID is required"),
@@ -71,7 +71,7 @@ interface OtherSportsFormProps {
 
 function AthleticsForm({ match, onClose }: AthleticsFormProps) {
   const { data: session } = useSession();
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const form = useForm<AthleticsFormData>({
     resolver: zodResolver(athleticsSchema),
     defaultValues: {
@@ -91,9 +91,6 @@ function AthleticsForm({ match, onClose }: AthleticsFormProps) {
   const athleticsresultMutation = useMutation({
     mutationFn: (data: CreataeAthleticResult) =>
       createAthleticResult(session?.accessToken as string, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getAllSchedule"] });
-    },
   });
 
   const handleAthleticsResultSubmit: SubmitHandler<AthleticsFormData> = (
@@ -111,6 +108,7 @@ function AthleticsForm({ match, onClose }: AthleticsFormProps) {
     athleticsresultMutation.mutate(body, {
       onSuccess: () => {
         toast.success("บันทึกผลการแข่งขันสำเร็จ", { id });
+        queryClient.invalidateQueries({ queryKey: ["getAllSchedule"] });
         onClose();
       },
       onError: () => {
@@ -158,7 +156,7 @@ function AthleticsForm({ match, onClose }: AthleticsFormProps) {
 
 function OtherSportForm({ match, onClose }: OtherSportsFormProps) {
   const { data: session } = useSession();
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const form = useForm<OtherSportsFormData>({
     resolver: zodResolver(matchesSchema),
     defaultValues: {
@@ -173,9 +171,6 @@ function OtherSportForm({ match, onClose }: OtherSportsFormProps) {
   const matchResultMutation = useMutation({
     mutationFn: (data: CreateMatchResult) =>
       createMatchResult(session?.accessToken as string, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getAllSchedule"] });
-    },
   });
 
   const handleMatchResultSubmit: SubmitHandler<OtherSportsFormData> = (
@@ -193,6 +188,7 @@ function OtherSportForm({ match, onClose }: OtherSportsFormProps) {
     matchResultMutation.mutate(body, {
       onSuccess: () => {
         toast.success("บันทึกผลการแข่งขันสำเร็จ", { id });
+        queryClient.invalidateQueries({ queryKey: ["getAllSchedule"] });
         onClose();
       },
       onError: () => {

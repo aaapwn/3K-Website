@@ -137,20 +137,19 @@ const CheckIn = ({ session }: ScanQRProps) => {
                   <div className="mt-3">
                     <Select
                         label="เลือกกีฬาที่ต้องการลงทะเบียน"
-                        // selectedKeys={[selectSchedule]}
-                        // variant="bordered"
-                        // classNames={{
-                        //     label: "text-base",
-                        //     value: "text-2xl",
-
-                        // }}
+                        selectedKeys={[selectSchedule]}
+                        variant="bordered"
+                        classNames={{
+                            label: "text-base",
+                            value: "text-xl",
+                        }}
                         onChange={(e) => setSelectSchedule(e.target.value)}
                         className="text-black"
                     >
                         {
                            userData?.sportEvents ? (
                                  userData?.sportEvents.map((sportEvent) => (
-                                    <SelectItem value={sportEvent.id} key={sportEvent.id} className="text-black">
+                                    <SelectItem value={sportEvent.id} key={sportEvent.id} className="text-black" textValue={`${sportEvent.Sport.category}(${sportEvent.Sport.name}) - ${sportEvent.startDatetime.toLocaleDateString("th-TH")}(${sportEvent.startDatetime.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })})`}>
                                       {`${sportEvent.Sport.category}(${sportEvent.Sport.name})`} - {`${sportEvent.startDatetime.toLocaleDateString("th-TH")}(${sportEvent.startDatetime.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })})`}
                                     </SelectItem>
                                  ))

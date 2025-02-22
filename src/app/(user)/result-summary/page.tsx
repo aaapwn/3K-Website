@@ -41,11 +41,11 @@ const Page = () => {
 
   return (
     <div className="min-h-screen pb-10">
-      <div className="w-full flex flex-row justify-between items-center relative p-10 bg-firsto">
-        <p className="text-6xl font-bold text-secondw px-20">ลำดับคะแนนกีฬา</p>
+      <div className="w-full flex flex-col md:flex-row gap-y-5 justify-between md:items-center relative px-5 py-10 md:px-32 bg-firsto">
+        <p className="text-6xl font-bold text-secondw">ลำดับคะแนนกีฬา</p>
         <Dropdown className="text-2xl">
           <DropdownTrigger className="bg-secondw text-xl">
-            <Button variant="bordered">
+            <Button variant="bordered" className='w-fit'>
               {sportOption.find((sport) => sport.en === selectedSport)?.th}
               <ChevronDown />
             </Button>
