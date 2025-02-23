@@ -33,7 +33,7 @@ export const getUserSchedule = (token:string, qr_key:string): Promise<UserProfil
                     startDatetime: new Date(event.startDatetime),
                     endDatetime: new Date(event.endDatetime),
                 }
-            }).filter((event: any) => event.startDatetime > new Date()),
+            })
         } as UserProfile;
     });
     return res;
