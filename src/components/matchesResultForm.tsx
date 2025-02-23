@@ -78,7 +78,10 @@ function AthleticsForm({ match, onClose }: AthleticsFormProps) {
       matchId: match.id,
       players: match.players.map((player, index) => ({
         playerID: player.user.id,
-        time: (match.result?.data as TrackResult[])[index]?.time ?? 0,
+        time: match.result
+          ? Number((match.result?.data as TrackResult[])[index]?.time) ??
+            Number(0)
+          : Number(0),
       })),
     },
   });
