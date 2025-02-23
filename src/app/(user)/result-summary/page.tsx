@@ -21,6 +21,10 @@ const sportOption = [
   {
     th: 'วอลเลย์บอล',
     en: 'Volleyball',
+  },
+  {
+    th: 'เปตอง',
+    en: 'Petanque',
   }
 ]
 
