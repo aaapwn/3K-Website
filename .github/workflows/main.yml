@@ -38,3 +38,8 @@ jobs:
         run: |
           echo "docker build -t aaapwn/3k-website:latest ." | docker login -u "docker build -t aaapwn/3k-website:latest ." --password-stdin
           docker push aaapwn/3k-website:latest
+
+      - name: Notify Slack
+        if: always()
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"${{ github.repository }} pipeline #${{ github.run_number }} on ${{ github.ref_name }} - completed"}' ${{ secrets.SLACK_WEBHOOK_URL }}
