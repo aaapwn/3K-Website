@@ -1,0 +1,40 @@
+name: Build&Push
+'on':
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: |
+          if ! command -v pnpm > /dev/null 2>&1; then npm install -g pnpm; fi
+          pnpm install --frozen-lockfile
+
+      - name: Check Code Quality
+        run: pnpm run lint
+
+      - name: Build Project
+        run: pnpm run build
+
+      - name: Build Docker Image
+        run: docker build -t aaapwn/3k-website:latest .
+
+      - name: Push to Docker Hub
+        if: true
+        run: |
+          echo "docker build -t aaapwn/3k-website:latest ." | docker login -u "docker build -t aaapwn/3k-website:latest ." --password-stdin
+          docker push aaapwn/3k-website:latest
